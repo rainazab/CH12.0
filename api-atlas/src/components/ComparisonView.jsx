@@ -1,19 +1,72 @@
 import { useState } from 'react';
-import { Trophy, TrendingUp, DollarSign, Zap, Shield, Code, Image, MessageSquare } from 'lucide-react';
+import { Trophy, TrendingUp, DollarSign, Zap, Shield, Code, Image, MessageSquare, Sparkles, BarChart3 } from 'lucide-react';
 
 const ComparisonView = ({ apis }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   if (!apis || apis.length < 2) {
     return (
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <section style={{
+        padding: '6rem 2rem',
+        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          background: 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: '1.5rem',
+          padding: '3rem',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          maxWidth: '35rem'
+        }}>
+          <div style={{
+            width: '4rem',
+            height: '4rem',
+            background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem'
+          }}>
+            <BarChart3 style={{ width: '1.5rem', height: '1.5rem', color: 'white' }} />
+          </div>
+          <h2 style={{
+            fontSize: '1.5rem',
+            fontWeight: '700',
+            color: '#1e293b',
+            marginBottom: '0.5rem'
+          }}>
             Compare APIs Side by Side
           </h2>
-          <p className="text-gray-600 mb-6">
-            Select at least 2 APIs to start comparing their features, performance, and pricing.
+          <p style={{
+            color: '#64748b',
+            fontSize: '1rem',
+            marginBottom: '2rem',
+            lineHeight: '1.6'
+          }}>
+            Select at least 2 APIs from the results to start comparing their features, performance metrics, and pricing in detail.
           </p>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'rgba(102, 126, 234, 0.1)',
+            color: '#667eea',
+            padding: '0.5rem 1rem',
+            borderRadius: '2rem',
+            fontSize: '0.875rem',
+            fontWeight: '600',
+            border: '1px solid rgba(102, 126, 234, 0.2)'
+          }}>
+            <Sparkles style={{ width: '1rem', height: '1rem' }} />
+            Select 2+ APIs to get started
+          </div>
         </div>
       </section>
     );

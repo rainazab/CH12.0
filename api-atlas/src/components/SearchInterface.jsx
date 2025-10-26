@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, X, Loader2 } from 'lucide-react';
+import { Search, Filter, X, Loader2, Sparkles, ArrowRight } from 'lucide-react';
 
 const SearchInterface = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
@@ -22,54 +22,181 @@ const SearchInterface = ({ onSearch, loading }) => {
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section style={{
+      padding: '4rem 2rem',
+      background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+      position: 'relative'
+    }}>
+      {/* Background elements */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        right: '10%',
+        width: '12rem',
+        height: '12rem',
+        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))',
+        borderRadius: '50%',
+        filter: 'blur(30px)',
+        animation: 'float 6s ease-in-out infinite'
+      }}></div>
+
+      <div style={{
+        maxWidth: '60rem',
+        margin: '0 auto',
+        textAlign: 'center'
+      }}>
         {/* Main search */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Find Your Perfect API
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: '1.5rem',
+          padding: '3rem',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          marginBottom: '2rem'
+        }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+            color: 'white',
+            padding: '0.5rem 1rem',
+            borderRadius: '2rem',
+            fontSize: '0.875rem',
+            fontWeight: '600',
+            marginBottom: '1.5rem',
+            boxShadow: '0 4px 20px rgba(102, 126, 234, 0.3)'
+          }}>
+            <Sparkles style={{ width: '1rem', height: '1rem' }} />
+            Advanced API Discovery
+          </div>
+
+          <h2 style={{
+            fontSize: '2rem',
+            fontWeight: '800',
+            background: 'linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: '1rem'
+          }}>
+            Search & Discover APIs
           </h2>
-          <p className="text-gray-600 mb-8">
-            Describe what you need and let AI find the best matches with real-time performance data
+          <p style={{
+            fontSize: '1.125rem',
+            color: '#64748b',
+            marginBottom: '2rem',
+            lineHeight: '1.6'
+          }}>
+            Use natural language to find APIs that match your exact requirements
           </p>
 
-          <form onSubmit={handleSubmit} className="relative max-w-2xl mx-auto">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <form onSubmit={handleSubmit} style={{
+            maxWidth: '40rem',
+            margin: '0 auto',
+            background: 'white',
+            borderRadius: '1rem',
+            padding: '1.5rem',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem'
+            }}>
+              <Search style={{ width: '1.5rem', height: '1.5rem', color: '#94a3b8' }} />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="I need an API for..."
-                className="w-full pl-12 pr-12 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                style={{
+                  flex: 1,
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  color: '#334155',
+                  fontSize: '1.125rem',
+                  fontWeight: '500'
+                }}
                 disabled={loading}
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600"
+                  style={{
+                    padding: '0.5rem',
+                    background: 'transparent',
+                    border: 'none',
+                    borderRadius: '0.5rem',
+                    cursor: 'pointer',
+                    color: '#64748b',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.background = 'rgba(239, 68, 68, 0.1)';
+                    e.target.style.color = '#dc2626';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.color = '#64748b';
+                  }}
                 >
-                  <X className="w-4 h-4" />
+                  <X style={{ width: '1rem', height: '1rem' }} />
                 </button>
               )}
             </div>
 
-            <div className="flex justify-center mt-4 space-x-3">
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1rem',
+              marginTop: '1.5rem'
+            }}>
               <button
                 type="submit"
                 disabled={loading || !query.trim()}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.75rem',
+                  fontWeight: '600',
+                  cursor: loading || !query.trim() ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 20px rgba(102, 126, 234, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  opacity: loading || !query.trim() ? 0.5 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!loading && query.trim()) {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 8px 30px rgba(102, 126, 234, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!loading && query.trim()) {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.3)';
+                  }
+                }}
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 style={{ width: '1rem', height: '1rem' }} className="animate-spin" />
                     Searching...
                   </>
                 ) : (
                   <>
-                    <Search className="w-4 h-4 mr-2" />
-                    Search APIs
+                    <span>Search APIs</span>
+                    <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                   </>
                 )}
               </button>
@@ -77,18 +204,53 @@ const SearchInterface = ({ onSearch, loading }) => {
               <button
                 type="button"
                 onClick={() => setShowFilters(!showFilters)}
-                className="bg-white/10 hover:bg-white/20 text-gray-700 border border-gray-300 font-semibold py-2 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(10px)',
+                  color: '#64748b',
+                  border: '1px solid rgba(226, 232, 240, 0.5)',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.75rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.background = 'rgba(102, 126, 234, 0.1)';
+                  e.target.style.color = '#667eea';
+                  e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.background = 'rgba(255, 255, 255, 0.8)';
+                  e.target.style.color = '#64748b';
+                  e.target.style.borderColor = 'rgba(226, 232, 240, 0.5)';
+                }}
               >
-                <Filter className="w-4 h-4 mr-2" />
+                <Filter style={{ width: '1rem', height: '1rem' }} />
                 Filters
               </button>
             </div>
           </form>
 
           {/* Popular searches */}
-          <div className="mt-8">
-            <p className="text-sm text-gray-500 mb-3">Popular searches:</p>
-            <div className="flex flex-wrap justify-center gap-2">
+          <div style={{ marginTop: '2rem' }}>
+            <p style={{
+              fontSize: '0.875rem',
+              color: '#64748b',
+              marginBottom: '1rem',
+              fontWeight: '600'
+            }}>
+              Popular searches:
+            </p>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>
               {popularSearches.map((search, index) => (
                 <button
                   key={index}
@@ -96,8 +258,31 @@ const SearchInterface = ({ onSearch, loading }) => {
                     setQuery(search);
                     onSearch(search);
                   }}
-                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full text-sm transition-colors"
                   disabled={loading}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    background: `linear-gradient(135deg, ${index % 3 === 0 ? 'rgba(102, 126, 234, 0.1)' : index % 3 === 1 ? 'rgba(118, 75, 162, 0.1)' : 'rgba(240, 147, 251, 0.1)'})`,
+                    color: index % 3 === 0 ? '#667eea' : index % 3 === 1 ? '#764ba2' : '#f093fb',
+                    border: `1px solid ${index % 3 === 0 ? 'rgba(102, 126, 234, 0.2)' : index % 3 === 1 ? 'rgba(118, 75, 162, 0.2)' : 'rgba(240, 147, 251, 0.2)'}`,
+                    borderRadius: '2rem',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.3s ease',
+                    opacity: loading ? 0.5 : 1
+                  }}
+                  onMouseOver={(e) => {
+                    if (!loading) {
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    if (!loading) {
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = 'none';
+                    }
+                  }}
                 >
                   {search}
                 </button>
@@ -108,13 +293,63 @@ const SearchInterface = ({ onSearch, loading }) => {
 
         {/* Advanced filters */}
         {showFilters && (
-          <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '1.5rem',
+            padding: '2rem',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            maxWidth: '50rem',
+            margin: '0 auto',
+            animation: 'slideUp 0.5s ease-out'
+          }}>
+            <h3 style={{
+              fontSize: '1.25rem',
+              fontWeight: '700',
+              color: '#1e293b',
+              marginBottom: '1.5rem',
+              textAlign: 'center'
+            }}>
+              Advanced Filters
+            </h3>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '1.5rem',
+              marginBottom: '2rem'
+            }}>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#64748b',
+                  marginBottom: '0.5rem'
+                }}>
                   Category
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <select style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '0.75rem',
+                  background: 'white',
+                  color: '#334155',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#667eea';
+                  e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#e2e8f0';
+                  e.target.style.boxShadow = 'none';
+                }}
+                >
                   <option value="">All Categories</option>
                   <option value="llm">Large Language Models</option>
                   <option value="image">Image Generation</option>
@@ -126,10 +361,35 @@ const SearchInterface = ({ onSearch, loading }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#64748b',
+                  marginBottom: '0.5rem'
+                }}>
                   Pricing Model
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <select style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '0.75rem',
+                  background: 'white',
+                  color: '#334155',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#667eea';
+                  e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#e2e8f0';
+                  e.target.style.boxShadow = 'none';
+                }}
+                >
                   <option value="">All Models</option>
                   <option value="free">Free Tier</option>
                   <option value="pay-per-use">Pay Per Use</option>
@@ -139,10 +399,35 @@ const SearchInterface = ({ onSearch, loading }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#64748b',
+                  marginBottom: '0.5rem'
+                }}>
                   Max Cost/Month
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <select style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '0.75rem',
+                  background: 'white',
+                  color: '#334155',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#667eea';
+                  e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#e2e8f0';
+                  e.target.style.boxShadow = 'none';
+                }}
+                >
                   <option value="">Any Budget</option>
                   <option value="10">$0 - $10</option>
                   <option value="50">$10 - $50</option>
@@ -153,10 +438,33 @@ const SearchInterface = ({ onSearch, loading }) => {
               </div>
             </div>
 
-            <div className="flex justify-center mt-6">
+            <div style={{
+              textAlign: 'center'
+            }}>
               <button
                 onClick={() => setShowFilters(false)}
-                className="bg-white/10 hover:bg-white/20 text-gray-700 border border-gray-300 font-semibold py-2 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.75rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 20px rgba(102, 126, 234, 0.3)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 8px 30px rgba(102, 126, 234, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.3)';
+                }}
               >
                 Apply Filters
               </button>
@@ -164,6 +472,27 @@ const SearchInterface = ({ onSearch, loading }) => {
           </div>
         )}
       </div>
+
+      {/* Add animations */}
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+          }
+
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
     </section>
   );
 };

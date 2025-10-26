@@ -37,36 +37,53 @@ A semantic API discovery and performance monitoring platform that combines natur
 ### Prerequisites
 - Node.js 18+
 - npm or yarn
-- Elastic Cloud account (for monitoring)
-- Chroma instance (local or hosted)
+- Elasticsearch instance (see options below)
 
 ### Installation
 
-1. **Clone and setup frontend:**
+1. **Clone and setup:**
 ```bash
 cd api-atlas
 npm install
 ```
 
-2. **Setup backend:**
-```bash
-cd backend
-npm install
-```
+2. **Setup Elasticsearch:**
 
-3. **Environment variables:**
-Create `.env` file in the root directory:
-```env
-VITE_API_URL=http://localhost:3001/api
-VITE_CHROMA_URL=http://localhost:8000
-VITE_ELASTIC_URL=http://localhost:9200
-ELASTIC_USERNAME=elastic
-ELASTIC_PASSWORD=your-elastic-password
-CHROMA_API_KEY=your-chroma-key
+   **Option A: Elastic Cloud (Recommended)**
+   ```bash
+   # 1. Create account at https://cloud.elastic.co
+   # 2. Create deployment
+   # 3. Copy connection details to .env
+   ELASTIC_URL=https://your-deployment-id.es.us-east-1.aws.found.io:9243
+   ELASTIC_USERNAME=elastic
+   ELASTIC_PASSWORD=your-generated-password
+   ```
+
+   **Option B: Local Docker (if Docker available)**
+   ```bash
+   docker compose up -d
+   # Then use: http://localhost:9200
+   ```
+
+   **Option C: Local Installation**
+   ```bash
+   # Download from https://www.elastic.co/downloads/elasticsearch
+   # Start with: ./bin/elasticsearch
+   # Then use: http://localhost:9200
+   ```
+
+3. **Setup Elasticsearch indices:**
+```bash
+# Initialize indices and test connection
+npm run setup-elastic
 ```
 
 4. **Start development servers:**
 ```bash
+# Start both frontend and backend
+npm run start
+
+# Or separately:
 # Frontend (port 5173)
 npm run dev
 
@@ -77,12 +94,23 @@ npm run backend
 5. **Seed initial data:**
 ```bash
 # This will populate Chroma with API data
-curl http://localhost:3001/api/monitor/seed
+npm run seed
 ```
 
 6. **Open your browser:**
 - Frontend: http://localhost:5173
+- Elasticsearch: http://localhost:9200 (or your Elastic Cloud URL)
+- Kibana (for data visualization): http://localhost:5601 (if using Docker)
 - Backend API: http://localhost:3001/api/health
+
+### 🛑 Stop Elasticsearch:
+```bash
+# If using Docker:
+docker compose down
+
+# If using local installation:
+# Stop the Elasticsearch process manually
+```
 
 ## 📁 Project Structure
 
@@ -158,13 +186,32 @@ api-atlas/
 - Feature comparison matrices
 - Cost efficiency calculations
 
-## 📊 Monitoring Setup
+## 📊 Elasticsearch Setup
 
-### Elastic Configuration
-1. Create Elastic Cloud account
-2. Set up serverless instance
-3. Configure Agent Builder policies
-4. Create data streams for performance metrics
+### Local Development (Docker)
+The project includes a Docker Compose setup for Elasticsearch (if Docker is available):
+
+```bash
+# Start Elasticsearch + Kibana
+docker compose up -d
+
+# Setup indices
+npm run setup-elastic
+
+# View data in Kibana
+open http://localhost:5601
+```
+
+### Production Deployment
+For production, consider:
+- **Elastic Cloud**: Managed Elasticsearch service
+- **Self-hosted**: Deploy Elasticsearch cluster
+- **AWS OpenSearch**: AWS managed alternative
+
+### Data Structure
+The app creates these Elasticsearch indices:
+- `api-atlas-performance`: Real-time API performance metrics
+- `api-atlas-metrics`: Additional monitoring data
 
 ### Chroma Setup
 1. Install Chroma locally or use hosted instance
