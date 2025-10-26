@@ -54,21 +54,29 @@ A modern API comparison platform that helps developers find the perfect APIs for
 
 ### 🚀 Quick Start
 
-1. **Clone/Download** the project files
-2. **Install dependencies**: `npm install` in both root and api-atlas directories
-3. **Start the backend**: `npm run server` (in api-atlas/backend)
-4. **Start the frontend**: `npm run dev` (in api-atlas)
-5. **Open browser**: Navigate to `http://localhost:5173`
-6. **Explore**: Use filters to find your perfect API stack!
+1. **Navigate to the project directory**: `cd api-atlas`
+2. **Install dependencies**: `npm install`
+3. **Start both frontend and backend**: `npm run start`
+4. **Open browser**: Navigate to `http://localhost:5173`
+5. **Explore**: Use the interface to discover and compare APIs!
 
 ### 📁 Project Structure
 
 ```
-/
-├── api-atlas/          # Main React application
-│   ├── backend/        # Node.js/Express server
-│   ├── src/           # React frontend source
-│   └── package.json
-├── index.html         # Project index
-└── README.md          # This file
+api-atlas/
+├── backend/              # Node.js/Express server
+│   ├── routes/          # API routes (search, performance, monitor)
+│   ├── services/        # Business logic (chroma, elastic, scoring)
+│   ├── data/           # Seed data
+│   └── server.js       # Main backend server
+├── src/                # React frontend source
+│   ├── components/     # React components
+│   ├── lib/           # Utility functions
+│   ├── assets/        # Static assets
+│   ├── App.jsx        # Main React app
+│   ├── main.jsx       # React entry point
+│   └── index.css      # Global styles
+├── package.json       # Frontend dependencies
+├── vite.config.js     # Vite configuration
+└── tailwind.config.js # Tailwind CSS configuration
 ```

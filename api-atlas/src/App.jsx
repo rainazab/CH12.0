@@ -166,106 +166,39 @@ function App() {
     });
   };
 
-  // Show error state if there's an error and no results
-  if (error && searchResults.length === 0) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          padding: '2rem',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '1rem',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          color: 'white'
-        }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>API Atlas</h1>
-          <p style={{ color: '#ef4444', marginBottom: '1rem' }}>{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              borderRadius: '0.5rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
 
-  // Simple test render to see if React is working
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      color: 'white',
-      padding: '2rem'
-    }}>
-      <div style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-          🚀 API Atlas - Test Version
-        </h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>
-          React is working! The app is loading...
-        </p>
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          padding: '1rem',
-          borderRadius: '0.5rem',
-          backdropFilter: 'blur(10px)',
-          marginBottom: '2rem'
-        }}>
-          <p>✅ Basic React rendering is working</p>
-          <p>📊 Console logs should show component loading</p>
-          <p>🎯 Check browser dev tools for any errors</p>
-        </div>
+    <Router>
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+        <Header />
 
-        <Router>
-          <div style={{ marginTop: '2rem' }}>
-            <Header />
-
-            <main style={{ paddingTop: '5rem' }}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <>
-                      <Hero onSearch={handleSearch} />
-                      <SearchInterface onSearch={handleSearch} loading={loading} />
-                      <APIResults
-                        results={searchResults}
-                        loading={loading}
-                        onAPISelect={handleAPISelect}
-                        selectedAPIs={selectedAPIs}
-                      />
-                      {selectedAPIs.length > 1 && (
-                        <ComparisonView apis={selectedAPIs} />
-                      )}
-                    </>
-                  }
-                />
-                <Route path="/performance" element={<PerformanceDashboard />} />
-                <Route path="/api/:id" element={<APIDetail />} />
-                <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
-              </Routes>
-            </main>
-          </div>
-        </Router>
+        <main style={{ paddingTop: '5rem' }}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero onSearch={handleSearch} />
+                  <SearchInterface onSearch={handleSearch} loading={loading} />
+                  <APIResults
+                    results={searchResults}
+                    loading={loading}
+                    onAPISelect={handleAPISelect}
+                    selectedAPIs={selectedAPIs}
+                  />
+                  {selectedAPIs.length > 1 && (
+                    <ComparisonView apis={selectedAPIs} />
+                  )}
+                </>
+              }
+            />
+            <Route path="/performance" element={<PerformanceDashboard />} />
+            <Route path="/api/:id" element={<APIDetail />} />
+            <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </Router>
   );
 }
 

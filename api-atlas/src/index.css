@@ -1,38 +1,9 @@
-/* Basic CSS without Tailwind for testing */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-}
-
-.test-content {
-  text-align: center;
-  color: white;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.test-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
-
-.test-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
 }

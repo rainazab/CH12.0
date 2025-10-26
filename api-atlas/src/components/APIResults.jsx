@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle, XCircle, Clock, Star, ExternalLink, BarChart3 } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, Star, ExternalLink, BarChart3, Search } from 'lucide-react';
 
 const APIResults = ({ results, loading, onAPISelect, selectedAPIs }) => {
   if (loading) {
