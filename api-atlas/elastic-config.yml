@@ -1,8 +1,8 @@
-# Elastic Agent Configuration for API Atlas
+# Elastic Agent Configuration for Rho
 # This file configures monitoring agents for API performance tracking
 
 name: api-atlas-monitoring
-description: "Real-time API performance monitoring for API Atlas platform"
+description: "Real-time API performance monitoring for Rho platform"
 
 # Agent policies
 policies:
@@ -15,14 +15,14 @@ policies:
         streams:
           - metrics: ["*"]
             data_stream:
-              dataset: api-atlas.performance
+              dataset: rho.performance
 
 # Data streams
 data_streams:
-  - name: api-atlas-performance
+  - name: rho-performance
     description: "API performance metrics"
     indices:
-      - api-atlas-performance-default
+      - rho-performance-default
     mappings:
       properties:
         api_id:

@@ -22,7 +22,7 @@ async function getOrCreateCollection() {
     const collection = await client.createCollection({
       name: COLLECTION_NAME,
       metadata: {
-        description: 'API Atlas - Semantic search for developer APIs'
+        description: 'Rho - Semantic search for developer APIs'
       }
     });
     return collection;

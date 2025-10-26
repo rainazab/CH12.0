@@ -73,7 +73,7 @@ const Header = () => {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              API Atlas
+              Rho
             </span>
           </Link>
 

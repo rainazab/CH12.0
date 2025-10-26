@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * API Atlas Setup Script
+ * Rho Setup Script
  * Helps initialize the development environment
  */
 
@@ -74,7 +74,7 @@ async function setupEnvironment() {
       info('Please update .env with your actual API keys and URLs');
     } else {
       // Create basic .env file
-      const envContent = `# API Atlas Environment Configuration
+      const envContent = `# Rho Environment Configuration
 VITE_API_URL=http://localhost:3001/api
 VITE_CHROMA_URL=http://localhost:8000
 VITE_ELASTIC_URL=http://localhost:9200
@@ -162,7 +162,7 @@ async function startDevelopmentServers() {
 }
 
 async function main() {
-  log(`${colors.bright}${colors.cyan}🚀 API Atlas Setup${colors.reset}\n`, colors.bright);
+  log(`${colors.bright}${colors.cyan}🚀 Rho Setup${colors.reset}\n`, colors.bright);
 
   const steps = [
     checkDependencies,

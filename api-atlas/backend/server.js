@@ -28,10 +28,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Root endpoint - API Atlas information
+// Root endpoint - Rho information
 app.get('/', (req, res) => {
   res.json({
-    name: 'API Atlas',
+    name: 'Rho',
     description: 'Semantic API Discovery & Performance Monitoring Platform',
     version: '1.0.0',
     status: 'running',
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 // API documentation endpoint
 app.get('/api', (req, res) => {
   res.json({
-    name: 'API Atlas Backend API',
+    name: 'Rho Backend API',
     version: '1.0.0',
     description: 'Backend API for semantic API discovery and performance monitoring',
     baseUrl: 'http://localhost:3001/api',
@@ -106,6 +106,6 @@ app.use('*', (req, res) => {
 });
 
 app.listen(PORT, '127.0.0.1', () => {
-  console.log(`🚀 API Atlas backend running on port ${PORT}`);
+  console.log(`🚀 Rho backend running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
 });

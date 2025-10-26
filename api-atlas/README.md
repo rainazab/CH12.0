@@ -1,4 +1,4 @@
-# API Atlas 🚀
+# Rho 🚀
 
 A semantic API discovery and performance monitoring platform that combines natural language search with real-time operational intelligence. Built as a modern React application with Chroma vector database and Elastic monitoring.
 
@@ -175,7 +175,7 @@ api-atlas/
 ## 🎯 Demo Script
 
 **Opening (30 sec):**
-"Developers waste hours comparing APIs. Should I use SendGrid or Resend? Is OpenAI faster than Anthropic today? API Atlas solves this."
+"Developers waste hours comparing APIs. Should I use SendGrid or Resend? Is OpenAI faster than Anthropic today? Rho solves this."
 
 **Demo (2 min):**
 1. Type: "I need to generate images from text"

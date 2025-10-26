@@ -13,7 +13,7 @@ Build a platform that aggregates and benchmarks AI APIs across cost, latency, ac
 ### Tagline
 **AI that compares AI — past, present, and future.**
 
-## 🚀 API Atlas
+## 🚀 Rho
 
 A modern API comparison platform that helps developers find the perfect APIs for their projects. Built with a focus on beautiful design, powerful filtering, and data-driven decisions.
 

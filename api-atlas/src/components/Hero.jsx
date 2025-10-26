@@ -79,15 +79,7 @@ const Hero = ({ onSearch }) => {
             marginBottom: '1.5rem',
             lineHeight: '1.1'
           }}>
-            Discover APIs with{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #06b6d4, #ec4899)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              AI Intelligence
-            </span>
+            Prompt. Compare. Select your ideal AI model.
           </h1>
           <p style={{
             fontSize: '1.25rem',

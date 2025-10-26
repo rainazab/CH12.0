@@ -1,7 +1,7 @@
 {
-  "name": "api-atlas-backend",
+  "name": "rho-backend",
   "version": "1.0.0",
-  "description": "Backend API for API Atlas - Semantic API Discovery Platform",
+  "description": "Backend API for Rho - Semantic API Discovery Platform",
   "main": "server.js",
   "type": "module",
   "scripts": {
