@@ -41,13 +41,13 @@ const APIResults = ({ results, loading, onAPISelect, selectedAPIs }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'operational':
-        return 'text-green-600 bg-green-100';
+        return 'bg-green-100 text-green-800';
       case 'degraded':
-        return 'text-yellow-600 bg-yellow-100';
+        return 'bg-yellow-100 text-yellow-800';
       case 'down':
-        return 'text-red-600 bg-red-100';
+        return 'bg-red-100 text-red-800';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -85,7 +85,7 @@ const APIResults = ({ results, loading, onAPISelect, selectedAPIs }) => {
             return (
               <div
                 key={api.id}
-                className={`api-card cursor-pointer transition-all duration-300 ${
+                className={`bg-white rounded-xl p-6 shadow-lg border transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 ${
                   isSelected ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
                 }`}
                 onClick={() => onAPISelect(api)}
@@ -118,10 +118,10 @@ const APIResults = ({ results, loading, onAPISelect, selectedAPIs }) => {
                   {/* Status */}
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-500">Status</span>
-                    <div className={`status-indicator ${getStatusColor(api.performance?.status)}`}>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(api.performance?.status)}`}>
                       {getStatusIcon(api.performance?.status)}
                       <span className="ml-1 capitalize">{api.performance?.status || 'unknown'}</span>
-                    </div>
+                    </span>
                   </div>
 
                   {/* Response time */}

@@ -28,6 +28,57 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Root endpoint - API Atlas information
+app.get('/', (req, res) => {
+  res.json({
+    name: 'API Atlas',
+    description: 'Semantic API Discovery & Performance Monitoring Platform',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: 'GET /api/health',
+      search: 'POST /api/search',
+      performance: 'GET /api/performance/:apiId',
+      performance_history: 'GET /api/performance/:apiId/history',
+      system_status: 'GET /api/performance/status/all',
+      monitoring: 'POST /api/monitor/add',
+      documentation: 'Frontend available at http://localhost:5173'
+    },
+    frontend: 'http://localhost:5173',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// API documentation endpoint
+app.get('/api', (req, res) => {
+  res.json({
+    name: 'API Atlas Backend API',
+    version: '1.0.0',
+    description: 'Backend API for semantic API discovery and performance monitoring',
+    baseUrl: 'http://localhost:3001/api',
+    endpoints: {
+      search: {
+        method: 'POST',
+        path: '/search',
+        description: 'Semantic search for APIs',
+        body: { query: 'string' }
+      },
+      performance: {
+        method: 'GET',
+        path: '/performance/:apiId',
+        description: 'Get performance metrics for an API',
+        params: { apiId: 'string', period: '24h|7d|30d' }
+      },
+      health: {
+        method: 'GET',
+        path: '/health',
+        description: 'Health check endpoint'
+      }
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -41,7 +92,16 @@ app.use((err, req, res, next) => {
 app.use('*', (req, res) => {
   res.status(404).json({
     error: 'Not found',
-    message: 'The requested endpoint does not exist'
+    message: 'The requested endpoint does not exist',
+    availableEndpoints: [
+      'GET /',
+      'GET /api',
+      'GET /api/health',
+      'POST /api/search',
+      'GET /api/performance/:apiId',
+      'GET /api/performance/status/all'
+    ],
+    frontend: 'http://localhost:5173'
   });
 });
 

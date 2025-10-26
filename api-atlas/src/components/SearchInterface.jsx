@@ -59,7 +59,7 @@ const SearchInterface = ({ onSearch, loading }) => {
               <button
                 type="submit"
                 disabled={loading || !query.trim()}
-                className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -77,7 +77,7 @@ const SearchInterface = ({ onSearch, loading }) => {
               <button
                 type="button"
                 onClick={() => setShowFilters(!showFilters)}
-                className="btn-secondary"
+                className="bg-white/10 hover:bg-white/20 text-gray-700 border border-gray-300 font-semibold py-2 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filters
@@ -156,7 +156,7 @@ const SearchInterface = ({ onSearch, loading }) => {
             <div className="flex justify-center mt-6">
               <button
                 onClick={() => setShowFilters(false)}
-                className="btn-secondary"
+                className="bg-white/10 hover:bg-white/20 text-gray-700 border border-gray-300 font-semibold py-2 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm"
               >
                 Apply Filters
               </button>

@@ -7,6 +7,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Debug logging
+  console.log('Header component rendered, location:', location.pathname);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -23,28 +26,59 @@ const Header = () => {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1000,
+      transition: 'all 0.3s ease',
+      background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+      backdropFilter: isScrolled ? 'blur(20px)' : 'none',
+      boxShadow: isScrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
+      borderBottom: isScrolled ? '1px solid rgba(0, 0, 0, 0.1)' : 'none'
+    }}>
+      <nav style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '4rem' }}>
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center space-x-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '1.25rem',
+              fontWeight: 'bold',
+              color: isScrolled ? '#1f2937' : 'white',
+              textDecoration: 'none',
+              transition: 'color 0.3s ease'
+            }}
+            onMouseOver={(e) => e.target.style.color = '#3b82f6'}
+            onMouseOut={(e) => e.target.style.color = isScrolled ? '#1f2937' : 'white'}
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white" />
+            <div style={{
+              width: '2rem',
+              height: '2rem',
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              borderRadius: '0.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Zap style={{ width: '1.25rem', height: '1.25rem', color: 'white' }} />
             </div>
-            <span className="text-gradient">API Atlas</span>
+            <span style={{
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              API Atlas
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.href;
@@ -53,13 +87,37 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: '500',
+                    color: isActive
+                      ? (isScrolled ? '#1d4ed8' : '#3b82f6')
+                      : (isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)'),
+                    background: isActive
+                      ? (isScrolled ? '#dbeafe' : 'rgba(255, 255, 255, 0.1)')
+                      : 'transparent',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    if (!isActive) {
+                      e.target.style.color = isScrolled ? '#374151' : 'white';
+                      e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(255, 255, 255, 0.1)';
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    if (!isActive) {
+                      e.target.style.color = isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)';
+                      e.target.style.background = 'transparent';
+                    }
+                  }}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon style={{ width: '1rem', height: '1rem' }} />
                   <span>{item.name}</span>
                 </Link>
               );
@@ -67,15 +125,31 @@ const Header = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div style={{ display: 'none' }}>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              style={{
+                padding: '0.5rem',
+                borderRadius: '0.5rem',
+                color: isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.color = isScrolled ? '#374151' : 'white';
+                e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(255, 255, 255, 0.1)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.color = isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)';
+                e.target.style.background = 'transparent';
+              }}
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X style={{ width: '1.5rem', height: '1.5rem' }} />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu style={{ width: '1.5rem', height: '1.5rem' }} />
               )}
             </button>
           </div>
@@ -83,8 +157,12 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div style={{
+            display: 'none',
+            borderTop: '1px solid #e5e7eb',
+            background: 'white'
+          }}>
+            <div style={{ padding: '0.5rem 0 0.75rem 0' }}>
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.href;
@@ -94,13 +172,33 @@ const Header = () => {
                     key={item.name}
                     to={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-base font-medium transition-colors ${
-                      isActive
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                    }`}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      fontWeight: '500',
+                      color: isActive ? '#1d4ed8' : '#6b7280',
+                      background: isActive ? '#dbeafe' : 'transparent',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      if (!isActive) {
+                        e.target.style.color = '#374151';
+                        e.target.style.background = '#f9fafb';
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (!isActive) {
+                        e.target.style.color = '#6b7280';
+                        e.target.style.background = 'transparent';
+                      }
+                    }}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon style={{ width: '1.25rem', height: '1.25rem' }} />
                     <span>{item.name}</span>
                   </Link>
                 );

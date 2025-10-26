@@ -20,43 +20,133 @@ const Hero = ({ onSearch }) => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section style={{
+      position: 'relative',
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      padding: '2rem'
+    }}>
       {/* Background */}
-      <div className="absolute inset-0 gradient-bg opacity-90"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20"></div>
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2))'
+      }}></div>
 
       {/* Floating elements */}
-      <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-20 w-40 h-40 bg-white/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      <div style={{
+        position: 'absolute',
+        top: '5rem',
+        left: '5rem',
+        width: '8rem',
+        height: '8rem',
+        background: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: '50%',
+        filter: 'blur(20px)',
+        animation: 'pulse 3s ease-in-out infinite'
+      }}></div>
+      <div style={{
+        position: 'absolute',
+        bottom: '5rem',
+        right: '5rem',
+        width: '10rem',
+        height: '10rem',
+        background: 'rgba(255, 255, 255, 0.05)',
+        borderRadius: '50%',
+        filter: 'blur(30px)',
+        animation: 'pulse 3s ease-in-out infinite 1s'
+      }}></div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        maxWidth: '60rem',
+        margin: '0 auto',
+        textAlign: 'center'
+      }}>
         {/* Main heading */}
-        <div className="mb-8">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+        <div style={{ marginBottom: '3rem' }}>
+          <h1 style={{
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '1.5rem',
+            lineHeight: '1.1'
+          }}>
             Discover APIs with{' '}
-            <span className="text-gradient">AI Intelligence</span>
+            <span style={{
+              background: 'linear-gradient(135deg, #06b6d4, #ec4899)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              AI Intelligence
+            </span>
           </h1>
-          <p className="text-xl sm:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p style={{
+            fontSize: '1.25rem',
+            color: 'rgba(255, 255, 255, 0.9)',
+            marginBottom: '2rem',
+            lineHeight: '1.6',
+            maxWidth: '45rem',
+            margin: '0 auto 2rem'
+          }}>
             Find the perfect APIs for your project using semantic search and real-time performance monitoring.
             Make data-driven decisions with live operational intelligence.
           </p>
         </div>
 
         {/* Search form */}
-        <div className="mb-12">
-          <form onSubmit={handleSubmit} className="search-bar">
-            <div className="flex items-center space-x-4">
-              <Search className="w-6 h-6 text-gray-400" />
+        <div style={{ marginBottom: '3rem' }}>
+          <form onSubmit={handleSubmit} style={{
+            width: '100%',
+            maxWidth: '40rem',
+            margin: '0 auto',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '1rem',
+            padding: '1.5rem',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <Search style={{ width: '1.5rem', height: '1.5rem', color: 'rgba(255, 255, 255, 0.6)' }} />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Describe what API you need..."
-                className="flex-1 bg-transparent border-0 outline-none text-white placeholder-white/60 text-lg font-medium"
+                style={{
+                  flex: 1,
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  color: 'white',
+                  fontSize: '1.125rem',
+                  fontWeight: '500'
+                }}
               />
               <button
                 type="submit"
-                className="btn-primary px-8 py-3"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.5rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  transform: 'scale(1)'
+                }}
+                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
               >
                 Search
               </button>
@@ -64,7 +154,13 @@ const Hero = ({ onSearch }) => {
           </form>
 
           {/* Example queries */}
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <div style={{
+            marginTop: '1.5rem',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '0.75rem'
+          }}>
             {exampleQueries.map((query, index) => (
               <button
                 key={index}
@@ -72,7 +168,19 @@ const Hero = ({ onSearch }) => {
                   setSearchQuery(query);
                   onSearch(query);
                 }}
-                className="btn-secondary text-sm"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  fontSize: '0.875rem'
+                }}
+                onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
+                onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
               >
                 {query}
               </button>
@@ -81,32 +189,82 @@ const Hero = ({ onSearch }) => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-white mb-2">50+</div>
-            <div className="text-white/80">APIs Monitored</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '2rem',
+          maxWidth: '40rem',
+          margin: '0 auto'
+        }}>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '0.75rem',
+            padding: '1.5rem',
+            textAlign: 'center',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>50+</div>
+            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>APIs Monitored</div>
           </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-white mb-2">99.5%</div>
-            <div className="text-white/80">Uptime Average</div>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '0.75rem',
+            padding: '1.5rem',
+            textAlign: 'center',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>99.5%</div>
+            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Uptime Average</div>
           </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-white mb-2">&lt;500ms</div>
-            <div className="text-white/80">Response Time</div>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '0.75rem',
+            padding: '1.5rem',
+            textAlign: 'center',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>&lt;500ms</div>
+            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Response Time</div>
           </div>
         </div>
 
         {/* Trending section */}
-        <div className="mt-16">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <TrendingUp className="w-5 h-5 text-white" />
-            <span className="text-white/90 font-medium">Trending API Comparisons</span>
+        <div style={{ marginTop: '4rem' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            marginBottom: '1.5rem'
+          }}>
+            <TrendingUp style={{ width: '1.25rem', height: '1.25rem', color: 'white' }} />
+            <span style={{ color: 'rgba(255, 255, 255, 0.9)', fontWeight: '500' }}>Trending API Comparisons</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '1rem'
+          }}>
             {['OpenAI vs Claude', 'DALL-E vs Midjourney', 'Stripe vs PayPal'].map((comparison, index) => (
               <div
                 key={index}
-                className="glass-effect rounded-lg px-4 py-2 text-white/90 text-sm hover:bg-white/20 transition-colors cursor-pointer"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: '0.5rem',
+                  padding: '1rem 1.5rem',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontSize: '0.875rem',
+                  cursor: 'pointer',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
+                onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
               >
                 {comparison}
               </div>
@@ -114,6 +272,15 @@ const Hero = ({ onSearch }) => {
           </div>
         </div>
       </div>
+
+      <style>
+        {`
+          @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+          }
+        `}
+      </style>
     </section>
   );
 };
