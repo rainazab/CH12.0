@@ -49,12 +49,12 @@ const Header = () => {
               gap: '0.5rem',
               fontSize: '1.25rem',
               fontWeight: 'bold',
-              color: isScrolled ? '#1f2937' : 'white',
+              color: isScrolled ? 'black' : 'black',
               textDecoration: 'none',
               transition: 'color 0.3s ease'
             }}
             onMouseOver={(e) => e.target.style.color = '#3b82f6'}
-            onMouseOut={(e) => e.target.style.color = isScrolled ? '#1f2937' : 'white'}
+            onMouseOut={(e) => e.target.style.color = isScrolled ? 'black' : 'black'}
           >
             <div style={{
               width: '2rem',
@@ -97,7 +97,7 @@ const Header = () => {
                     fontWeight: '500',
                     color: isActive
                       ? (isScrolled ? '#1d4ed8' : '#3b82f6')
-                      : (isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)'),
+                      : (isScrolled ? 'black' : 'black'),
                     background: isActive
                       ? (isScrolled ? '#dbeafe' : 'rgba(255, 255, 255, 0.1)')
                       : 'transparent',
@@ -106,13 +106,13 @@ const Header = () => {
                   }}
                   onMouseOver={(e) => {
                     if (!isActive) {
-                      e.target.style.color = isScrolled ? '#374151' : 'white';
-                      e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.color = isScrolled ? '#374151' : 'black';
+                      e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(0, 0, 0, 0.1)';
                     }
                   }}
                   onMouseOut={(e) => {
                     if (!isActive) {
-                      e.target.style.color = isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)';
+                      e.target.style.color = isScrolled ? 'black' : 'black';
                       e.target.style.background = 'transparent';
                     }
                   }}
@@ -131,18 +131,18 @@ const Header = () => {
               style={{
                 padding: '0.5rem',
                 borderRadius: '0.5rem',
-                color: isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)',
+                color: isScrolled ? 'black' : 'black',
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
               }}
               onMouseOver={(e) => {
-                e.target.style.color = isScrolled ? '#374151' : 'white';
-                e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(255, 255, 255, 0.1)';
+                e.target.style.color = isScrolled ? '#374151' : 'black';
+                e.target.style.background = isScrolled ? '#f9fafb' : 'rgba(0, 0, 0, 0.1)';
               }}
               onMouseOut={(e) => {
-                e.target.style.color = isScrolled ? '#6b7280' : 'rgba(255, 255, 255, 0.9)';
+                e.target.style.color = isScrolled ? 'black' : 'black';
                 e.target.style.background = 'transparent';
               }}
             >
@@ -180,7 +180,7 @@ const Header = () => {
                       borderRadius: '0.5rem',
                       fontSize: '1rem',
                       fontWeight: '500',
-                      color: isActive ? '#1d4ed8' : '#6b7280',
+                      color: isActive ? '#1d4ed8' : 'black',
                       background: isActive ? '#dbeafe' : 'transparent',
                       textDecoration: 'none',
                       transition: 'all 0.3s ease'
@@ -193,7 +193,7 @@ const Header = () => {
                     }}
                     onMouseOut={(e) => {
                       if (!isActive) {
-                        e.target.style.color = '#6b7280';
+                        e.target.style.color = 'black';
                         e.target.style.background = 'transparent';
                       }
                     }}

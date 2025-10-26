@@ -36,7 +36,7 @@ const Hero = ({ onSearch }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2))'
+        background: 'white'
       }}></div>
 
       {/* Floating elements */}
@@ -46,7 +46,7 @@ const Hero = ({ onSearch }) => {
         left: '5rem',
         width: '8rem',
         height: '8rem',
-        background: 'rgba(255, 255, 255, 0.1)',
+        background: 'rgba(0, 0, 0, 0.1)',
         borderRadius: '50%',
         filter: 'blur(20px)',
         animation: 'pulse 3s ease-in-out infinite'
@@ -57,7 +57,7 @@ const Hero = ({ onSearch }) => {
         right: '5rem',
         width: '10rem',
         height: '10rem',
-        background: 'rgba(255, 255, 255, 0.05)',
+        background: 'rgba(0, 0, 0, 0.05)',
         borderRadius: '50%',
         filter: 'blur(30px)',
         animation: 'pulse 3s ease-in-out infinite 1s'
@@ -75,7 +75,7 @@ const Hero = ({ onSearch }) => {
           <h1 style={{
             fontSize: '3rem',
             fontWeight: 'bold',
-            color: 'white',
+            color: 'black',
             marginBottom: '1.5rem',
             lineHeight: '1.1'
           }}>
@@ -83,7 +83,7 @@ const Hero = ({ onSearch }) => {
           </h1>
           <p style={{
             fontSize: '1.25rem',
-            color: 'rgba(255, 255, 255, 0.9)',
+            color: 'black',
             marginBottom: '2rem',
             lineHeight: '1.6',
             maxWidth: '45rem',
@@ -100,15 +100,15 @@ const Hero = ({ onSearch }) => {
             width: '100%',
             maxWidth: '40rem',
             margin: '0 auto',
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
+            border: '1px solid rgba(0, 0, 0, 0.2)',
             borderRadius: '1rem',
             padding: '1.5rem',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <Search style={{ width: '1.5rem', height: '1.5rem', color: 'rgba(255, 255, 255, 0.6)' }} />
+              <Search style={{ width: '1.5rem', height: '1.5rem', color: 'black' }} />
               <input
                 type="text"
                 value={searchQuery}
@@ -119,7 +119,7 @@ const Hero = ({ onSearch }) => {
                   background: 'transparent',
                   border: 'none',
                   outline: 'none',
-                  color: 'white',
+                  color: 'black',
                   fontSize: '1.125rem',
                   fontWeight: '500'
                 }}
@@ -161,9 +161,9 @@ const Hero = ({ onSearch }) => {
                   onSearch(query);
                 }}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  color: 'white',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(0, 0, 0, 0.1)',
+                  color: 'black',
+                  border: '1px solid rgba(0, 0, 0, 0.2)',
                   padding: '0.5rem 1rem',
                   borderRadius: '0.5rem',
                   fontWeight: '600',
@@ -171,8 +171,8 @@ const Hero = ({ onSearch }) => {
                   transition: 'all 0.3s ease',
                   fontSize: '0.875rem'
                 }}
-                onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
-                onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
+                onMouseOver={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.2)'}
+                onMouseOut={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.1)'}
               >
                 {query}
               </button>
@@ -189,37 +189,37 @@ const Hero = ({ onSearch }) => {
           margin: '0 auto'
         }}>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(10px)',
             borderRadius: '0.75rem',
             padding: '1.5rem',
             textAlign: 'center',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
+            border: '1px solid rgba(0, 0, 0, 0.2)'
           }}>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>50+</div>
-            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>APIs Monitored</div>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'black', marginBottom: '0.5rem' }}>50+</div>
+            <div style={{ color: 'black' }}>APIs Monitored</div>
           </div>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(10px)',
             borderRadius: '0.75rem',
             padding: '1.5rem',
             textAlign: 'center',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
+            border: '1px solid rgba(0, 0, 0, 0.2)'
           }}>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>99.5%</div>
-            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Uptime Average</div>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'black', marginBottom: '0.5rem' }}>99.5%</div>
+            <div style={{ color: 'black' }}>Uptime Average</div>
           </div>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(10px)',
             borderRadius: '0.75rem',
             padding: '1.5rem',
             textAlign: 'center',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
+            border: '1px solid rgba(0, 0, 0, 0.2)'
           }}>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>&lt;500ms</div>
-            <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Response Time</div>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'black', marginBottom: '0.5rem' }}>&lt;500ms</div>
+            <div style={{ color: 'black' }}>Response Time</div>
           </div>
         </div>
 
@@ -232,8 +232,8 @@ const Hero = ({ onSearch }) => {
             gap: '0.5rem',
             marginBottom: '1.5rem'
           }}>
-            <TrendingUp style={{ width: '1.25rem', height: '1.25rem', color: 'white' }} />
-            <span style={{ color: 'rgba(255, 255, 255, 0.9)', fontWeight: '500' }}>Trending API Comparisons</span>
+            <TrendingUp style={{ width: '1.25rem', height: '1.25rem', color: 'black' }} />
+            <span style={{ color: 'black', fontWeight: '500' }}>Trending API Comparisons</span>
           </div>
           <div style={{
             display: 'flex',
@@ -245,18 +245,18 @@ const Hero = ({ onSearch }) => {
               <div
                 key={index}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
+                  background: 'rgba(0, 0, 0, 0.1)',
                   backdropFilter: 'blur(10px)',
                   borderRadius: '0.5rem',
                   padding: '1rem 1.5rem',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: 'black',
                   fontSize: '0.875rem',
                   cursor: 'pointer',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid rgba(0, 0, 0, 0.2)',
                   transition: 'all 0.3s ease'
                 }}
-                onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
-                onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
+                onMouseOver={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.2)'}
+                onMouseOut={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.1)'}
               >
                 {comparison}
               </div>
