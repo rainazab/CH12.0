@@ -81,14 +81,14 @@ export default function Home() {
       <section 
         id="hero"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['hero'] ? 'visible' : ''}`}
+        className={`relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 min-h-[auto] sm:min-h-screen ${visibleSections['hero'] ? 'visible' : ''}`}
       >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Content */}
             <div className="space-y-6 sm:space-y-8 w-full">
               <div className="space-y-4 sm:space-y-6">
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
                   Compare API Outputs{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Visually
@@ -181,7 +181,7 @@ export default function Home() {
       <section 
         id="problem"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['problem'] ? 'visible' : ''}`}
+        className={`relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 min-h-[auto] sm:min-h-screen ${visibleSections['problem'] ? 'visible' : ''}`}
       >
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -231,7 +231,7 @@ export default function Home() {
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <span className="text-xs sm:text-sm font-semibold text-red-400 uppercase tracking-wider">The Challenge</span>
-                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
                     Choosing the right API is a{' '}
                     <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
                       nightmare
@@ -280,7 +280,7 @@ export default function Home() {
       <section 
         id="solution"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['solution'] ? 'visible' : ''}`}
+        className={`relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 min-h-[auto] sm:min-h-screen ${visibleSections['solution'] ? 'visible' : ''}`}
       >
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -336,7 +336,7 @@ export default function Home() {
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <span className="text-xs sm:text-sm font-semibold text-cyan-400 uppercase tracking-wider">Why Rho Works</span>
-                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
                     Everything you need to{' '}
                     <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                       decide fast
@@ -374,11 +374,11 @@ export default function Home() {
       <section 
         id="cta"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['cta'] ? 'visible' : ''}`}
+        className={`relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 min-h-[auto] sm:min-h-screen ${visibleSections['cta'] ? 'visible' : ''}`}
       >
         <div className="max-w-4xl mx-auto text-center space-y-8 sm:space-y-12">
           <div className="space-y-3 sm:space-y-6">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
               Ready to find your API?
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400">
