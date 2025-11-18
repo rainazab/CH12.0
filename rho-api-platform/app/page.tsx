@@ -16,48 +16,100 @@ export default function Home() {
 
   return (
     <div className="relative bg-black overflow-hidden">
-      {/* Animated Grid Background */}
-      <div className="fixed inset-0 opacity-20 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
-      </div>
-
-      {/* Animated Blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-3xl animate-blob" />
-        <div className="absolute top-40 right-10 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-4000" />
-      </div>
 
       {/* HERO SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center space-y-8">
-          <div className="space-y-6">
-            <h1 className="text-7xl lg:text-8xl font-bold text-white leading-tight">
-              Find Your{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Perfect API
-              </span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Stop wasting time evaluating APIs. See them side-by-side in seconds.
-            </p>
-          </div>
+      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Content */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  Compare APIs in{' '}
+                  <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    seconds
+                  </span>
+                </h1>
+                <p className="text-xl text-gray-400 leading-relaxed">
+                  Stop drowning in documentation. Rho lets you test multiple APIs side-by-side and make data-driven decisions instantly.
+                </p>
+              </div>
 
-          {/* Hero CTA */}
-          <Link
-            href="/compare"
-            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-110"
-          >
-            Start Comparing Now
-            <span className="text-2xl">→</span>
-          </Link>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 py-8 border-y border-gray-800">
+                <div>
+                  <div className="text-3xl font-bold text-cyan-400">3</div>
+                  <p className="text-sm text-gray-500">APIs at once</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-cyan-400">0s</div>
+                  <p className="text-sm text-gray-500">Setup time</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-cyan-400">100%</div>
+                  <p className="text-sm text-gray-500">Data-driven</p>
+                </div>
+              </div>
+
+              {/* Hero CTA */}
+              <Link
+                href="/compare"
+                className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-110 w-fit"
+              >
+                Start Comparing
+                <span className="text-2xl">→</span>
+              </Link>
+            </div>
+
+            {/* Right: Demo Visual */}
+            <div className="hidden lg:block">
+              <div className="relative">
+                {/* Demo Card */}
+                <div className="bg-gradient-to-b from-gray-900/80 to-black/80 border border-gray-800/50 rounded-2xl p-6 backdrop-blur">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-800/30">
+                    <h3 className="font-semibold text-white">Comparison Results</h3>
+                    <span className="text-xs text-gray-500">Real-time</span>
+                  </div>
+
+                  {/* API Columns */}
+                  <div className="grid grid-cols-3 gap-4">
+                    {[
+                      { name: 'GPT-4', speed: '245ms', cost: '$0.03', uptime: '99.9%', color: 'cyan' },
+                      { name: 'Claude 3', speed: '312ms', cost: '$0.02', uptime: '99.8%', color: 'blue' },
+                      { name: 'Gemini', speed: '198ms', cost: '$0.01', uptime: '99.5%', color: 'purple' },
+                    ].map((api, idx) => (
+                      <div key={idx} className={`space-y-3 p-4 rounded-lg bg-${api.color}-500/5 border border-${api.color}-500/20`}>
+                        <div className={`font-semibold text-${api.color}-400 text-sm`}>{api.name}</div>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-gray-400">Speed</span>
+                            <span className="text-gray-300 font-mono">{api.speed}</span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-gray-400">Cost</span>
+                            <span className="text-gray-300 font-mono">{api.cost}</span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-gray-400">Uptime</span>
+                            <span className="text-gray-300 font-mono">{api.uptime}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="mt-6 pt-4 border-t border-gray-800/30">
+                    <p className="text-xs text-gray-500 text-center">Winner: Gemini (Best price & speed)</p>
+                  </div>
+                </div>
+
+                {/* Glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl -z-10" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
