@@ -25,13 +25,13 @@ export default function Home() {
             <div className="space-y-8 flex flex-col items-center">
               <div className="space-y-6 text-left">
                 <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
-                  Compare APIs in{' '}
+                  See API Outputs{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    seconds
+                    Visually
                   </span>
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
-                  Stop drowning in documentation. Rho lets you test multiple APIs side-by-side and make data-driven decisions instantly.
+                  Watch APIs perform side-by-side in real-time. See exact outputs, compare metrics, costs, and performance all in one visual interface.
                 </p>
               </div>
 
@@ -115,30 +115,84 @@ export default function Home() {
 
       {/* PROBLEM SECTION */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Problem Visual */}
-            <div className="hidden md:block space-y-6">
-              <div className="h-80 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-2xl border border-red-500/20 flex items-center justify-center backdrop-blur">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">🔍</div>
-                  <p className="text-gray-400">Drowning in API docs?</p>
+            <div className="hidden md:block">
+              <div className="space-y-4">
+                {/* Stack of cards animation */}
+                <div className="relative h-80 perspective">
+                  {/* Card 1 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 p-4 transform -rotate-3 shadow-lg">
+                    <div className="text-xs text-gray-500 mb-3">API Performance</div>
+                    <div className="space-y-2">
+                      <div className="h-2 bg-gray-700 rounded w-3/4"></div>
+                      <div className="h-2 bg-gray-700 rounded w-1/2"></div>
+                      <div className="h-2 bg-gray-700 rounded w-2/3"></div>
+                    </div>
+                  </div>
+
+                  {/* Card 2 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 p-4 transform rotate-2 translate-y-4 translate-x-4 shadow-lg">
+                    <div className="text-xs text-gray-500 mb-3">Pricing Guide</div>
+                    <div className="space-y-2">
+                      <div className="h-2 bg-gray-700 rounded w-full"></div>
+                      <div className="h-2 bg-gray-700 rounded w-5/6"></div>
+                      <div className="h-2 bg-gray-700 rounded w-3/4"></div>
+                    </div>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-red-500/30 p-4 transform rotate-1 translate-y-8 translate-x-2 shadow-lg">
+                    <div className="text-xs text-red-400 mb-3">📄 API Documentation</div>
+                    <div className="space-y-2">
+                      <div className="h-2 bg-red-500/20 rounded w-4/5"></div>
+                      <div className="h-2 bg-red-500/20 rounded w-3/5"></div>
+                      <div className="h-2 bg-red-500/20 rounded w-full"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Problem Text */}
             <div className="space-y-8">
-              <div>
-                <h2 className="text-5xl font-bold text-white mb-6">
-                  The Problem
-                </h2>
-                <p className="text-xl text-gray-400 leading-relaxed mb-6">
-                  Choosing the right API is overwhelming. Prices shift, performance varies, and documentation is scattered across the web.
-                </p>
-                <p className="text-lg text-gray-500">
-                  Developers waste hours digging through docs, comparing spreadsheets, and making unreliable decisions.
-                </p>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-sm font-semibold text-red-400 uppercase tracking-wider">The Challenge</span>
+                  <h2 className="text-5xl lg:text-6xl font-bold text-white mt-4 leading-tight">
+                    Choosing the right API is a{' '}
+                    <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+                      nightmare
+                    </span>
+                  </h2>
+                </div>
+
+                <div className="space-y-4 pt-4 border-t border-gray-800">
+                  <div className="flex gap-4">
+                    <div className="text-3xl">📚</div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">Fragmented Information</h3>
+                      <p className="text-gray-400">Pricing, docs, benchmarks scattered across 10+ websites. No single source of truth.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="text-3xl">⏱️</div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">Endless Evaluation</h3>
+                      <p className="text-gray-400">Hours spent testing, comparing spreadsheets, and reading conflicting reviews.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="text-3xl">❌</div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">Wrong Decisions</h3>
+                      <p className="text-gray-400">Pick the wrong API and waste thousands on costs or suffer from poor performance.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
