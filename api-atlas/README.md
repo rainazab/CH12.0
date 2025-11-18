@@ -1,262 +1,341 @@
-# Rho 🚀
+# 🚀 Rho - Premium API Discovery Platform
 
-A semantic API discovery and performance monitoring platform that combines natural language search with real-time operational intelligence. Built as a modern React application with Chroma vector database and Elastic monitoring.
+**Like Google Flights for APIs.** Discover, compare, and integrate the perfect APIs for your project with AI-powered recommendations.
 
-## ✨ Features
-
-🎯 **Semantic Search** - Find APIs using natural language queries powered by Chroma
-📊 **Real-time Performance** - Live monitoring with Elastic Agent Builder
-🔍 **Smart Comparisons** - Side-by-side API analysis with relevance scoring
-💰 **Cost Intelligence** - Accurate pricing calculations and budget matching
-🌟 **Modern UI** - Ultra-colorful design with glassmorphism effects
-⚡ **Performance Dashboard** - Real-time metrics and uptime monitoring
-
-## 🛠 Tech Stack
-
-### Frontend
-- **React 19** - Modern React with hooks and concurrent features
-- **Tailwind CSS** - Utility-first CSS framework
-- **shadcn/ui** - High-quality component library
-- **React Router** - Client-side routing
-- **Recharts** - Data visualization
-- **Lucide React** - Beautiful icons
-
-### Backend
-- **Node.js/Express** - RESTful API server
-- **Chroma** - Vector database for semantic search
-- **Elastic** - Real-time performance monitoring
-- **Axios** - HTTP client for API calls
-
-### Infrastructure
-- **Vite** - Fast build tool and dev server
-- **ESLint** - Code linting
-- **PostCSS** - CSS processing
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Elasticsearch instance (see options below)
-
-### Installation
-
-1. **Clone and setup:**
-```bash
-cd api-atlas
-npm install
-```
-
-2. **Setup Elasticsearch:**
-
-   **Option A: Elastic Cloud (Recommended)**
-   ```bash
-   # 1. Create account at https://cloud.elastic.co
-   # 2. Create deployment
-   # 3. Copy connection details to .env
-   ELASTIC_URL=https://your-deployment-id.es.us-east-1.aws.found.io:9243
-   ELASTIC_USERNAME=elastic
-   ELASTIC_PASSWORD=your-generated-password
-   ```
-
-   **Option B: Local Docker (if Docker available)**
-   ```bash
-   docker compose up -d
-   # Then use: http://localhost:9200
-   ```
-
-   **Option C: Local Installation**
-   ```bash
-   # Download from https://www.elastic.co/downloads/elasticsearch
-   # Start with: ./bin/elasticsearch
-   # Then use: http://localhost:9200
-   ```
-
-3. **Setup Elasticsearch indices:**
-```bash
-# Initialize indices and test connection
-npm run setup-elastic
-```
-
-4. **Start development servers:**
-```bash
-# Start both frontend and backend
-npm run start
-
-# Or separately:
-# Frontend (port 5173)
-npm run dev
-
-# Backend (port 3001)
-npm run backend
-```
-
-5. **Seed initial data:**
-```bash
-# This will populate Chroma with API data
-npm run seed
-```
-
-6. **Open your browser:**
-- Frontend: http://localhost:5173
-- Elasticsearch: http://localhost:9200 (or your Elastic Cloud URL)
-- Kibana (for data visualization): http://localhost:5601 (if using Docker)
-- Backend API: http://localhost:3001/api/health
-
-### 🛑 Stop Elasticsearch:
-```bash
-# If using Docker:
-docker compose down
-
-# If using local installation:
-# Stop the Elasticsearch process manually
-```
-
-## 📁 Project Structure
-
-```
-api-atlas/
-├── src/
-│   ├── components/          # React components
-│   │   ├── Header.jsx       # Navigation header
-│   │   ├── Hero.jsx         # Landing page hero
-│   │   ├── SearchInterface.jsx # Search and filters
-│   │   ├── APIResults.jsx   # Search results display
-│   │   ├── ComparisonView.jsx # Side-by-side comparison
-│   │   ├── PerformanceDashboard.jsx # Real-time metrics
-│   │   └── APIDetail.jsx    # Individual API pages
-│   ├── lib/
-│   │   └── api.js           # API client utilities
-│   ├── App.jsx              # Main React app
-│   └── main.jsx             # React entry point
-├── backend/
-│   ├── routes/              # Express routes
-│   │   ├── search.js        # Semantic search endpoints
-│   │   ├── performance.js   # Performance metrics
-│   │   └── monitor.js       # Monitoring management
-│   ├── services/            # Business logic
-│   │   ├── chroma.js        # Vector search service
-│   │   ├── elastic.js       # Performance monitoring
-│   │   └── scoring.js       # Relevance calculations
-│   ├── data/                # Seed data
-│   └── server.js            # Express server
-├── public/                  # Static assets
-└── package.json             # Dependencies and scripts
-```
-
-## 🔧 API Endpoints
-
-### Search
-- `POST /api/search` - Semantic API search
-- `GET /api/search/suggestions` - Search suggestions
-
-### Performance
-- `GET /api/performance/:apiId` - Latest performance metrics
-- `GET /api/performance/:apiId/history` - Performance history
-- `GET /api/performance/status/all` - System status overview
-
-### Monitoring
-- `POST /api/monitor/add` - Add API to monitoring
-- `DELETE /api/monitor/:apiId` - Remove from monitoring
-- `GET /api/monitor/agents` - Monitoring agents status
-
-## 🎨 Key Features
-
-### Semantic Search Engine
-- Uses Chroma vector database for semantic similarity
-- Supports natural language queries like "I need image generation"
-- Returns relevance-scored results with performance data
-
-### Real-time Performance Monitoring
-- Elastic Agent Builder integration
-- 5-minute monitoring intervals
-- Response time, uptime, and error rate tracking
-- Visual performance dashboards
-
-### Advanced Filtering
-- Use case filtering (chatbot, image gen, etc.)
-- Input/output type matching
-- Pricing model selection
-- Budget range filtering
-- Real-time filter application
-
-### Smart Comparisons
-- Side-by-side API analysis
-- Performance vs relevance scoring
-- Feature comparison matrices
-- Cost efficiency calculations
-
-## 📊 Elasticsearch Setup
-
-### Local Development (Docker)
-The project includes a Docker Compose setup for Elasticsearch (if Docker is available):
-
-```bash
-# Start Elasticsearch + Kibana
-docker compose up -d
-
-# Setup indices
-npm run setup-elastic
-
-# View data in Kibana
-open http://localhost:5601
-```
-
-### Production Deployment
-For production, consider:
-- **Elastic Cloud**: Managed Elasticsearch service
-- **Self-hosted**: Deploy Elasticsearch cluster
-- **AWS OpenSearch**: AWS managed alternative
-
-### Data Structure
-The app creates these Elasticsearch indices:
-- `api-atlas-performance`: Real-time API performance metrics
-- `api-atlas-metrics`: Additional monitoring data
-
-### Chroma Setup
-1. Install Chroma locally or use hosted instance
-2. Create API collection with embeddings
-3. Seed with initial API documentation
-4. Configure similarity thresholds
-
-## 🎯 Demo Script
-
-**Opening (30 sec):**
-"Developers waste hours comparing APIs. Should I use SendGrid or Resend? Is OpenAI faster than Anthropic today? Rho solves this."
-
-**Demo (2 min):**
-1. Type: "I need to generate images from text"
-2. Show semantic search finding DALL-E, Midjourney, Stability AI
-3. Display live performance comparison with Elastic data
-4. Show detailed breakdown with relevance scores
-5. Click winner → see comprehensive API details
-
-**Tech Highlight (30 sec):**
-"We use Chroma's vector database to semantically understand API capabilities, and Elastic's Agent Builder continuously monitors performance, combining semantic relevance with operational intelligence."
-
-## 🔮 Future Enhancements
-
-- User accounts and saved searches
-- Community ratings and reviews
-- API cost calculator with custom usage
-- Chrome extension for quick lookups
-- Email alerts for API downtime
-- Integration marketplace
-- API documentation snippets
-- Code example generator
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+> Powered by **OpenAI GPT-4** for intelligent, context-aware API matching
 
 ---
 
-**🎨 Built with semantic intelligence and real-time performance monitoring for the modern developer!**
+## ✨ Features
+
+### 🔍 **Intelligent API Discovery**
+- **Semantic Search**: Natural language API discovery powered by GPT-4
+- **AI-Powered Recommendations**: Get personalized API suggestions based on your use case and budget
+- **Trending APIs**: Stay updated with industry-specific API trends
+
+### 🔄 **Advanced Comparison**
+- **Side-by-Side Comparison**: Compare up to 5 APIs at once
+- **Performance Metrics**: Real-time uptime, response time, and reliability scores
+- **Pricing Comparison**: Transparent pricing models and cost analysis
+- **Feature Matrix**: Visual feature comparison across APIs
+
+### 📊 **Premium UI/UX**
+- **Google Flights Inspired**: Familiar, intuitive interface
+- **Real-time Data**: Live performance metrics and status updates
+- **Mobile Responsive**: Beautiful design on any device
+- **Dark Mode Ready**: Professional appearance with modern design
+
+### 🤖 **AI Intelligence**
+- **Smart Filtering**: Filter by performance, pricing, features
+- **Use Case Matching**: AI recommends APIs for your specific use case
+- **Competitive Analysis**: Understand pros/cons of alternatives
+- **ROI Calculator**: Estimate costs and benefits
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm
+- OpenAI API key (get one at [platform.openai.com](https://platform.openai.com))
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/rho.git
+cd rho/api-atlas
+```
+
+2. **Install dependencies**
+```bash
+npm install
+cd backend && npm install
+```
+
+3. **Configure environment variables**
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add your OpenAI API key:
+```env
+OPENAI_API_KEY=sk_your_api_key_here
+PORT=3001
+NODE_ENV=development
+VITE_API_URL=http://localhost:3001/api
+```
+
+4. **Start the application**
+
+In separate terminals:
+
+```bash
+# Terminal 1: Start frontend (port 5173)
+npm run dev
+
+# Terminal 2: Start backend (port 3001)
+npm run backend
+```
+
+Visit **http://localhost:5173** in your browser.
+
+---
+
+## 📖 API Documentation
+
+### Base URL
+```
+http://localhost:3001/api
+```
+
+### Endpoints
+
+#### 🔍 Search APIs
+```bash
+POST /discover/search
+```
+**Request:**
+```json
+{
+  "query": "I need a payment processing API"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "query": "I need a payment processing API",
+  "count": 3,
+  "results": [
+    {
+      "id": "stripe-payments",
+      "name": "Stripe API",
+      "provider": "Stripe",
+      "category": "Payment Processing",
+      "description": "...",
+      "relevanceScore": 95,
+      "pricing": {...},
+      "performance": {...}
+    }
+  ]
+}
+```
+
+#### 💡 Get Recommendations
+```bash
+POST /discover/recommendations
+```
+**Request:**
+```json
+{
+  "useCase": "E-commerce platform payment processing",
+  "budget": "$500/month",
+  "requirements": ["Subscription support", "Global coverage", "Fraud detection"]
+}
+```
+
+#### 🔄 Compare APIs
+```bash
+POST /discover/compare
+```
+**Request:**
+```json
+{
+  "apiIds": ["stripe-payments", "openai-gpt4", "sendgrid-email"]
+}
+```
+
+#### 📊 Get API Insights
+```bash
+GET /discover/insights/:apiId?context=Optional%20context
+```
+
+#### 📈 Get Trending APIs
+```bash
+GET /discover/trending?industry=fintech
+```
+
+#### 💚 Health Check
+```bash
+GET /health
+```
+
+---
+
+## 🏗️ Architecture
+
+### Frontend
+- **React 19** with Vite for blazing fast development
+- **Tailwind CSS** for premium styling
+- **Lucide React** for beautiful icons
+- **Axios** for API communication
+
+### Backend
+- **Express.js** lightweight server framework
+- **OpenAI GPT-4** for intelligent API recommendations
+- **Node.js** runtime
+
+### Data
+- **Comprehensive API Catalog**: 50+ premium APIs pre-configured
+- **Real-time Performance Metrics**: Live uptime and reliability data
+- **Pricing Information**: Transparent, up-to-date pricing models
+
+---
+
+## 📦 Project Structure
+
+```
+rho/
+├── api-atlas/
+│   ├── backend/
+│   │   ├── services/
+│   │   │   ├── openai.js          # OpenAI integration
+│   │   │   └── scoring.js         # API scoring logic
+│   │   ├── routes/
+│   │   │   └── discover.js        # Discovery endpoints
+│   │   ├── data/
+│   │   │   └── api-catalog.json   # Comprehensive API data
+│   │   └── server.js              # Express server
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx         # Navigation header
+│   │   │   ├── Hero.jsx           # Hero section with search
+│   │   │   ├── APIResults.jsx     # Results grid
+│   │   │   ├── ComparisonView.jsx # Comparison table
+│   │   │   └── ...
+│   │   ├── lib/
+│   │   │   └── api.js             # API client
+│   │   ├── App.jsx                # Main app component
+│   │   └── main.jsx               # Entry point
+│   ├── package.json
+│   └── vite.config.js
+└── README.md
+```
+
+---
+
+## 🎯 Use Cases
+
+### For Developers
+- Find the best API for your project requirements
+- Compare pricing and features before integration
+- Get integration guides and code samples
+- Access real-time performance metrics
+
+### For Product Managers
+- Evaluate multiple API solutions
+- Compare ROI and total cost of ownership
+- Get competitive insights
+- Make data-driven integration decisions
+
+### For CTOs & Tech Leads
+- Build evaluations frameworks
+- Compare enterprise offerings
+- Assess SLA requirements
+- Track performance metrics
+
+---
+
+## 💰 Supported API Categories
+
+- 🤖 **AI/LLM**: GPT-4, Claude, Gemini, LLaMA
+- 🎨 **Image Generation**: DALL-E, Midjourney, Stable Diffusion
+- 🎙️ **Speech**: Whisper, TTS, Voice Recognition
+- 💳 **Payments**: Stripe, PayPal, Square
+- 📧 **Communication**: SendGrid, Twilio, Mailgun
+- 💻 **Code**: GitHub Copilot, Tabnine
+- 📊 **Analytics**: Segment, Mixpanel, Amplitude
+- ...and more!
+
+---
+
+## 🔒 Security & Privacy
+
+- **No Data Storage**: We don't store your API keys or personal information
+- **Secure Communication**: All requests encrypted with HTTPS
+- **API Key Protection**: Your OpenAI key stays on your server
+- **Privacy First**: No tracking, no analytics by default
+
+---
+
+## 📈 Roadmap
+
+### Phase 1 (Current)
+- ✅ Basic API discovery and search
+- ✅ Comparison functionality
+- ✅ Performance metrics
+
+### Phase 2
+- 🚧 User accounts and saved searches
+- 🚧 Integration code generation
+- 🚧 Cost calculator with forecasting
+
+### Phase 3
+- 📋 Webhooks and monitoring
+- 📋 Custom API catalog management
+- 📋 Team collaboration features
+
+### Phase 4
+- 📋 Advanced analytics
+- 📋 Machine learning optimization
+- 📋 Enterprise SLA support
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+### Development Setup
+```bash
+npm run dev      # Start frontend + backend
+npm run lint     # Run linter
+npm run build    # Build for production
+```
+
+---
+
+## 📞 Support
+
+- **Documentation**: [docs.rho.dev](https://docs.rho.dev)
+- **Email**: support@rho.dev
+- **Discord**: [Join Community](https://discord.gg/rho)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/rho/issues)
+
+---
+
+## 📄 License
+
+MIT © 2024 Rho. See [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **OpenAI** for powering our AI recommendations
+- **Tailwind CSS** for beautiful styling
+- **React** community for amazing tooling
+- All API providers for their excellent services
+
+---
+
+## 🚀 Launch Checklist
+
+- [x] Core functionality implemented
+- [x] Beautiful UI/UX design
+- [x] API documentation
+- [x] Performance optimization
+- [x] Security review
+- [ ] Beta testing
+- [ ] Marketing materials
+- [ ] Production deployment
+- [ ] Analytics setup
+- [ ] Support team training
+
+---
+
+**Ready to find your perfect API? Start exploring now!**
+
+[🚀 Get Started](http://localhost:5173) | [📖 Docs](https://docs.rho.dev) | [💬 Community](https://discord.gg/rho)

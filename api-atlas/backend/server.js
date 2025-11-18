@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import searchRoutes from './routes/search.js';
-import performanceRoutes from './routes/performance.js';
-import monitorRoutes from './routes/monitor.js';
+import dotenv from 'dotenv';
+import discoverRoutes from './routes/discover.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
@@ -11,10 +12,14 @@ const PORT = Number(process.env.PORT) || 3001;
 app.use(cors());
 app.use(express.json());
 
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`📡 ${req.method} ${req.path}`);
+  next();
+});
+
 // Routes
-app.use('/api/search', searchRoutes);
-app.use('/api/performance', performanceRoutes);
-app.use('/api/monitor', monitorRoutes);
+app.use('/api/discover', discoverRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -22,9 +27,9 @@ app.get('/api/health', (req, res) => {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     services: {
-      chroma: 'operational',
-      elastic: 'operational'
-    }
+      openai: process.env.OPENAI_API_KEY ? 'connected' : 'not configured',
+      backend: 'operational',
+    },
   });
 });
 
@@ -32,20 +37,21 @@ app.get('/api/health', (req, res) => {
 app.get('/', (req, res) => {
   res.json({
     name: 'Rho',
-    description: 'Semantic API Discovery & Performance Monitoring Platform',
-    version: '1.0.0',
+    tagline: 'The ultimate API discovery platform',
+    description: 'Find, compare, and integrate the perfect APIs for your project',
+    version: '2.0.0',
     status: 'running',
+    powerededBy: 'OpenAI GPT-4',
     endpoints: {
       health: 'GET /api/health',
-      search: 'POST /api/search',
-      performance: 'GET /api/performance/:apiId',
-      performance_history: 'GET /api/performance/:apiId/history',
-      system_status: 'GET /api/performance/status/all',
-      monitoring: 'POST /api/monitor/add',
-      documentation: 'Frontend available at http://localhost:5173'
+      search: 'POST /api/discover/search',
+      recommendations: 'POST /api/discover/recommendations',
+      compare: 'POST /api/discover/compare',
+      insights: 'GET /api/discover/insights/:apiId',
+      trending: 'GET /api/discover/trending',
     },
     frontend: 'http://localhost:5173',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -53,38 +59,59 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({
     name: 'Rho Backend API',
-    version: '1.0.0',
-    description: 'Backend API for semantic API discovery and performance monitoring',
+    version: '2.0.0',
+    description: 'AI-powered API discovery and recommendation platform',
     baseUrl: 'http://localhost:3001/api',
+    poweredBy: 'OpenAI GPT-4',
     endpoints: {
       search: {
         method: 'POST',
-        path: '/search',
+        path: '/discover/search',
         description: 'Semantic search for APIs',
-        body: { query: 'string' }
+        body: { query: 'string' },
+        example: { query: 'I need an API for image generation' },
       },
-      performance: {
+      recommendations: {
+        method: 'POST',
+        path: '/discover/recommendations',
+        description: 'Get AI-powered API recommendations',
+        body: { useCase: 'string', budget: 'string', requirements: 'array' },
+      },
+      compare: {
+        method: 'POST',
+        path: '/discover/compare',
+        description: 'Compare multiple APIs',
+        body: { apiIds: 'array' },
+      },
+      insights: {
         method: 'GET',
-        path: '/performance/:apiId',
-        description: 'Get performance metrics for an API',
-        params: { apiId: 'string', period: '24h|7d|30d' }
+        path: '/discover/insights/:apiId',
+        description: 'Get detailed insights about an API',
+        params: { apiId: 'string', context: 'optional string' },
+      },
+      trending: {
+        method: 'GET',
+        path: '/discover/trending',
+        description: 'Get trending APIs by industry',
+        params: { industry: 'optional string' },
       },
       health: {
         method: 'GET',
         path: '/health',
-        description: 'Health check endpoint'
-      }
+        description: 'Health check endpoint',
+      },
     },
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('❌ Error:', err);
   res.status(500).json({
-    error: 'Something went wrong!',
-    message: err.message
+    error: 'Something went wrong',
+    message: err.message,
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -97,15 +124,26 @@ app.use('*', (req, res) => {
       'GET /',
       'GET /api',
       'GET /api/health',
-      'POST /api/search',
-      'GET /api/performance/:apiId',
-      'GET /api/performance/status/all'
+      'POST /api/discover/search',
+      'POST /api/discover/recommendations',
+      'POST /api/discover/compare',
+      'GET /api/discover/insights/:apiId',
+      'GET /api/discover/trending',
     ],
-    frontend: 'http://localhost:5173'
+    frontend: 'http://localhost:5173',
   });
 });
 
 app.listen(PORT, '127.0.0.1', () => {
-  console.log(`🚀 Rho backend running on port ${PORT}`);
+  console.log(`🚀 Rho backend running on http://localhost:${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`📖 API docs: http://localhost:${PORT}/api`);
+  console.log(`🤖 Powered by OpenAI GPT-4`);
+
+  // Check OpenAI API key
+  if (!process.env.OPENAI_API_KEY) {
+    console.warn('⚠️  OPENAI_API_KEY not set. Set it in .env file.');
+  } else {
+    console.log('✅ OpenAI API key configured');
+  }
 });

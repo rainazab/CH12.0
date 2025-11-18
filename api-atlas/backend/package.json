@@ -1,7 +1,7 @@
 {
   "name": "rho-backend",
   "version": "1.0.0",
-  "description": "Backend API for Rho - Semantic API Discovery Platform",
+  "description": "Backend API for Rho - Premium API Discovery Platform powered by OpenAI",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -12,8 +12,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "cors": "^2.8.5",
-    "chromadb": "^1.9.2",
-    "@elastic/elasticsearch": "^8.15.3",
+    "openai": "^4.48.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.5"
   },

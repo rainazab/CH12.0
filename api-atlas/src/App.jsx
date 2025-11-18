@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import SearchInterface from './components/SearchInterface';
 import APIResults from './components/APIResults';
 import ComparisonView from './components/ComparisonView';
 import PerformanceDashboard from './components/PerformanceDashboard';
@@ -15,140 +14,56 @@ function App() {
   const [selectedAPIs, setSelectedAPIs] = useState([]);
   const [error, setError] = useState(null);
 
-  // Debug logging
-  console.log('🚀 App component rendered - full version');
-
-  // Load trending APIs on initial load
+  // Load initial data on mount
   useEffect(() => {
-    console.log('🔄 App useEffect triggered');
-    // Start with mock data immediately, then try to load from backend
-    loadInitialData();
-    loadTrendingAPIs();
+    loadInitialAPIs();
   }, []);
 
-  const loadInitialData = () => {
-    console.log('📋 Loading initial mock data...');
-    // Set mock data immediately for testing
-    const mockResults = [
-      {
-        id: 'openai-gpt4',
-        name: 'ChatGPT API',
-        provider: 'OpenAI',
-        category: 'text-generation',
-        description: 'Advanced language model for text generation and conversation',
-        features: ['Text generation', 'Function calling', 'JSON mode'],
-        performance: {
-          status: 'operational',
-          responseTime: 245,
-          uptime: 99.8,
-          errorRate: 0.2,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: 25.50
-        }
-      },
-      {
-        id: 'anthropic-claude',
-        name: 'Claude API',
-        provider: 'Anthropic',
-        category: 'text-generation',
-        description: 'Constitutional AI for safe and helpful text generation',
-        features: ['Safe AI', 'Large context', 'Vision capabilities'],
-        performance: {
-          status: 'operational',
-          responseTime: 320,
-          uptime: 99.2,
-          errorRate: 0.8,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: 18.90
-        }
-      },
-      {
-        id: 'openai-dalle',
-        name: 'DALL-E API',
-        provider: 'OpenAI',
-        category: 'image-generation',
-        description: 'AI image generation from text descriptions',
-        features: ['Text-to-image', 'High quality', 'Commercial usage'],
-        performance: {
-          status: 'operational',
-          responseTime: 1200,
-          uptime: 99.1,
-          errorRate: 0.9,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: 45.00
-        }
-      },
-      {
-        id: 'github-copilot',
-        name: 'GitHub Copilot API',
-        provider: 'GitHub',
-        category: 'code-generation',
-        description: 'AI-powered code completion and generation',
-        features: ['Code completion', 'Multi-language', 'IDE integration'],
-        performance: {
-          status: 'operational',
-          responseTime: 180,
-          uptime: 99.5,
-          errorRate: 0.5,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: 10.00
-        }
-      }
-    ];
-    setSearchResults(mockResults);
-    console.log('✅ Initial mock data loaded -', mockResults.length, 'APIs');
-  };
-
-  const loadTrendingAPIs = async () => {
+  const loadInitialAPIs = async () => {
     try {
+      setLoading(true);
       setError(null);
-      console.log('📡 Loading trending APIs from backend...');
-      const results = await searchAPIs('popular APIs for developers');
-      console.log('✅ Backend returned results:', results.length);
-
-      // Add mock performance data to results
-      const resultsWithPerformance = results.map(api => ({
+      
+      // Load trending APIs
+      const results = await searchAPIs('popular and trending APIs for developers');
+      
+      // Add mock relevance scores if not provided by backend
+      const resultsWithScores = results.map((api, index) => ({
         ...api,
-        performance: {
-          status: 'operational',
-          responseTime: 200 + Math.random() * 800,
-          uptime: 98 + Math.random() * 2,
-          errorRate: Math.random() * 2,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: Math.random() * 50 + 10
-        }
+        relevanceScore: api.relevanceScore || (100 - index * 10),
       }));
-      setSearchResults(resultsWithPerformance.slice(0, 6));
-      console.log('✅ Loaded trending APIs:', results.length);
-    } catch (error) {
-      console.error('❌ Failed to load trending APIs:', error);
-      // Don't set error since we already have mock data
-      console.log('📋 Keeping mock data since backend failed');
+      
+      setSearchResults(resultsWithScores.slice(0, 8));
+    } catch (err) {
+      console.error('Failed to load initial APIs:', err);
+      setError('Failed to load APIs. Please try searching manually.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSearch = async (query) => {
+    if (!query.trim()) return;
+    
     setLoading(true);
     setError(null);
+    
     try {
-      console.log('🔍 Searching for:', query);
       const results = await searchAPIs(query);
-      // Add mock performance data to search results
-      const resultsWithPerformance = results.map(api => ({
+      
+      // Add mock relevance scores if not provided
+      const resultsWithScores = results.map((api, index) => ({
         ...api,
-        performance: {
-          status: Math.random() > 0.9 ? 'degraded' : 'operational',
-          responseTime: 200 + Math.random() * 800,
-          uptime: 98 + Math.random() * 2,
-          errorRate: Math.random() * 2,
-          lastChecked: new Date().toISOString(),
-          monthlyCost: Math.random() * 50 + 10
-        }
+        relevanceScore: api.relevanceScore || (100 - index * 5),
       }));
-      setSearchResults(resultsWithPerformance);
-      console.log('✅ Search results:', results.length);
-    } catch (error) {
-      console.error('❌ Search failed:', error);
+      
+      setSearchResults(resultsWithScores);
+      
+      if (resultsWithScores.length === 0) {
+        setError('No APIs found matching your query. Try different keywords.');
+      }
+    } catch (err) {
+      console.error('Search error:', err);
       setError('Search failed. Please try again.');
     } finally {
       setLoading(false);
@@ -156,37 +71,47 @@ function App() {
   };
 
   const handleAPISelect = (api) => {
-    setSelectedAPIs(prev => {
-      const exists = prev.find(a => a.id === api.id);
+    setSelectedAPIs((prev) => {
+      const exists = prev.find((a) => a.id === api.id);
       if (exists) {
-        return prev.filter(a => a.id !== api.id);
+        return prev.filter((a) => a.id !== api.id);
       } else {
+        // Limit to 5 APIs for comparison
+        if (prev.length >= 5) {
+          return [...prev.slice(1), api];
+        }
         return [...prev, api];
       }
     });
   };
 
-
   return (
     <Router>
-      <div style={{ minHeight: '100vh', background: 'white' }}>
+      <div className="min-h-screen bg-white">
         <Header />
 
-        <main style={{ paddingTop: '5rem' }}>
+        <main className="pt-16">
           <Routes>
             <Route
               path="/"
               element={
                 <>
                   <Hero onSearch={handleSearch} />
-                  <SearchInterface onSearch={handleSearch} loading={loading} />
+                  
+                  {error && (
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800">
+                      {error}
+                    </div>
+                  )}
+                  
                   <APIResults
                     results={searchResults}
                     loading={loading}
                     onAPISelect={handleAPISelect}
                     selectedAPIs={selectedAPIs}
                   />
-                  {selectedAPIs.length > 1 && (
+                  
+                  {selectedAPIs.length > 0 && (
                     <ComparisonView apis={selectedAPIs} />
                   )}
                 </>
@@ -197,6 +122,86 @@ function App() {
             <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
           </Routes>
         </main>
+
+        {/* Footer */}
+        <footer className="bg-gray-900 text-gray-300 py-12 mt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-4 gap-8 mb-8">
+              <div>
+                <h3 className="font-bold text-white mb-4">Rho</h3>
+                <p className="text-sm text-gray-400">
+                  Discover and compare the perfect APIs for your project.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-4">Product</h4>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Docs
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-4">Company</h4>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-4">Legal</h4>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Privacy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Terms
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Status
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 pt-8">
+              <p className="text-center text-sm text-gray-400">
+                © 2024 Rho. All rights reserved. | Powered by{' '}
+                <span className="text-purple-400 font-semibold">OpenAI GPT-4</span>
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );
