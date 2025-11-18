@@ -9,7 +9,6 @@ export default function Terms() {
           <h1 className="text-5xl lg:text-6xl font-bold mb-6">
             Terms of <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Service</span>
           </h1>
-          <p className="text-gray-400">Last updated: November 2024</p>
         </div>
 
         {/* Content */}
@@ -73,9 +72,13 @@ export default function Terms() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">9. Contact</h2>
             <p>
-              If you have any questions about these Terms of Service, please contact us at <a href="mailto:hello@rho.dev" className="text-cyan-400 hover:text-cyan-300">hello@rho.dev</a>
+              If you have any questions about these Terms of Service, please contact us at <a href="mailto:support@rhoapi.com" className="text-cyan-400 hover:text-cyan-300">support@rhoapi.com</a>
             </p>
           </section>
+        </div>
+        {/* Last Updated */}
+        <div className="mt-16 pt-8 border-t border-gray-800">
+          <p className="text-gray-500 text-sm">Last updated: November 2025</p>
         </div>
       </div>
     </div>

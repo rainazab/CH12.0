@@ -1,6 +1,47 @@
 'use client';
 
+import { useState } from 'react';
+
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // Send email via mailto for now (can be replaced with API call)
+      const mailtoLink = `mailto:hello@rho.dev?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,61 +55,93 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact Info */}
-        <div className="grid md:grid-cols-2 gap-12 mb-12">
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2">Email</h3>
-              <p className="text-lg text-gray-400">
-                <a href="mailto:hello@rho.dev" className="hover:text-cyan-400 transition">
-                  hello@rho.dev
-                </a>
-              </p>
-            </div>
+        <div className="grid md:grid-cols-1 gap-8 mb-12">
+          {/* Contact Form */}
+          <div className="max-w-2xl">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-semibold text-white mb-2">
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition"
+                  placeholder="Your name"
+                />
+              </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2">Social</h3>
-              <p className="text-gray-400 text-lg">
-                Follow us on X for updates and announcements
-              </p>
-            </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition"
+                  placeholder="your@email.com"
+                />
+              </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2">Location</h3>
-              <p className="text-gray-400 text-lg">
-                Built at CalHacks 12.0<br />
-                UC Berkeley, California
-              </p>
-            </div>
+              <div>
+                <label htmlFor="subject" className="block text-sm font-semibold text-white mb-2">
+                  Subject *
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 transition"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="Feature Request">Feature Request</option>
+                  <option value="Bug Report">Bug Report</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-semibold text-white mb-2">
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition resize-none"
+                  placeholder="Tell us what's on your mind..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300 disabled:opacity-50"
+              >
+                {loading ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {submitted && (
+                <div className="p-4 bg-green-600/20 border border-green-500/30 rounded-lg text-green-400">
+                  Thanks for your message! We'll get back to you within 24 hours.
+                </div>
+              )}
+            </form>
           </div>
-
-          <div className="bg-gradient-to-br from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">Why Connect?</h3>
-            <ul className="space-y-4 text-gray-300">
-              <li className="flex gap-3">
-                <span className="text-cyan-400">→</span>
-                <span>Share feature requests</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-400">→</span>
-                <span>Report bugs or issues</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-400">→</span>
-                <span>Discuss partnerships</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-400">→</span>
-                <span>General inquiries</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="bg-blue-600/10 border border-blue-500/30 rounded-2xl p-8 text-center">
-          <p className="text-gray-300 text-lg">
-            We're responsive and typically reply within 24 hours. Thanks for reaching out!
-          </p>
         </div>
       </div>
     </div>

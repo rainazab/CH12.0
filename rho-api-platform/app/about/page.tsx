@@ -75,7 +75,7 @@ export default function About() {
                   linkedin: 'https://www.linkedin.com/in/matildaverdejo/',
                 },
                 {
-                  name: 'Maria Fernanda Palacios',
+                  name: 'Fernanda Palacios',
                   image: '/fp.jpg',
                   website: null,
                   linkedin: 'https://www.linkedin.com/in/maria-fernanda-palacios/',
