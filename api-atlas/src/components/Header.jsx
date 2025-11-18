@@ -26,7 +26,7 @@ export default function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 hover:opacity-80 transition">
             <img 
-              src="/static/assets/loading.png" 
+              src="/loading.png" 
               alt="Rho" 
               className="w-8 h-8 object-contain"
             />
