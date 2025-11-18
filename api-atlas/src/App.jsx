@@ -1,12 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import APIResults from './components/APIResults';
 import ComparisonView from './components/ComparisonView';
-import PerformanceDashboard from './components/PerformanceDashboard';
-import APIDetail from './components/APIDetail';
 import { searchAPIs } from './lib/api';
+
+// Debounce helper
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -43,7 +56,10 @@ function App() {
   };
 
   const handleSearch = async (query) => {
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      setSearchResults([]);
+      return;
+    }
     
     setLoading(true);
     setError(null);
@@ -51,16 +67,11 @@ function App() {
     try {
       const results = await searchAPIs(query);
       
-      // Add mock relevance scores if not provided
-      const resultsWithScores = results.map((api, index) => ({
-        ...api,
-        relevanceScore: api.relevanceScore || (100 - index * 5),
-      }));
+      // Results already have relevanceScore from backend
+      setSearchResults(results);
       
-      setSearchResults(resultsWithScores);
-      
-      if (resultsWithScores.length === 0) {
-        setError('No APIs found matching your query. Try different keywords.');
+      if (results.length === 0) {
+        setError('No APIs found. Try different keywords.');
       }
     } catch (err) {
       console.error('Search error:', err);
@@ -117,87 +128,94 @@ function App() {
                 </>
               }
             />
-            <Route path="/performance" element={<PerformanceDashboard />} />
-            <Route path="/api/:id" element={<APIDetail />} />
             <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
           </Routes>
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-gray-300 py-12 mt-20">
+        <footer className="bg-black border-t border-gray-800 py-16 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="grid md:grid-cols-4 gap-12 mb-12">
+              {/* Brand Column */}
               <div>
-                <h3 className="font-bold text-white mb-4">Rho</h3>
-                <p className="text-sm text-gray-400">
-                  Discover and compare the perfect APIs for your project.
+                <h3 className="font-bold text-white mb-2 text-lg">Rho</h3>
+                <p className="text-sm text-gray-400 mb-4">
+                  Like Google Flights for APIs. Discover, compare, and integrate the best APIs with AI-powered recommendations.
                 </p>
               </div>
+
+              {/* Product */}
               <div>
                 <h4 className="font-semibold text-white mb-4">Product</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Features
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Pricing
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Docs
                     </a>
                   </li>
                 </ul>
               </div>
+
+              {/* Company */}
               <div>
                 <h4 className="font-semibold text-white mb-4">Company</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       About
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Blog
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Contact
                     </a>
                   </li>
                 </ul>
               </div>
+
+              {/* Legal */}
               <div>
                 <h4 className="font-semibold text-white mb-4">Legal</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Privacy
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Terms
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Status
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
+
+            {/* Bottom */}
             <div className="border-t border-gray-800 pt-8">
-              <p className="text-center text-sm text-gray-400">
+              <p className="text-center text-sm text-gray-500">
                 © 2024 Rho. All rights reserved. | Powered by{' '}
-                <span className="text-purple-400 font-semibold">OpenAI GPT-4</span>
+                <span className="text-cyan-400 font-semibold">Elastic & Chroma</span>
               </p>
             </div>
           </div>

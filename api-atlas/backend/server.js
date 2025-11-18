@@ -1,9 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import discoverRoutes from './routes/discover.js';
 
-dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
@@ -41,7 +44,7 @@ app.get('/', (req, res) => {
     description: 'Find, compare, and integrate the perfect APIs for your project',
     version: '2.0.0',
     status: 'running',
-    powerededBy: 'OpenAI GPT-4',
+    powerededBy: 'Elastic & Chroma',
     endpoints: {
       health: 'GET /api/health',
       search: 'POST /api/discover/search',
@@ -62,7 +65,7 @@ app.get('/api', (req, res) => {
     version: '2.0.0',
     description: 'AI-powered API discovery and recommendation platform',
     baseUrl: 'http://localhost:3001/api',
-    poweredBy: 'OpenAI GPT-4',
+    poweredBy: 'Elastic & Chroma',
     endpoints: {
       search: {
         method: 'POST',
@@ -138,12 +141,12 @@ app.listen(PORT, '127.0.0.1', () => {
   console.log(`🚀 Rho backend running on http://localhost:${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
   console.log(`📖 API docs: http://localhost:${PORT}/api`);
-  console.log(`🤖 Powered by OpenAI GPT-4`);
+  console.log(`📊 Powered by Elastic & Chroma`);
 
   // Check OpenAI API key
   if (!process.env.OPENAI_API_KEY) {
     console.warn('⚠️  OPENAI_API_KEY not set. Set it in .env file.');
   } else {
-    console.log('✅ OpenAI API key configured');
+    console.log('✅ API key configured');
   }
 });

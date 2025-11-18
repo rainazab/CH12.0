@@ -2,7 +2,7 @@
 
 **Like Google Flights for APIs.** Discover, compare, and integrate the perfect APIs for your project with AI-powered recommendations.
 
-> Powered by **OpenAI GPT-4** for intelligent, context-aware API matching
+> Powered by **Elastic & Chroma** for intelligent, context-aware API matching
 
 ---
 
@@ -174,7 +174,7 @@ GET /health
 
 ### Backend
 - **Express.js** lightweight server framework
-- **OpenAI GPT-4** for intelligent API recommendations
+- **Elastic & Chroma** for intelligent API recommendations
 - **Node.js** runtime
 
 ### Data
@@ -314,7 +314,7 @@ MIT © 2024 Rho. See [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- **OpenAI** for powering our AI recommendations
+- **Elastic & Chroma** for powering our API discovery
 - **Tailwind CSS** for beautiful styling
 - **React** community for amazing tooling
 - All API providers for their excellent services

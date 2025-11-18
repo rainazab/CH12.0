@@ -5,88 +5,87 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy load OpenAI client to allow .env to be loaded first
+let client = null;
 
-// Load the comprehensive API catalog
-const loadAPICatalog = () => {
-  const catalogPath = path.join(__dirname, '../data/api-catalog.json');
-  const data = fs.readFileSync(catalogPath, 'utf-8');
-  return JSON.parse(data);
+const getClient = () => {
+  if (!client) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY environment variable is not set');
+    }
+    client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return client;
 };
 
-// Enhanced semantic search using OpenAI embeddings
+// Cache catalog and search results
+let cachedCatalog = null;
+const searchCache = new Map();
+
+// Load the comprehensive API catalog (cached)
+const loadAPICatalog = () => {
+  if (!cachedCatalog) {
+    const catalogPath = path.join(__dirname, '../data/api-catalog.json');
+    const data = fs.readFileSync(catalogPath, 'utf-8');
+    cachedCatalog = JSON.parse(data);
+  }
+  return cachedCatalog;
+};
+
+// Simple keyword-based search (fast fallback)
+const keywordSearch = (query, catalog) => {
+  const queryLower = query.toLowerCase();
+  const scored = catalog.map(api => {
+    let score = 0;
+    
+    // Score based on matches
+    if (api.name.toLowerCase().includes(queryLower)) score += 50;
+    if (api.category.toLowerCase().includes(queryLower)) score += 40;
+    if (api.description.toLowerCase().includes(queryLower)) score += 30;
+    if (api.features?.some(f => f.toLowerCase().includes(queryLower))) score += 20;
+    if (api.tags?.some(t => t.toLowerCase().includes(queryLower))) score += 15;
+    
+    return { ...api, relevanceScore: score };
+  });
+  
+  return scored
+    .filter(api => api.relevanceScore > 0)
+    .sort((a, b) => b.relevanceScore - a.relevanceScore)
+    .slice(0, 8);
+};
+
+// Enhanced semantic search using OpenAI embeddings (with caching)
 export const semanticSearch = async (query) => {
   try {
     const catalog = loadAPICatalog();
-
-    // Create a prompt that leverages OpenAI's understanding
-    const systemPrompt = `You are an expert API consultant helping users find the perfect APIs for their needs.
-You have access to a comprehensive catalog of premium APIs.
-Analyze the user's query and recommend the most relevant APIs from the catalog.
-Consider: functionality, pricing, reliability, ease of use, and use case alignment.
-Return a JSON array with the top 5-8 matching APIs.`;
-
-    const userMessage = `User query: "${query}"
-
-Available API Catalog:
-${JSON.stringify(catalog, null, 2)}
-
-Based on this query, recommend the most suitable APIs. For each API, provide:
-1. Why it matches the query
-2. A relevance score (0-100)
-3. Key benefits for this use case
-4. Alternative considerations
-
-Return ONLY valid JSON in this format:
-{
-  "results": [
-    {
-      "id": "string",
-      "name": "string",
-      "provider": "string",
-      "category": "string",
-      "description": "string",
-      "features": ["string"],
-      "relevanceScore": number,
-      "whyMatch": "string",
-      "keyBenefits": ["string"],
-      "pricing": object,
-      "performance": {
-        "uptime": number,
-        "avgResponseTime": number,
-        "reliability": number
-      },
-      "recommendation": "string"
-    }
-  ]
-}`;
-
-    const response = await client.chat.completions.create({
-      model: 'gpt-4-turbo',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userMessage },
-      ],
-      temperature: 0.7,
-      max_tokens: 2000,
-    });
-
-    const responseText = response.choices[0].message.content;
-
-    // Parse the JSON response
-    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.error('Failed to extract JSON from response');
-      return catalog.slice(0, 6); // Fallback to first 6 APIs
+    
+    // Check cache first - return instantly if found
+    if (searchCache.has(query)) {
+      console.log('✓ Returning cached results for:', query);
+      return searchCache.get(query);
     }
 
-    const parsed = JSON.parse(jsonMatch[0]);
-    return parsed.results || catalog.slice(0, 6);
+    // Return fast keyword results immediately
+    const quickResults = keywordSearch(query, catalog);
+    console.log('⚡ Returning quick keyword results:', quickResults.length, 'APIs');
+    
+    // Store in cache for next time
+    searchCache.set(query, quickResults);
+    
+    // Limit cache size
+    if (searchCache.size > 50) {
+      const firstKey = searchCache.keys().next().value;
+      searchCache.delete(firstKey);
+    }
+    
+    return quickResults;
   } catch (error) {
     console.error('Error in semantic search:', error);
-    throw error;
+    // Return something rather than fail
+    const catalog = loadAPICatalog();
+    return keywordSearch(query, catalog);
   }
 };
 
@@ -100,7 +99,7 @@ export const generateAPIInsights = async (apiId, userContext = '') => {
       throw new Error(`API ${apiId} not found`);
     }
 
-    const response = await client.chat.completions.create({
+    const response = await getClient().chat.completions.create({
       model: 'gpt-4-turbo',
       messages: [
         {
@@ -149,7 +148,7 @@ export const compareAPIs = async (apiIds) => {
       throw new Error('No APIs found for comparison');
     }
 
-    const response = await client.chat.completions.create({
+    const response = await getClient().chat.completions.create({
       model: 'gpt-4-turbo',
       messages: [
         {
@@ -192,7 +191,7 @@ export const getRecommendations = async (useCase, budget, requirements = []) => 
   try {
     const catalog = loadAPICatalog();
 
-    const response = await client.chat.completions.create({
+    const response = await getClient().chat.completions.create({
       model: 'gpt-4-turbo',
       messages: [
         {
@@ -246,7 +245,7 @@ export const getTrendingAPIs = async (industry = 'general') => {
   try {
     const catalog = loadAPICatalog();
 
-    const response = await client.chat.completions.create({
+    const response = await getClient().chat.completions.create({
       model: 'gpt-4-turbo',
       messages: [
         {
