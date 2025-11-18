@@ -158,11 +158,6 @@ function App() {
                       Pricing
                     </a>
                   </li>
-                  <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
-                      Docs
-                    </a>
-                  </li>
                 </ul>
               </div>
 
@@ -173,11 +168,6 @@ function App() {
                   <li>
                     <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       About
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
-                      Blog
                     </a>
                   </li>
                   <li>
@@ -200,11 +190,6 @@ function App() {
                   <li>
                     <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
                       Terms
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
-                      Status
                     </a>
                   </li>
                 </ul>
