@@ -57,6 +57,80 @@ export default function About() {
               </li>
             </ul>
           </section>
+
+          <section className="space-y-8 pt-8 border-t border-gray-800">
+            <h2 className="text-3xl font-bold text-white">Built at CalHacks 12.0</h2>
+            <div className="grid md:grid-cols-4 gap-8">
+              {[
+                {
+                  name: 'Raina Zabasajja',
+                  image: '/rz.jpg',
+                  website: 'www.rainazab.com',
+                  linkedin: 'https://www.linkedin.com/in/rainazab/',
+                },
+                {
+                  name: 'Matilda Verdejo',
+                  image: '/mv.jpg',
+                  website: null,
+                  linkedin: 'https://www.linkedin.com/in/matildaverdejo/',
+                },
+                {
+                  name: 'Maria Fernanda Palacios',
+                  image: '/fp.jpg',
+                  website: null,
+                  linkedin: 'https://www.linkedin.com/in/maria-fernanda-palacios/',
+                },
+                {
+                  name: 'Sarah Hoang',
+                  image: null,
+                  website: null,
+                  linkedin: 'https://www.linkedin.com/in/sarah-hoang-compsci/',
+                },
+              ].map((member, idx) => (
+                <div key={idx} className="text-center">
+                  {member.image ? (
+                    <div className="mb-4 flex justify-center">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-24 h-24 rounded-full object-cover border-2 border-cyan-400/30"
+                      />
+                    </div>
+                  ) : (
+                    <div className="mb-4 flex justify-center">
+                      <div className="w-24 h-24 rounded-full bg-gray-800 flex items-center justify-center border-2 border-gray-700">
+                        <span className="text-2xl font-bold text-cyan-400">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                      </div>
+                    </div>
+                  )}
+                  <h3 className="font-semibold text-white mb-2 text-lg">{member.name}</h3>
+                  <div className="flex justify-center gap-3 flex-wrap items-center">
+                    {member.website && (
+                      <>
+                        <a
+                          href={`https://${member.website}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-cyan-400 hover:text-cyan-300 transition"
+                        >
+                          Website
+                        </a>
+                        <span className="text-cyan-400">|</span>
+                      </>
+                    )}
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-cyan-400 hover:text-cyan-300 transition"
+                    >
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </div>
