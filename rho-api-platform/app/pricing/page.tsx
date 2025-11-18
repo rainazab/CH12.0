@@ -164,11 +164,12 @@ export default function PricingPage() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-2xl border backdrop-blur transition duration-300 transform hover:scale-105 ${
+              className={`relative border backdrop-blur transition duration-300 ${
                 plan.highlighted
                   ? 'border-cyan-400/60 bg-gradient-to-br from-cyan-600/10 to-blue-600/10 ring-2 ring-cyan-400/20 shadow-2xl shadow-cyan-500/20'
                   : 'border-gray-800/50 bg-gray-900/30 hover:border-gray-700/50'
               }`}
+              style={{ borderRadius: '1rem' }}
             >
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -178,7 +179,7 @@ export default function PricingPage() {
                 </div>
               )}
 
-              <div className="p-8 h-full flex flex-col">
+              <div className="p-8 h-full flex flex-col w-full">
                 {/* Plan Header */}
                 <div className="mb-8">
                   <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
@@ -212,7 +213,7 @@ export default function PricingPage() {
                 </button>
 
                 {/* Features List */}
-                <div className="space-y-4 flex-grow">
+                <div className="space-y-4 flex-grow w-full">
                   <div>
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Comparison Features</p>
                     {plan.features.map((feature, featureIdx) => (
@@ -223,19 +224,19 @@ export default function PricingPage() {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-700/30 pt-4">
+                  <div className="border-t border-gray-700/30 pt-4 w-full">
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Stack Features</p>
                     {plan.stackFeatures?.map((feature, featureIdx) => {
                       const isAvailable = feature.startsWith('true_');
                       const featureName = feature.substring(6);
                       return (
-                        <div key={featureIdx} className="flex items-start gap-3 mb-2">
+                        <div key={featureIdx} className="flex gap-2 mb-3 min-w-0">
                           {isAvailable ? (
-                            <Image src="/icon/checkmark-seal.png" alt="check" width={18} height={18} className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" />
+                            <Image src="/icon/checkmark-seal.png" alt="check" width={16} height={16} className="flex-shrink-0 mt-0.5" style={{ objectFit: 'contain' }} />
                           ) : (
-                            <Image src="/icon/x.png" alt="close" width={18} height={18} className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" />
+                            <Image src="/icon/x.png" alt="close" width={16} height={16} className="flex-shrink-0 mt-0.5" style={{ objectFit: 'contain' }} />
                           )}
-                          <span className={`text-sm ${isAvailable ? 'text-green-300' : 'text-gray-400'}`}>
+                          <span className={`text-sm break-words flex-1 ${isAvailable ? 'text-green-300' : 'text-gray-400'}`}>
                             {featureName}
                           </span>
                         </div>
