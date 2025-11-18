@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Check, ChevronDown } from 'lucide-react';
-import Head from 'next/head';
 
 export default function PricingPage() {
   const [user, setUser] = useState<any>(null);
@@ -159,16 +158,6 @@ export default function PricingPage() {
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Choose the perfect plan for your needs. No hidden fees, cancel anytime.
           </p>
-          
-          {/* Info Banner */}
-          <div className="mt-8 p-4 border border-blue-500/30 rounded-lg bg-blue-500/5 backdrop-blur flex items-center gap-3">
-            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-              <Image src="/icon/bolt.png" alt="bolt" width={20} height={16} style={{ objectFit: 'contain' }} />
-            </div>
-            <p className="text-sm text-blue-200">
-              <span className="font-semibold">Pro & Enterprise plans unlock</span> stack saving, sharing, editing, and community access.
-            </p>
-          </div>
         </div>
 
         {/* Pricing Cards */}
