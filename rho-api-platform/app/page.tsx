@@ -120,10 +120,10 @@ export default function Home() {
               <div className="flex justify-center w-full pt-2">
                 <Link
                   href="/compare"
-                  className="inline-flex items-center justify-center gap-3 px-7 sm:px-10 py-2.5 sm:py-3 lg:py-3.5 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white font-medium text-sm sm:text-base lg:text-lg rounded-lg transition-all duration-500 hover:from-slate-800 hover:via-slate-700 hover:to-slate-800 border border-cyan-500/20 hover:border-cyan-400/40 group backdrop-blur-xl"
+                  className="inline-flex items-center justify-center gap-3 px-7 sm:px-10 py-2.5 sm:py-3 lg:py-3.5 bg-gradient-to-r from-slate-900 via-red-950/30 to-slate-900 text-white font-medium text-sm sm:text-base lg:text-lg rounded-lg transition-all duration-500 hover:from-slate-800 hover:via-red-900/40 hover:to-slate-800 border border-emerald-500/20 hover:border-emerald-400/50 group backdrop-blur-xl"
                 >
-                  <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Start Comparing</span>
-                  <span className="text-base sm:text-lg text-cyan-400 group-hover:text-cyan-300 transition-all duration-500 group-hover:translate-x-1">→</span>
+                  <span>Start Comparing</span>
+                  <span className="text-base sm:text-lg text-emerald-400 group-hover:text-emerald-300 transition-all duration-500 group-hover:translate-x-1">→</span>
                 </Link>
               </div>
             </div>
