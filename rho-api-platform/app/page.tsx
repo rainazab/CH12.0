@@ -387,24 +387,25 @@ export default function Home() {
           </div>
 
           {/* Demo Search Showcase */}
-          <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="w-11/12 lg:w-5/6 mx-auto">
             <div className="relative">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40" />
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50" />
 
-              <div className="relative flex items-center gap-2 sm:gap-4 lg:gap-6 bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-cyan-500/30 px-4 sm:px-8 lg:px-10 py-3 sm:py-4 min-h-14 sm:min-h-16">
-                <Search className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-400 flex-shrink-0" />
-
-                <div className="flex-1 min-w-0 text-sm sm:text-lg text-white font-medium">
-                  <span className="text-gray-500 italic truncate inline-block max-w-md sm:max-w-2xl lg:max-w-4xl">
-                    {displayedText}
-                    <span className="animate-pulse">|</span>
-                  </span>
+              <div className="relative flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-cyan-500/30 px-6 sm:px-8 lg:px-10 py-4 sm:py-5 min-h-16 sm:min-h-20">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                  <Search className="w-5 sm:w-6 h-5 sm:h-6 text-cyan-400 flex-shrink-0" />
+                  <div className="text-sm sm:text-lg text-white font-medium w-full">
+                    <span className="text-gray-500 italic inline-block w-full">
+                      {displayedText}
+                      <span className="animate-pulse">|</span>
+                    </span>
+                  </div>
                 </div>
 
                 <button
                   onClick={() => window.location.href = '/compare'}
-                  className="px-4 sm:px-8 py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-xs sm:text-sm"
+                  className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-xs sm:text-sm"
                 >
                   Explore
                 </button>
