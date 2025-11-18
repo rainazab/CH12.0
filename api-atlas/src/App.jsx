@@ -1,10 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import APIResults from './components/APIResults';
 import ComparisonView from './components/ComparisonView';
+import Features from './components/Features';
+import Pricing from './components/Pricing';
+import About from './components/About';
+import Contact from './components/Contact';
+import Privacy from './components/Privacy';
+import Terms from './components/Terms';
 import { searchAPIs } from './lib/api';
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return null;
+}
 
 // Debounce helper
 const useDebounce = (value, delay) => {
@@ -98,6 +115,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-black">
         <Header />
 
@@ -129,6 +147,12 @@ function App() {
               }
             />
             <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
           </Routes>
         </main>
 
@@ -138,7 +162,10 @@ function App() {
             <div className="grid md:grid-cols-4 gap-12 mb-12">
               {/* Brand Column */}
               <div>
-                <h3 className="font-bold text-white mb-2 text-lg">Rho</h3>
+                <div className="flex items-center gap-2 mb-2">
+                  <img src="/loading.png" alt="loading" className="w-6 h-6" />
+                  <h3 className="font-bold text-white text-lg">Rho</h3>
+                </div>
                 <p className="text-sm text-gray-400 mb-4">
                   Like Google Flights for APIs. Discover, compare, and integrate the best APIs with AI-powered recommendations.
                 </p>
@@ -149,14 +176,14 @@ function App() {
                 <h4 className="font-semibold text-white mb-4">Product</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/features" className="text-gray-400 hover:text-cyan-400 transition">
                       Features
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/pricing" className="text-gray-400 hover:text-cyan-400 transition">
                       Pricing
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -166,14 +193,14 @@ function App() {
                 <h4 className="font-semibold text-white mb-4">Company</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/about" className="text-gray-400 hover:text-cyan-400 transition">
                       About
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/contact" className="text-gray-400 hover:text-cyan-400 transition">
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -183,14 +210,14 @@ function App() {
                 <h4 className="font-semibold text-white mb-4">Legal</h4>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/privacy" className="text-gray-400 hover:text-cyan-400 transition">
                       Privacy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-cyan-400 transition">
+                    <Link to="/terms" className="text-gray-400 hover:text-cyan-400 transition">
                       Terms
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

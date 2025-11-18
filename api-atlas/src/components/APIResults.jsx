@@ -17,9 +17,26 @@ export default function APIResults({
 }) {
   const [expandedAPI, setExpandedAPI] = useState(null);
   const [sortBy, setSortBy] = useState('relevance');
+  const [userVolume, setUserVolume] = useState(100000); // requests/month
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'matrix'
+
+  // Honest Gotchas - real issues vendors don't advertise
+  const gotchas = {
+    'ChatGPT API': ['Rate limit: 3.5K req/min', 'Hallucination: 3-5%', 'Context window: 128K tokens max', 'Latency variance by region'],
+    'DALL-E 3': ['Rate limit: 50 req/min', 'Burst penalty: +50% on overages', 'Queue time in peak hours', 'Image quality variance'],
+    'Stripe API': ['Rate limits per API key', 'Webhook delivery can be delayed', 'PCI compliance required', 'Settlement delays (1-3 days)'],
+    'ElevenLabs TTS': ['Concurrent limit: 3 simultaneous', 'Latency: 200-800ms variance', 'Quality drops with long text', 'Regional availability limited'],
+  };
+
+  // Calculate monthly cost based on volume
+  const calculateMonthlyCost = (api, volume) => {
+    if (!api.pricing) return 0;
+    const basePrice = api.pricing.input || api.pricing.cost || 0;
+    return (volume * basePrice) / 1000; // assuming per 1K pricing
+  };
 
   const sortedResults = [...results].sort((a, b) => {
-    if (sortBy === 'price') return (a.pricing?.input || 0) - (b.pricing?.input || 0);
+    if (sortBy === 'price') return calculateMonthlyCost(a, userVolume) - calculateMonthlyCost(b, userVolume);
     if (sortBy === 'reliability') return (b.performance?.reliability || 0) - (a.performance?.reliability || 0);
     return (b.relevanceScore || 0) - (a.relevanceScore || 0);
   });
@@ -96,6 +113,45 @@ export default function APIResults({
                 }`}
               >
                 Reliability
+              </button>
+            </div>
+          </div>
+
+          {/* Cost Calculator & View Toggle */}
+          <div className="flex justify-between items-center gap-4 p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
+            <div className="flex items-center gap-4">
+              <label className="text-sm text-gray-400">Monthly Volume:</label>
+              <input
+                type="number"
+                value={userVolume}
+                onChange={(e) => setUserVolume(parseInt(e.target.value) || 0)}
+                className="px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm w-32 focus:border-cyan-500 focus:outline-none"
+                placeholder="requests/month"
+              />
+              <span className="text-cyan-400 font-semibold text-sm">
+                ~${(sortedResults.length > 0 ? calculateMonthlyCost(sortedResults[0], userVolume) : 0).toFixed(2)}/mo avg
+              </span>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`px-3 py-2 rounded text-sm font-medium transition ${
+                  viewMode === 'grid'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                }`}
+              >
+                Grid View
+              </button>
+              <button
+                onClick={() => setViewMode('matrix')}
+                className={`px-3 py-2 rounded text-sm font-medium transition ${
+                  viewMode === 'matrix'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                }`}
+              >
+                Comparison Matrix
               </button>
             </div>
           </div>
@@ -202,11 +258,14 @@ export default function APIResults({
                         )}
                       </button>
 
-                      {/* Pricing */}
+                      {/* Pricing + Dynamic Cost */}
                       {api.pricing && (
                         <div className="text-right">
-                          <div className="text-xs text-gray-500 mb-1">Starting at</div>
-                          <div className="text-lg font-bold text-gray-200">
+                          <div className="text-xs text-gray-500 mb-1">Estimated Monthly Cost</div>
+                          <div className="text-lg font-bold text-cyan-400 mb-2">
+                            ${calculateMonthlyCost(api, userVolume).toFixed(2)}/mo
+                          </div>
+                          <div className="text-xs text-gray-500">
                             {api.pricing.model === 'pay-per-token' &&
                               `$${api.pricing.input}/1K tokens`}
                             {api.pricing.model === 'subscription' &&
@@ -242,44 +301,63 @@ export default function APIResults({
 
                   {/* Expanded Content */}
                   {expandedAPI === api.id && (
-                    <div className="mt-4 pt-4 border-t border-gray-700 grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-white mb-3">Key Features</h4>
-                        <ul className="space-y-2">
-                          {api.features?.map((feature) => (
-                            <li
-                              key={feature}
-                              className="flex items-center gap-2 text-gray-300"
+                    <div className="mt-4 pt-4 border-t border-gray-700 space-y-4">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <h4 className="font-bold text-white mb-3">Key Features</h4>
+                          <ul className="space-y-2">
+                            {api.features?.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-center gap-2 text-gray-300"
+                              >
+                                <Check className="w-4 h-4 text-green-500" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-white mb-3">Quick Links</h4>
+                          <div className="space-y-2">
+                            <a
+                              href={api.docs_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium"
                             >
-                              <Check className="w-4 h-4 text-green-500" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-white mb-3">Quick Links</h4>
-                        <div className="space-y-2">
-                          <a
-                            href={api.docs_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium"
-                          >
-                            Documentation
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                          <a
-                            href={api.endpoint}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium"
-                          >
-                            API Endpoint
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
+                              Documentation
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                            <a
+                              href={api.endpoint}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium"
+                            >
+                              API Endpoint
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          </div>
                         </div>
                       </div>
+
+                      {/* HONEST GOTCHAS - The secret sauce */}
+                      {gotchas[api.name] && (
+                        <div className="bg-red-900/20 border border-red-700/50 rounded-lg p-4 mt-4">
+                          <h4 className="font-bold text-red-400 mb-3 flex items-center gap-2">
+                            ⚠️ Honest Gotchas (What vendors don't advertise)
+                          </h4>
+                          <ul className="space-y-2">
+                            {gotchas[api.name].map((gotcha, idx) => (
+                              <li key={idx} className="flex items-start gap-3 text-gray-300 text-sm">
+                                <span className="text-red-400 mt-1">•</span>
+                                {gotcha}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
