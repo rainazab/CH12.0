@@ -387,16 +387,16 @@ export default function Home() {
           </div>
 
           {/* Demo Search Showcase */}
-          <div className="w-full max-w-3xl mx-auto">
+          <div className="w-full max-w-3xl mx-auto px-4 sm:px-0">
             <div className="relative">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40" />
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50" />
 
-              <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 px-6 py-4 min-h-16">
-                <Search className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+              <div className="relative flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-cyan-500/30 px-4 sm:px-6 py-3 sm:py-4 min-h-14 sm:min-h-16">
+                <Search className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-400 flex-shrink-0" />
 
-                <div className="flex-1 text-lg text-white font-medium">
-                  <span className="text-gray-500 italic">
+                <div className="flex-1 min-w-0 text-sm sm:text-lg text-white font-medium">
+                  <span className="text-gray-500 italic truncate inline-block max-w-xs sm:max-w-md">
                     {displayedText}
                     <span className="animate-pulse">|</span>
                   </span>
@@ -404,7 +404,7 @@ export default function Home() {
 
                 <button
                   onClick={() => window.location.href = '/compare'}
-                  className="px-8 py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-sm"
+                  className="px-4 sm:px-8 py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-xs sm:text-sm"
                 >
                   Explore
                 </button>
