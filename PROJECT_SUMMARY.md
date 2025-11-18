@@ -90,7 +90,7 @@ rho-api-platform/
 - See latency & performance metrics
 
 ### 3. Pricing Page
-- Free plan: 5 comparisons/day
+- Free plan: 1 comparison/day
 - Pro plan: $10/month (unlimited)
 - Enterprise: Custom pricing
 - Stripe Checkout integration

@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  @apply bg-black text-white;
+  @apply bg-black text-white font-sans;
 }
 
 ::-webkit-scrollbar {
@@ -21,7 +21,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {

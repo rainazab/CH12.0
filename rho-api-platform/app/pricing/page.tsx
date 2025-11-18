@@ -51,9 +51,9 @@ export default function PricingPage() {
       name: 'Free',
       price: '$0',
       period: '/month',
-      description: 'Perfect for getting started',
+      description: 'Perfect for trying Rho',
       features: [
-        '5 comparisons per day',
+        '1 comparison per day',
         'Up to 2 APIs per comparison',
         'Basic output view',
         'Community support',

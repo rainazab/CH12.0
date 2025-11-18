@@ -116,7 +116,7 @@ export default function Home() {
               description: 'Get AI-powered suggestions for the best API for your use case.',
             },
           ].map((feature, idx) => (
-            <div
+              <div
               key={idx}
               className="rounded-lg border border-gray-700 bg-gray-900/50 p-6 hover:border-cyan-400/50 transition"
             >

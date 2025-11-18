@@ -22,7 +22,7 @@ export default function Header() {
           : 'bg-gradient-to-b from-black/80 to-transparent border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition">
@@ -35,14 +35,11 @@ export default function Header() {
           </Link>
 
           {/* Right Side: Navigation + Get Started Button */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {/* Desktop Navigation */}
             <nav className="flex items-center gap-8">
               <a href="/test" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
                 Test APIs
-              </a>
-              <a href="#discover" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
-                Discover
               </a>
               <a href="#pricing" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
                 Pricing
@@ -74,9 +71,6 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isOpen && (
           <nav className="md:hidden border-t border-white/10 py-4 space-y-3 bg-black/50 backdrop-blur">
-            <a href="#discover" className="block px-4 py-2 text-gray-300 hover:text-cyan-400 font-medium transition">
-              Discover
-            </a>
             <a href="#pricing" className="block px-4 py-2 text-gray-300 hover:text-cyan-400 font-medium transition">
               Pricing
             </a>

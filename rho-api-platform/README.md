@@ -204,7 +204,7 @@ The platform includes integrations for:
 
 | Plan | Price | Features |
 |------|-------|----------|
-| Free | $0 | 5 comparisons/day, 2 APIs max |
+| Free | $0 | 1 comparison/day, 2 APIs max |
 | Pro | $10/mo | Unlimited comparisons, 3 APIs max |
 | Enterprise | Custom | Full features, dedicated support |
 

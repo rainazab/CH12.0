@@ -145,6 +145,13 @@ Open http://localhost:3000
 5. Click "Compare APIs"
 6. You should see mock results
 
+### Pricing Tiers
+
+Rho uses three pricing tiers:
+- **Free**: $0/month - 1 comparison per day
+- **Pro**: $10/month - Unlimited comparisons
+- **Enterprise**: Custom pricing - Dedicated support
+
 ### Test Stripe Checkout
 
 For local Stripe testing:
