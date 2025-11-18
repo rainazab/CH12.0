@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Sparkles } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 export default function Hero({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,14 +46,6 @@ export default function Hero({ onSearch }) {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <div className="mb-8 flex justify-center">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-300 text-sm font-medium backdrop-blur-sm hover:bg-cyan-500/20 transition">
-            <Sparkles className="w-4 h-4" />
-            Powered by Elastic & Chroma
-          </span>
-        </div>
-
         {/* Main Headline */}
         <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
           Find Your Perfect <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">API</span>
