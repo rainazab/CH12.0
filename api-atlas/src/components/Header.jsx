@@ -25,9 +25,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 hover:opacity-80 transition">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center font-bold text-white text-sm">
-              ⚡
-            </div>
+            <img 
+              src="/static/assets/loading.png" 
+              alt="Rho" 
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-xl font-bold text-white">Rho</span>
           </a>
 
