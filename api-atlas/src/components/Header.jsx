@@ -33,37 +33,38 @@ export default function Header() {
             <span className="text-xl font-bold text-white">Rho</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#discover" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
-              Discover
-            </a>
-            <a href="#pricing" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
-              Pricing
-            </a>
-            <a href="#signin" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
-              Sign In
-            </a>
-          </nav>
+          {/* Right Side: Navigation + Get Started Button */}
+          <div className="hidden md:flex items-center gap-8">
+            {/* Desktop Navigation */}
+            <nav className="flex items-center gap-8">
+              <a href="#discover" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
+                Discover
+              </a>
+              <a href="#pricing" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
+                Pricing
+              </a>
+              <a href="#signin" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
+                Sign In
+              </a>
+            </nav>
 
-          {/* Get Started Button and Mobile Menu */}
-          <div className="flex items-center gap-4">
-            <button className="hidden md:inline-flex px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105">
+            {/* Get Started Button */}
+            <button className="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105">
               Get Started
             </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 hover:bg-white/10 rounded-lg transition"
-            >
-              {isOpen ? (
-                <X className="w-6 h-6 text-white" />
-              ) : (
-                <Menu className="w-6 h-6 text-white" />
-              )}
-            </button>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 hover:bg-white/10 rounded-lg transition"
+          >
+            {isOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
