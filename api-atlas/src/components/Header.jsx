@@ -38,6 +38,9 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-8">
             {/* Desktop Navigation */}
             <nav className="flex items-center gap-8">
+              <a href="/test" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
+                Test APIs
+              </a>
               <a href="#discover" className="text-gray-300 hover:text-cyan-400 font-medium text-sm transition">
                 Discover
               </a>

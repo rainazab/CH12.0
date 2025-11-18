@@ -10,6 +10,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
+import FirstSecondsTest from './components/FirstSecondsTest';
 import { searchAPIs } from './lib/api';
 
 // Scroll to top on route change
@@ -40,6 +41,7 @@ const useDebounce = (value, delay) => {
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
+  const [allAPIs, setAllAPIs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedAPIs, setSelectedAPIs] = useState([]);
   const [error, setError] = useState(null);
@@ -63,6 +65,7 @@ function App() {
         relevanceScore: api.relevanceScore || (100 - index * 10),
       }));
       
+      setAllAPIs(resultsWithScores);
       setSearchResults(resultsWithScores.slice(0, 8));
     } catch (err) {
       console.error('Failed to load initial APIs:', err);
@@ -146,6 +149,7 @@ function App() {
                 </>
               }
             />
+            <Route path="/test" element={<FirstSecondsTest allAPIs={allAPIs} />} />
             <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />
