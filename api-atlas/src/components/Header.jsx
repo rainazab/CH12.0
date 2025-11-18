@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import loadingIcon from '../../../static/assets/loading.png';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition">
             <img 
-              src="/loading.png" 
+              src={loadingIcon} 
               alt="Rho" 
               className="w-8 h-8 object-contain"
             />

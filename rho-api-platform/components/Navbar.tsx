@@ -9,6 +9,7 @@ import { Menu, X, LogOut } from 'lucide-react';
 export default function Navbar() {
   const [user, setUser] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -18,14 +19,23 @@ export default function Navbar() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleLogout = async () => {
     await signOut(auth);
     setUser(null);
   };
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`fixed w-full top-0 z-50 bg-black/80 backdrop-blur-xl transition-all ${isScrolled ? 'border-b border-white/10' : 'border-b border-transparent'}`}>
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">

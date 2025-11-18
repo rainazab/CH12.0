@@ -6,6 +6,9 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Rho - Compare APIs Visually',
   description: 'Visually compare APIs side-by-side and find your perfect match.',
+  icons: {
+    icon: '/loading.png',
+  },
 };
 
 export default function RootLayout({
@@ -15,12 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white">
+      <body className="bg-black text-white flex flex-col min-h-screen">
         <Navbar />
-        <div className="flex flex-col min-h-screen pt-16">
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <main className="flex-grow pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   );
