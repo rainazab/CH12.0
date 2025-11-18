@@ -72,9 +72,13 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/auth/signin"
-                className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition"
+                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition duration-300 transform hover:scale-105 relative overflow-hidden group"
               >
-                Sign In
+                <span className="relative z-10 flex items-center gap-2">
+                  Sign In
+                  <span className="group-hover:translate-x-1 transition duration-300">→</span>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition duration-300 -z-10"></div>
               </Link>
             )}
           </div>
@@ -105,7 +109,7 @@ export default function Navbar() {
                 Sign Out
               </button>
             ) : (
-              <Link href="/auth/signin" className="block px-4 py-2 text-cyan-400">
+              <Link href="/auth/signin" className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300">
                 Sign In
               </Link>
             )}
