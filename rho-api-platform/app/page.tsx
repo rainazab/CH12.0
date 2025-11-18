@@ -86,43 +86,43 @@ export default function Home() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Content */}
-            <div className="space-y-5 sm:space-y-7 lg:space-y-8 w-full">
-              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <div className="space-y-6 sm:space-y-7 lg:space-y-8 w-full">
+              <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
                   Find Your Perfect{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     API Stack
                   </span>
                 </h1>
-                <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed">
+                <p className="text-sm sm:text-base lg:text-xl text-gray-400 leading-relaxed max-w-2xl">
                   Don't waste hours testing APIs. See real responses, compare costs, speed, and reliability side-by-side instantly. Make smarter integration decisions in seconds.
                 </p>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-5 sm:py-7 lg:py-8 border-y border-gray-800 w-full text-center">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">10+</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Leading APIs</p>
+              <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6 sm:py-8 lg:py-8 border-y border-gray-700/50 w-full text-center">
+                <div className="space-y-2">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">10+</div>
+                  <p className="text-xs sm:text-sm text-gray-400 font-medium">Leading APIs</p>
                 </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">&lt;5s</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Time to Compare</p>
+                <div className="space-y-2">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">&lt;5s</div>
+                  <p className="text-xs sm:text-sm text-gray-400 font-medium">Time to Compare</p>
                 </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">$0</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">To Get Started</p>
+                <div className="space-y-2">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$0</div>
+                  <p className="text-xs sm:text-sm text-gray-400 font-medium">To Get Started</p>
                 </div>
               </div>
 
               {/* Hero CTA */}
-              <div className="flex justify-center w-full">
+              <div className="flex justify-center w-full pt-2">
                 <Link
                   href="/compare"
-                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 sm:hover:scale-110"
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-8 sm:px-12 py-3 sm:py-4 lg:py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/70 transition-all duration-300 transform hover:scale-105 sm:hover:scale-110 border border-purple-400/30 hover:border-purple-400/60"
                 >
-                  Start Comparing
-                  <span className="text-lg sm:text-2xl">→</span>
+                  <span>Start Comparing</span>
+                  <span className="text-lg sm:text-xl lg:text-2xl transition-transform group-hover:translate-x-1">→</span>
                 </Link>
               </div>
             </div>
