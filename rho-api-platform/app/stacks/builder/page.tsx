@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Plus, X, DollarSign, Zap, TrendingUp } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -31,7 +32,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'llm',
       uptime: '99.9%',
       latency: '200-400ms',
-      icon: '🧠',
+      icon: 'grid',
     },
     {
       id: 'claude3',
@@ -53,7 +54,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'llm',
       uptime: '99.95%',
       latency: '250-450ms',
-      icon: '✨',
+      icon: 'star',
     },
   ],
   'image-gen': [
@@ -66,7 +67,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'image-gen',
       uptime: '99.1%',
       latency: '5-10s',
-      icon: '🎨',
+      icon: 'paint',
     },
     {
       id: 'midjourney',
@@ -77,7 +78,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'image-gen',
       uptime: '99.8%',
       latency: '30-60s',
-      icon: '🌐',
+      icon: 'cloud',
     },
     {
       id: 'stability',
@@ -147,7 +148,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'payments',
       uptime: '99.95%',
       latency: '200-300ms',
-      icon: '💰',
+      icon: 'dollarsign',
     },
     {
       id: 'square',
@@ -171,7 +172,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'analytics',
       uptime: '99.9%',
       latency: '50-100ms',
-      icon: '📊',
+      icon: 'chart',
     },
     {
       id: 'amplitude',
@@ -182,7 +183,7 @@ const apiDatabase: Record<string, StackAPI[]> = {
       category: 'analytics',
       uptime: '99.95%',
       latency: '100-200ms',
-      icon: '📈',
+      icon: 'upwardtrendgraph',
     },
     {
       id: 'segment',
@@ -329,10 +330,10 @@ export default function StackBuilderPage() {
                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
-                            <span className="text-3xl">{api.icon}</span>
+                            <Image src={`/icon/${api.icon}.png`} alt={api.name} width={32} height={32} className="w-8 h-8" />
                             {isSelected && (
                               <div className="w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center">
-                                <span className="text-xs text-black font-bold">✓</span>
+                                <Image src="/icon/checkmark-seal.png" alt="check" width={16} height={16} className="w-4 h-4" />
                               </div>
                             )}
                           </div>
@@ -341,9 +342,9 @@ export default function StackBuilderPage() {
                           </h3>
                           <p className="text-xs text-gray-500 mb-3">{api.provider}</p>
                           <div className="space-y-1 text-xs text-gray-400">
-                            <p>💰 {api.cost}</p>
-                            <p>⚡ Uptime: {api.uptime}</p>
-                            <p>⏱️ Latency: {api.latency}</p>
+                            <p className="flex items-center gap-1"><Image src="/icon/dollarsign.png" alt="cost" width={14} height={14} className="w-3.5 h-3.5" /> {api.cost}</p>
+                            <p className="flex items-center gap-1"><Image src="/icon/bolt.png" alt="speed" width={14} height={14} className="w-3.5 h-3.5" /> Uptime: {api.uptime}</p>
+                            <p className="flex items-center gap-1"><Image src="/icon/clock.png" alt="latency" width={14} height={14} className="w-3.5 h-3.5" /> Latency: {api.latency}</p>
                           </div>
                         </button>
                       );

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import ApiCard from '@/components/ApiCard';
 import CompareOutputPanel from '@/components/CompareOutputPanel';
 import apis from '@/data/apis.json';
@@ -77,7 +78,9 @@ export default function ComparePage() {
             {/* Option 1: Quick Compare */}
             <div className="p-4 border border-cyan-500/30 rounded-lg bg-cyan-500/5 backdrop-blur">
               <div className="flex items-start gap-3">
-                <span className="text-2xl">⚡</span>
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <Image src="/icon/bolt.png" alt="bolt" width={24} height={24} style={{ objectFit: 'contain' }} />
+                </div>
                 <div>
                   <h3 className="font-bold text-white mb-1">Quick Compare</h3>
                   <p className="text-sm text-gray-400">Pick APIs & test instantly below</p>
@@ -88,7 +91,9 @@ export default function ComparePage() {
             {/* Option 2: Guided Stack */}
             <div className="p-4 border border-purple-500/30 rounded-lg bg-purple-500/5 backdrop-blur">
               <div className="flex items-start gap-3">
-                <span className="text-2xl">🎯</span>
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <Image src="/icon/target.png" alt="target" width={24} height={24} style={{ objectFit: 'contain' }} />
+                </div>
                 <div>
                   <h3 className="font-bold text-white mb-1">Guided Stack</h3>
                   <p className="text-sm text-gray-400">Answer questions, we'll recommend</p>
@@ -99,7 +104,9 @@ export default function ComparePage() {
             {/* Option 3: Saved Stacks */}
             <div className="p-4 border border-green-500/30 rounded-lg bg-green-500/5 backdrop-blur">
               <div className="flex items-start gap-3">
-                <span className="text-2xl">💾</span>
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <Image src="/icon/cloud.png" alt="cloud" width={24} height={24} style={{ objectFit: 'contain' }} />
+                </div>
                 <div>
                   <h3 className="font-bold text-white mb-1">Saved Stacks</h3>
                   <p className="text-sm text-gray-400">View your built stacks (Pro+)</p>
@@ -112,15 +119,21 @@ export default function ComparePage() {
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <Link 
               href="/stacks/questionnaire"
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 text-center"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 text-center flex items-center justify-center gap-2"
             >
-              🎯 Start Guided Questionnaire
+              <div className="w-5 h-5 flex items-center justify-center">
+                <Image src="/icon/target.png" alt="target" width={20} height={20} style={{ objectFit: 'contain' }} />
+              </div>
+              Start Guided Questionnaire
             </Link>
             <Link 
               href="/stacks/my-stacks"
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-green-500/50 transition transform hover:scale-105 text-center"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-green-500/50 transition transform hover:scale-105 text-center flex items-center justify-center gap-2"
             >
-              💾 View My Stacks
+              <div className="w-5 h-5 flex items-center justify-center">
+                <Image src="/icon/cloud.png" alt="cloud" width={20} height={20} style={{ objectFit: 'contain' }} />
+              </div>
+              View My Stacks
             </Link>
           </div>
           
@@ -136,7 +149,9 @@ export default function ComparePage() {
             {/* Section Header */}
             <div className="bg-gradient-to-r from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-xl p-4">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                <span className="text-3xl">⚡</span>
+                <div className="w-7 h-7 flex items-center justify-center">
+                  <Image src="/icon/bolt.png" alt="bolt" width={28} height={28} style={{ objectFit: 'contain' }} />
+                </div>
                 Quick Compare
               </h2>
               <p className="text-sm text-gray-400 mt-2">Test APIs instantly with a custom prompt</p>
@@ -209,7 +224,8 @@ export default function ComparePage() {
                 </span>
               ) : (
                 <>
-                  <span className="text-xl">🚀</span> Compare {selectedApis.length} {selectedApis.length === 1 ? 'API' : 'APIs'}
+                  <Image src="/icon/paperplane.png" alt="rocket" width={20} height={20} className="w-5 h-5" />
+                  Compare {selectedApis.length} {selectedApis.length === 1 ? 'API' : 'APIs'}
                 </>
               )}
             </button>
@@ -221,7 +237,9 @@ export default function ComparePage() {
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/30 rounded-xl p-4">
                   <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                    <span className="text-3xl">📊</span>
+                    <div className="w-7 h-7 flex items-center justify-center">
+                      <Image src="/icon/chart.png" alt="chart" width={28} height={28} style={{ objectFit: 'contain' }} />
+                    </div>
                     Comparison Results
                   </h2>
                   <p className="text-sm text-gray-400 mt-2">See side-by-side outputs from all selected APIs</p>
@@ -249,13 +267,20 @@ export default function ComparePage() {
             ) : (
               <div className="h-full min-h-96 flex items-center justify-center">
                 <div className="text-center space-y-6 p-8 border-2 border-dashed border-gray-700/50 rounded-xl">
-                  <div className="text-7xl">🎯</div>
+                  <div className="flex justify-center">
+                    <Image src="/icon/target.png" alt="target" width={56} height={56} className="w-14 h-14" />
+                  </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Ready to Compare?</h3>
                     <p className="text-gray-400">Fill out the form on the left and click <span className="text-cyan-400 font-semibold">Compare</span> to see results here</p>
                   </div>
                   <div className="pt-4 border-t border-gray-700/50">
-                    <p className="text-sm text-gray-500">💡 Results appear here in real-time as you test</p>
+                    <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+                      <div className="w-4 h-4 flex items-center justify-center">
+                        <Image src="/icon/bolt.png" alt="bolt" width={16} height={16} style={{ objectFit: 'contain' }} />
+                      </div>
+                      Results appear here in real-time as you test
+                    </p>
                   </div>
                 </div>
               </div>

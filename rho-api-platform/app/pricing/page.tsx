@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Check, ChevronDown } from 'lucide-react';
@@ -73,10 +74,10 @@ export default function PricingPage() {
         'Community support',
       ],
       stackFeatures: [
-        '❌ Save stacks',
-        '❌ Share stacks',
-        '❌ View community stacks',
-        '❌ Edit saved stacks',
+        'false_Save stacks',
+        'false_Share stacks',
+        'false_View community stacks',
+        'false_Edit saved stacks',
       ],
       cta: 'Get Started',
       highlighted: false,
@@ -96,10 +97,10 @@ export default function PricingPage() {
         'Custom workspaces',
       ],
       stackFeatures: [
-        '✅ Save unlimited stacks',
-        '✅ Share stacks with unique links',
-        '✅ View & explore community stacks',
-        '✅ Edit & update saved stacks',
+        'true_Save unlimited stacks',
+        'true_Share stacks with unique links',
+        'true_View & explore community stacks',
+        'true_Edit & update saved stacks',
       ],
       cta: 'Subscribe',
       highlighted: true,
@@ -119,10 +120,10 @@ export default function PricingPage() {
         'SLA guarantee',
       ],
       stackFeatures: [
-        '✅ Unlimited stacks with team storage',
-        '✅ Advanced sharing & collaboration',
-        '✅ Private community stacks',
-        '✅ Full stack management suite',
+        'true_Unlimited stacks with team storage',
+        'true_Advanced sharing & collaboration',
+        'true_Private community stacks',
+        'true_Full stack management suite',
       ],
       cta: 'Contact Sales',
       highlighted: false,
@@ -159,9 +160,12 @@ export default function PricingPage() {
           </p>
           
           {/* Info Banner */}
-          <div className="mt-8 p-4 border border-blue-500/30 rounded-lg bg-blue-500/5 backdrop-blur">
+          <div className="mt-8 p-4 border border-blue-500/30 rounded-lg bg-blue-500/5 backdrop-blur flex items-center gap-3">
+            <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <Image src="/icon/bolt.png" alt="bolt" width={20} height={20} style={{ objectFit: 'contain' }} />
+            </div>
             <p className="text-sm text-blue-200">
-              💡 <span className="font-semibold">Pro & Enterprise plans unlock</span> stack saving, sharing, editing, and community access.
+              <span className="font-semibold">Pro & Enterprise plans unlock</span> stack saving, sharing, editing, and community access.
             </p>
           </div>
         </div>
@@ -232,16 +236,22 @@ export default function PricingPage() {
 
                   <div className="border-t border-gray-700/30 pt-4">
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Stack Features</p>
-                    {plan.stackFeatures?.map((feature, featureIdx) => (
-                      <div key={featureIdx} className="flex items-start gap-3 mb-2">
-                        <span className="text-lg flex-shrink-0 mt-0.5">
-                          {feature.startsWith('✅') ? '✅' : '❌'}
-                        </span>
-                        <span className={`text-sm ${feature.startsWith('✅') ? 'text-green-300' : 'text-gray-400'}`}>
-                          {feature.substring(2).trim()}
-                        </span>
-                      </div>
-                    ))}
+                    {plan.stackFeatures?.map((feature, featureIdx) => {
+                      const isAvailable = feature.startsWith('true_');
+                      const featureName = feature.substring(6);
+                      return (
+                        <div key={featureIdx} className="flex items-start gap-3 mb-2">
+                          {isAvailable ? (
+                            <Image src="/icon/checkmark-seal.png" alt="check" width={18} height={18} className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" />
+                          ) : (
+                            <Image src="/icon/x.png" alt="close" width={18} height={18} className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" />
+                          )}
+                          <span className={`text-sm ${isAvailable ? 'text-green-300' : 'text-gray-400'}`}>
+                            {featureName}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

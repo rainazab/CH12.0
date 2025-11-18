@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronRight, ArrowLeft } from 'lucide-react';
 
 interface QuestionnaireStep {
@@ -25,49 +26,49 @@ const steps: QuestionnaireStep[] = [
       {
         value: 'ai-app',
         label: 'AI/ML Application',
-        icon: '🤖',
+        icon: 'grid',
         recommendedCategories: ['llm', 'image-gen', 'voice', 'embeddings'],
       },
       {
         value: 'ecommerce',
         label: 'E-Commerce Platform',
-        icon: '🛒',
+        icon: 'building',
         recommendedCategories: ['payments', 'inventory', 'email', 'analytics'],
       },
       {
         value: 'saas',
         label: 'SaaS Product',
-        icon: '☁️',
+        icon: 'cloud',
         recommendedCategories: ['auth', 'database', 'analytics', 'email'],
       },
       {
         value: 'voice-app',
         label: 'Voice/Audio App',
-        icon: '🎙️',
+        icon: 'mic',
         recommendedCategories: ['voice-tts', 'voice-stt', 'audio-processing'],
       },
       {
         value: 'image-app',
         label: 'Image Generation/Processing',
-        icon: '🎨',
+        icon: 'paint',
         recommendedCategories: ['image-gen', 'image-processing', 'storage'],
       },
       {
         value: 'content-app',
         label: 'Content/Publishing Platform',
-        icon: '📝',
+        icon: 'doc',
         recommendedCategories: ['llm', 'email', 'storage', 'analytics'],
       },
       {
         value: 'data-app',
         label: 'Data Analytics Platform',
-        icon: '📊',
+        icon: 'chart',
         recommendedCategories: ['database', 'analytics', 'data-processing', 'visualization'],
       },
       {
         value: 'other',
         label: 'Something Else',
-        icon: '✨',
+        icon: 'star',
         recommendedCategories: [],
       },
     ],
@@ -80,25 +81,25 @@ const steps: QuestionnaireStep[] = [
       {
         value: 'startup',
         label: 'Just Starting ($0-100)',
-        icon: '🌱',
+        icon: 'cloud',
         recommendedCategories: [],
       },
       {
         value: 'growth',
         label: 'Growing ($100-1,000)',
-        icon: '📈',
+        icon: 'upwardtrendgraph',
         recommendedCategories: [],
       },
       {
         value: 'scale',
         label: 'Scaling ($1,000-10,000)',
-        icon: '🚀',
+        icon: 'paperplane',
         recommendedCategories: [],
       },
       {
         value: 'enterprise',
         label: 'Enterprise ($10,000+)',
-        icon: '🏢',
+        icon: 'building',
         recommendedCategories: [],
       },
     ],
@@ -111,25 +112,25 @@ const steps: QuestionnaireStep[] = [
       {
         value: 'cost',
         label: 'Cost Efficiency',
-        icon: '💰',
+        icon: 'dollarsign',
         recommendedCategories: [],
       },
       {
         value: 'performance',
         label: 'Performance & Speed',
-        icon: '⚡',
+        icon: 'bolt',
         recommendedCategories: [],
       },
       {
         value: 'quality',
         label: 'Quality & Accuracy',
-        icon: '✅',
+        icon: 'checkmark-seal',
         recommendedCategories: [],
       },
       {
         value: 'reliability',
         label: 'Uptime & Reliability',
-        icon: '🛡️',
+        icon: 'warning',
         recommendedCategories: [],
       },
     ],
@@ -239,7 +240,7 @@ export default function QuestionnairePage() {
               }`}
             >
               <div className="flex items-start justify-between mb-3">
-                <span className="text-3xl">{option.icon}</span>
+                <Image src={`/icon/${option.icon}.png`} alt={option.label} width={32} height={32} className="w-8 h-8" />
                 {selectedValue === option.value && (
                   <div className="w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center">
                     <span className="text-xs text-black font-bold">✓</span>

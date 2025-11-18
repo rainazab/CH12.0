@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Zap, TrendingUp, Target } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Search } from 'lucide-react';
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
   const [displayedText, setDisplayedText] = useState('');
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -38,13 +40,6 @@ export default function Home() {
       return () => clearTimeout(timeout);
     }
   }, [charIndex, currentExampleIndex, searchExamples]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/compare?q=${encodeURIComponent(searchQuery)}`;
-    }
-  };
 
   return (
     <div className="relative bg-black overflow-hidden">
@@ -176,7 +171,10 @@ export default function Home() {
 
                   {/* Card 3 */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-red-500/30 p-4 transform rotate-1 translate-y-8 translate-x-2 shadow-lg">
-                    <div className="text-xs text-red-400 mb-3">📄 API Documentation</div>
+                    <div className="text-xs text-red-400 mb-3 flex items-center gap-2">
+                      <Image src="/icon/doc.png" alt="docs" width={16} height={16} style={{ objectFit: 'contain' }} />
+                      API Documentation
+                    </div>
                     <div className="space-y-2">
                       <div className="h-2 bg-red-500/20 rounded w-4/5"></div>
                       <div className="h-2 bg-red-500/20 rounded w-3/5"></div>
@@ -202,7 +200,9 @@ export default function Home() {
 
                 <div className="space-y-4 pt-4 border-t border-gray-800">
                   <div className="flex gap-4">
-                    <div className="text-3xl">📚</div>
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <Image src="/icon/doc.png" alt="info" width={32} height={32} style={{ objectFit: 'contain' }} />
+                    </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-2">Fragmented Information</h3>
                       <p className="text-gray-400">Pricing, docs, benchmarks scattered across 10+ websites. No single source of truth.</p>
@@ -210,7 +210,9 @@ export default function Home() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="text-3xl">⏱️</div>
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <Image src="/icon/clock.png" alt="time" width={32} height={32} style={{ objectFit: 'contain' }} />
+                    </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-2">Endless Evaluation</h3>
                       <p className="text-gray-400">Hours spent testing, comparing spreadsheets, and reading conflicting reviews.</p>
@@ -218,7 +220,9 @@ export default function Home() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="text-3xl">❌</div>
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <Image src="/icon/x.png" alt="wrong" width={32} height={32} style={{ objectFit: 'contain' }} />
+                    </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-2">Wrong Decisions</h3>
                       <p className="text-gray-400">Pick the wrong API and waste thousands on costs or suffer from poor performance.</p>
@@ -242,33 +246,42 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-4">
                   {/* Card 1 */}
                   <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl p-6 backdrop-blur hover:border-cyan-400/60 transition duration-300 transform hover:scale-105">
-                    <div className="text-4xl mb-3">⚡</div>
+                    <div className="mb-3 w-10 h-10 flex items-center justify-center">
+                      <Image src="/icon/bolt.png" alt="lightning" width={40} height={40} style={{ objectFit: 'contain' }} />
+                    </div>
                     <h3 className="text-white font-semibold mb-2">Real-Time</h3>
                     <p className="text-sm text-gray-400">See results instantly</p>
                   </div>
 
                   {/* Card 2 */}
                   <div className="bg-gradient-to-br from-blue-600/20 to-blue-500/10 border border-blue-500/30 rounded-xl p-6 backdrop-blur hover:border-blue-400/60 transition duration-300 transform hover:scale-105">
-                    <div className="text-4xl mb-3">💰</div>
+                    <div className="mb-3 w-10 h-10 flex items-center justify-center">
+                      <Image src="/icon/dollarsign.png" alt="cost" width={40} height={40} style={{ objectFit: 'contain' }} />
+                    </div>
                     <h3 className="text-white font-semibold mb-2">Cost Clear</h3>
                     <p className="text-sm text-gray-400">Exact pricing shown</p>
                   </div>
 
                   {/* Card 3 */}
                   <div className="bg-gradient-to-br from-purple-600/20 to-purple-500/10 border border-purple-500/30 rounded-xl p-6 backdrop-blur hover:border-purple-400/60 transition duration-300 transform hover:scale-105">
-                    <div className="text-4xl mb-3">📊</div>
+                    <div className="mb-3 w-10 h-10 flex items-center justify-center">
+                      <Image src="/icon/chart.png" alt="metrics" width={40} height={40} style={{ objectFit: 'contain' }} />
+                    </div>
                     <h3 className="text-white font-semibold mb-2">Metrics</h3>
                     <p className="text-sm text-gray-400">Latency & uptime data</p>
                   </div>
 
-                  {/* Card 4 */}
-                  <div className="bg-gradient-to-br from-green-600/20 to-green-500/10 border border-green-500/30 rounded-xl p-6 backdrop-blur hover:border-green-400/60 transition duration-300 transform hover:scale-105">
-                    <div className="mb-3">
-                      <img src="/star.png" alt="Star" className="w-10 h-10 drop-shadow-lg filter brightness-125" style={{ filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.6))' }} />
+                  {/* Card 4 - Smart AI Recommendations */}
+                  <button
+                    onClick={() => router.push('/stacks/questionnaire')}
+                    className="bg-gradient-to-br from-green-600/20 to-green-500/10 border border-green-500/30 rounded-xl p-6 backdrop-blur hover:border-green-400/60 transition duration-300 transform hover:scale-105 text-left cursor-pointer w-full"
+                  >
+                    <div className="mb-3 w-10 h-10 flex items-center justify-center">
+                      <Image src="/icon/star.png" alt="smart" width={40} height={40} style={{ objectFit: 'contain', filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.6)) brightness(1.25)' }} />
                     </div>
                     <h3 className="text-white font-semibold mb-2">Smart</h3>
                     <p className="text-sm text-gray-400">AI recommendations</p>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -293,13 +306,15 @@ export default function Home() {
                 {/* Feature List with checkmarks */}
                 <div className="space-y-4 pt-6">
                   {[
-                    { icon: '✓', title: 'Side-by-side visual comparison', color: 'cyan' },
-                    { icon: '✓', title: 'Real-time performance metrics', color: 'blue' },
-                    { icon: '✓', title: 'Automated cost calculations', color: 'purple' },
-                    { icon: '✓', title: 'Data-driven recommendations', color: 'green' },
+                    { title: 'Side-by-side visual comparison', color: 'cyan' },
+                    { title: 'Real-time performance metrics', color: 'blue' },
+                    { title: 'Automated cost calculations', color: 'purple' },
+                    { title: 'Data-driven recommendations', color: 'green' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4 items-center">
-                      <div className="text-xl font-bold text-green-400">{item.icon}</div>
+                      <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                        <Image src="/icon/checkmark-seal.png" alt="check" width={24} height={24} style={{ objectFit: 'contain' }} />
+                      </div>
                       <p className="text-gray-300 text-lg">{item.title}</p>
                     </div>
                   ))}
