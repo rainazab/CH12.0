@@ -321,7 +321,7 @@ export default function Home() {
                   {/* Card 1 */}
                   <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl p-6 backdrop-blur hover:border-cyan-400/60 transition duration-300 transform hover:scale-105">
                     <div className="mb-3 w-10 h-10 flex items-center justify-center">
-                      <Image src="/icon/bolt.png" alt="lightning" width={40} height={32} style={{ objectFit: 'contain' }} />
+                      <Image src="/icon/bolt.png" alt="lightning" width={28} height={40} style={{ objectFit: 'contain' }} />
                     </div>
                     <h3 className="text-white font-semibold mb-2">Real-Time</h3>
                     <p className="text-sm text-gray-400">See results instantly</p>
