@@ -63,10 +63,10 @@ export default function Navbar() {
                 <span className="text-gray-300 text-sm">{user.email}</span>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30 text-orange-400 border border-orange-500/30 hover:border-orange-500/50 rounded-lg transition duration-300 transform hover:scale-105 group"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500/10 via-orange-500/10 to-red-500/10 hover:from-red-500/20 hover:via-orange-500/20 hover:to-red-500/20 text-red-400 border border-red-500/20 hover:border-red-400/40 rounded-full transition duration-300 transform hover:scale-105 backdrop-blur-sm"
                 >
-                  <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition" />
-                  Sign Out
+                  <LogOut className="w-4 h-4 transition duration-300" />
+                  <span className="text-sm font-medium">Sign Out</span>
                 </button>
               </div>
             ) : (
@@ -104,10 +104,10 @@ export default function Navbar() {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="w-full px-4 py-2.5 text-left text-orange-400 hover:bg-gradient-to-r hover:from-orange-500/20 hover:to-red-500/20 rounded-lg transition duration-300 flex items-center gap-2 group"
+                className="w-full px-4 py-2.5 text-left text-red-400 hover:bg-gradient-to-r hover:from-red-500/20 hover:via-orange-500/20 hover:to-red-500/20 rounded-lg transition duration-300 flex items-center gap-2 border border-transparent hover:border-red-400/30"
               >
-                <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition" />
-                Sign Out
+                <LogOut className="w-4 h-4 transition duration-300" />
+                <span className="font-medium">Sign Out</span>
               </button>
             ) : (
               <Link href="/auth/signin" className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300">
