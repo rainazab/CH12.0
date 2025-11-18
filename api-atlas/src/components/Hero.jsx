@@ -83,16 +83,65 @@ export default function Hero({ onSearch }) {
           </div>
         </form>
 
-        {/* Example Terms Carousel */}
-        <div className="space-y-3">
-          <p className="text-gray-500 text-sm font-medium">Try searching for:</p>
-          <div className="h-8 flex items-center justify-center">
-            <div className="relative overflow-hidden">
-              <p className="text-cyan-300 font-semibold transition-all duration-500">
-                {examples[currentExample]}
-              </p>
+        {/* Example Terms Carousel - Premium AI Experience */}
+        <div className="space-y-6 mt-8">
+          {/* Label with animation */}
+          <div className="flex items-center justify-center gap-2">
+            <div className="h-0.5 w-8 bg-gradient-to-r from-transparent to-cyan-400" />
+            <p className="text-gray-400 text-sm font-medium uppercase tracking-widest">Try Searching For</p>
+            <div className="h-0.5 w-8 bg-gradient-to-l from-transparent to-cyan-400" />
+          </div>
+
+          {/* Animated carousel container */}
+          <div className="relative h-16 flex items-center justify-center">
+            {/* Glow background effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-2xl blur-xl" />
+            
+            {/* Carousel box */}
+            <div className="relative flex items-center justify-center">
+              {/* Left indicator */}
+              <div className="absolute left-0 w-1 h-12 bg-gradient-to-b from-transparent via-cyan-400 to-transparent opacity-60" />
+              
+              {/* Text carousel with smooth animation */}
+              <div className="px-8 py-4 text-center">
+                <div className="relative h-12 flex items-center justify-center overflow-hidden">
+                  <div 
+                    className="absolute transition-all duration-500 ease-in-out"
+                    style={{
+                      opacity: 1,
+                      transform: 'translateY(0)',
+                    }}
+                  >
+                    <p className="text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent animate-pulse">
+                      {examples[currentExample]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right indicator */}
+              <div className="absolute right-0 w-1 h-12 bg-gradient-to-b from-transparent via-purple-400 to-transparent opacity-60" />
+            </div>
+
+            {/* Dots indicator */}
+            <div className="absolute bottom-0 flex gap-2 mt-4">
+              {examples.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    idx === currentExample
+                      ? 'w-6 bg-gradient-to-r from-cyan-400 to-purple-400'
+                      : 'w-1.5 bg-gray-600 hover:bg-gray-500'
+                  }`}
+                />
+              ))}
             </div>
           </div>
+
+          {/* Status text */}
+          <p className="text-center text-xs text-gray-500 uppercase tracking-widest">
+            powered by rho intelligence
+          </p>
         </div>
       </div>
     </div>
