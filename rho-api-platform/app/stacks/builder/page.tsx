@@ -216,9 +216,12 @@ export default function StackBuilderPage() {
   const [selectedApis, setSelectedApis] = useState<StackAPI[]>([]);
   const [user, setUser] = useState<any>(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [stackName, setStackName] = useState('');
   const [stackDescription, setStackDescription] = useState('');
   const [saving, setSaving] = useState(false);
+  const [lastSavedStackId, setLastSavedStackId] = useState<string | null>(null);
+  const [shareLink, setShareLink] = useState<string>('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -250,12 +253,12 @@ export default function StackBuilderPage() {
         false
       );
 
-      alert('Stack saved successfully!');
+      setLastSavedStackId(stackId);
+      setShareLink(`${window.location.origin}/stacks/view/${stackId}`);
       setShowSaveModal(false);
+      setShowShareModal(true);
       setStackName('');
       setStackDescription('');
-      // Optionally redirect to my-stacks
-      // router.push('/stacks/my-stacks');
     } catch (error) {
       console.error('Error saving stack:', error);
       alert('Failed to save stack');
@@ -433,9 +436,14 @@ export default function StackBuilderPage() {
                       >
                         💾 Save Stack
                       </button>
-                      <button className="w-full px-4 py-2 border border-cyan-400/50 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-400/10 transition">
-                        🔗 Share Stack
-                      </button>
+                      {lastSavedStackId && (
+                        <button
+                          onClick={() => setShowShareModal(true)}
+                          className="w-full px-4 py-2 border border-purple-400/50 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition"
+                        >
+                          🔗 Share Stack
+                        </button>
+                      )}
                     </div>
                   </div>
                 </>
@@ -496,6 +504,81 @@ export default function StackBuilderPage() {
               >
                 {saving ? 'Saving...' : 'Save Stack'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Share Stack Modal */}
+      {showShareModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8 max-w-md w-full">
+            <h3 className="text-2xl font-bold text-white mb-2">🎉 Stack Saved!</h3>
+            <p className="text-gray-400 mb-6">Your stack is ready to share with the community.</p>
+
+            <div className="space-y-4 mb-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">Share Link</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={shareLink}
+                    readOnly
+                    className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm"
+                  />
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(shareLink);
+                      alert('Link copied to clipboard!');
+                    }}
+                    className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-4 bg-purple-400/10 border border-purple-400/30 rounded-lg space-y-2">
+                <p className="text-sm text-purple-300">
+                  <span className="font-semibold">📤 Share Options:</span>
+                </p>
+                <div className="flex gap-2 flex-wrap">
+                  <button
+                    onClick={() => {
+                      const text = `Check out this API stack: ${shareLink}`;
+                      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+                      window.open(url, '_blank');
+                    }}
+                    className="px-3 py-1 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 text-xs rounded transition"
+                  >
+                    Share on X
+                  </button>
+                  <button
+                    onClick={() => {
+                      const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareLink)}`;
+                      window.open(url, '_blank');
+                    }}
+                    className="px-3 py-1 bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs rounded transition"
+                  >
+                    Share on LinkedIn
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowShareModal(false)}
+                className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition"
+              >
+                Done
+              </button>
+              <Link
+                href="/stacks/my-stacks"
+                className="flex-1 px-4 py-2 border border-purple-400/50 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition text-center"
+              >
+                View All Stacks
+              </Link>
             </div>
           </div>
         </div>
