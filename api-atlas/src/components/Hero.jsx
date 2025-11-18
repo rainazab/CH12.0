@@ -108,8 +108,8 @@ export default function Hero({ onSearch }) {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search APIs… (ex: image generation, payments, speech-to-text)"
-                className="flex-1 px-2 py-3 text-base md:text-lg outline-none bg-transparent text-white placeholder-gray-400 group-hover:placeholder-gray-300 transition"
+                placeholder="Enter your search here… (e.g., image generation, payments, email)"
+                className="flex-1 px-2 py-3 text-base md:text-lg outline-none bg-transparent text-white placeholder-gray-500 group-hover:placeholder-gray-400 transition font-medium"
               />
               
               <button
