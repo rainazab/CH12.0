@@ -116,13 +116,15 @@ export default function Home() {
               </div>
 
               {/* Hero CTA */}
-              <Link
-                href="/compare"
-                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 sm:hover:scale-110 w-full sm:w-auto"
-              >
-                Start Comparing
-                <span className="text-lg sm:text-2xl">→</span>
-              </Link>
+              <div className="flex justify-center w-full">
+                <Link
+                  href="/compare"
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 sm:hover:scale-110"
+                >
+                  Start Comparing
+                  <span className="text-lg sm:text-2xl">→</span>
+                </Link>
+              </div>
             </div>
 
             {/* Right: Demo Visual */}
