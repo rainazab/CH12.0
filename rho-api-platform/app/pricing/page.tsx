@@ -18,7 +18,19 @@ export default function PricingPage() {
     return () => unsubscribe();
   }, []);
 
-  const handleCheckout = async (priceId: string) => {
+  const handleCheckout = async (priceId: string, planName?: string) => {
+    // For Enterprise plan, open email
+    if (planName === 'Enterprise') {
+      window.location.href = 'mailto:support@rhoapi.com?subject=Enterprise%20Plan%20Inquiry&body=Hi%20Rho%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20Enterprise%20plan.%0A%0APlease%20contact%20me%20with%20more%20details.%0A%0AThank%20you!';
+      return;
+    }
+
+    // For Free plan, just redirect to signin
+    if (!priceId) {
+      window.location.href = '/auth/signin';
+      return;
+    }
+
     if (!user) {
       window.location.href = '/auth/signin';
       return;
@@ -106,24 +118,20 @@ export default function PricingPage() {
       a: 'Yes, you can upgrade or downgrade your plan at any time. Changes take effect at your next billing cycle.',
     },
     {
-      q: 'Do you offer refunds?',
-      a: 'We offer a 7-day money-back guarantee if you\'re not satisfied with your subscription.',
-    },
-    {
       q: 'What payment methods do you accept?',
       a: 'We accept all major credit cards through Stripe. All payments are secure and encrypted.',
     },
     {
       q: 'Is there a free trial?',
-      a: 'Yes! The Free plan includes 5 comparisons per day so you can try Rho risk-free.',
+      a: 'Yes! The Free plan includes 1 comparison per day so you can try Rho risk-free.',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white pt-24 pb-20">
+    <div className="min-h-screen bg-black text-white pt-8 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-20 space-y-4">
+        <div className="text-center mb-12 space-y-4">
           <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">Pricing</span>
           <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
             Simple, <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Transparent</span> Pricing
@@ -166,8 +174,8 @@ export default function PricingPage() {
 
                 {/* CTA Button */}
                 <button
-                  onClick={() => handleCheckout(plan.priceId)}
-                  disabled={loading || !plan.priceId}
+                  onClick={() => handleCheckout(plan.priceId, plan.name)}
+                  disabled={loading || (plan.name === 'Pro' && !plan.priceId)}
                   className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition duration-300 ${
                     plan.highlighted
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/50 disabled:opacity-50'
@@ -233,19 +241,6 @@ export default function PricingPage() {
             ))}
           </div>
 
-          {/* Contact CTA */}
-          <div className="mt-16 p-8 rounded-2xl border border-cyan-400/30 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 text-center">
-            <h3 className="text-2xl font-bold text-white mb-2">Still have questions?</h3>
-            <p className="text-gray-400 mb-6">
-              Our team is happy to help. Reach out anytime.
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-cyan-600 transition"
-            >
-              Contact Us
-            </a>
-          </div>
         </div>
       </div>
     </div>
