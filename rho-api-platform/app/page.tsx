@@ -132,31 +132,48 @@ export default function Home() {
                 <div className="bg-gradient-to-b from-gray-900/80 to-black/80 border border-gray-800/50 rounded-2xl p-4 sm:p-6 backdrop-blur group-hover:border-cyan-500/40 transition duration-300">
                   {/* Header */}
                   <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-800/30">
-                    <h3 className="font-semibold text-white text-sm sm:text-base">Comparison Results</h3>
-                    <span className="text-xs text-gray-500">Real-time</span>
+                    <h3 className="font-semibold text-white text-sm sm:text-base">Prompt: Generate a product tagline</h3>
+                    <span className="text-xs text-gray-500">Live Comparison</span>
                   </div>
 
-                  {/* API Columns */}
+                  {/* API Response Columns */}
                   <div className="grid grid-cols-3 gap-3 sm:gap-4">
                     {[
-                      { name: 'GPT-4', speed: '245ms', cost: '$0.03', uptime: '99.9%', color: 'cyan' },
-                      { name: 'Claude 3', speed: '312ms', cost: '$0.02', uptime: '99.8%', color: 'blue' },
-                      { name: 'Gemini', speed: '198ms', cost: '$0.01', uptime: '99.5%', color: 'purple' },
+                      { 
+                        name: 'GPT-4', 
+                        response: '"Where innovation meets simplicity."',
+                        speed: '245ms', 
+                        cost: '$0.03', 
+                        color: 'cyan' 
+                      },
+                      { 
+                        name: 'Claude 3', 
+                        response: '"Your API companion for better decisions."',
+                        speed: '312ms', 
+                        cost: '$0.02', 
+                        color: 'blue' 
+                      },
+                      { 
+                        name: 'Gemini', 
+                        response: '"Compare. Decide. Optimize."',
+                        speed: '198ms', 
+                        cost: '$0.01', 
+                        color: 'purple' 
+                      },
                     ].map((api, idx) => (
                       <div key={idx} className={`space-y-2 sm:space-y-3 p-3 sm:p-4 rounded-lg bg-${api.color}-500/5 border border-${api.color}-500/20 hover:border-${api.color}-400/40 transition`}>
                         <div className={`font-semibold text-${api.color}-400 text-xs sm:text-sm`}>{api.name}</div>
-                        <div className="space-y-1 sm:space-y-2">
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-gray-400">Speed</span>
-                            <span className="text-gray-300 font-mono text-xs">{api.speed}</span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-gray-400">Cost</span>
-                            <span className="text-gray-300 font-mono text-xs">{api.cost}</span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-gray-400">Uptime</span>
-                            <span className="text-gray-300 font-mono text-xs">{api.uptime}</span>
+                        <div className="space-y-2 sm:space-y-3">
+                          <p className="text-xs sm:text-sm text-gray-300 italic line-clamp-3">{api.response}</p>
+                          <div className="space-y-1 pt-2 border-t border-gray-700/30">
+                            <div className="flex justify-between items-center text-xs">
+                              <span className="text-gray-500">Speed</span>
+                              <span className="text-gray-300 font-mono">{api.speed}</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs">
+                              <span className="text-gray-500">Cost</span>
+                              <span className="text-gray-300 font-mono">{api.cost}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -165,7 +182,7 @@ export default function Home() {
 
                   {/* Footer */}
                   <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-800/30">
-                    <p className="text-xs text-gray-500 text-center">Winner: Gemini (Best price & speed)</p>
+                    <p className="text-xs text-gray-500 text-center">Gemini wins: Fastest response at lowest cost</p>
                   </div>
                 </div>
 
