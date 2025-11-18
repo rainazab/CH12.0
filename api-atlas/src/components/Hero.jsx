@@ -75,7 +75,7 @@ export default function Hero({ onSearch }) {
               
               <button
                 type="submit"
-                className="px-7 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/60 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap"
+                className="px-8 py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-sm"
               >
                 Search
               </button>
