@@ -160,8 +160,16 @@ export default function Home() {
                         cost: '$0.01', 
                         color: 'purple' 
                       },
-                    ].map((api, idx) => (
-                      <div key={idx} className={`space-y-2 sm:space-y-3 p-3 sm:p-4 rounded-lg bg-${api.color}-500/5 border transition ${api.name === 'Gemini' ? 'border-white/60 shadow-lg shadow-white/20' : `border-${api.color}-500/20 hover:border-${api.color}-400/40`}`}>
+                    ].map((api, idx) => {
+                      const isWinner = api.name === 'Gemini';
+                      const borderClass = isWinner 
+                        ? 'border-white/60 shadow-lg shadow-white/20' 
+                        : api.color === 'cyan' 
+                          ? 'border-cyan-500/20 hover:border-cyan-400/40' 
+                          : 'border-blue-500/20 hover:border-blue-400/40';
+                      
+                      return (
+                      <div key={idx} className={`space-y-2 sm:space-y-3 p-3 sm:p-4 rounded-lg bg-${api.color}-500/5 border transition ${borderClass}`}>
                         <div className={`font-semibold text-${api.color}-400 text-xs sm:text-sm`}>{api.name}</div>
                         <div className="space-y-2 sm:space-y-3">
                           <p className="text-xs sm:text-sm text-gray-300 italic line-clamp-3">{api.response}</p>
@@ -177,7 +185,8 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   {/* Footer */}
