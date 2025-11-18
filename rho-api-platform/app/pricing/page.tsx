@@ -228,15 +228,15 @@ export default function PricingPage() {
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Stack Features</p>
                     {plan.stackFeatures?.map((feature, featureIdx) => {
                       const isAvailable = feature.startsWith('true_');
-                      const featureName = feature.substring(6);
+                      const featureName = feature.substring(feature.indexOf('_') + 1);
                       return (
-                        <div key={featureIdx} className="flex gap-2 mb-3 min-w-0">
+                        <div key={featureIdx} className="flex gap-2 mb-3 w-full items-start">
                           {isAvailable ? (
                             <Image src="/icon/checkmark-seal.png" alt="check" width={16} height={16} className="flex-shrink-0 mt-0.5" style={{ objectFit: 'contain' }} />
                           ) : (
                             <Image src="/icon/x.png" alt="close" width={16} height={16} className="flex-shrink-0 mt-0.5" style={{ objectFit: 'contain' }} />
                           )}
-                          <span className={`text-sm break-words flex-1 ${isAvailable ? 'text-green-300' : 'text-gray-400'}`}>
+                          <span className={`text-sm ${isAvailable ? 'text-green-300' : 'text-gray-400'}`}>
                             {featureName}
                           </span>
                         </div>
