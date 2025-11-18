@@ -14,11 +14,11 @@ export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   
   const searchExamples = [
-    'Compare GPT-4 vs Claude 3...',
-    'Find image generation APIs...',
-    'Search by budget: $100/month...',
-    'Compare latency & speed...',
-    'Find text-to-speech APIs...',
+    'Compare GPT-4 vs Claude 3',
+    'Find image generation APIs',
+    'Search by budget: $100/month',
+    'Compare latency & speed',
+    'Find text-to-speech APIs',
   ];
 
   useEffect(() => {
@@ -86,8 +86,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Content */}
-            <div className="space-y-6 sm:space-y-8 w-full">
-              <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-5 sm:space-y-7 lg:space-y-8 w-full">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
                   Compare API Outputs{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -100,7 +100,7 @@ export default function Home() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-6 sm:py-8 border-y border-gray-800 w-full text-center">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-5 sm:py-7 lg:py-8 border-y border-gray-800 w-full text-center">
                 <div>
                   <div className="text-2xl sm:text-3xl font-bold text-cyan-400">3</div>
                   <p className="text-xs sm:text-sm text-gray-500 mt-1">APIs at once</p>
@@ -227,11 +227,11 @@ export default function Home() {
             </div>
 
             {/* Problem Text */}
-            <div className="space-y-6 sm:space-y-8 order-1 lg:order-2">
-              <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-5 sm:space-y-7 lg:space-y-8 order-1 lg:order-2">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <div>
                   <span className="text-xs sm:text-sm font-semibold text-red-400 uppercase tracking-wider">The Challenge</span>
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-3 lg:mt-4 leading-tight">
                     Choosing the right API is a{' '}
                     <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
                       nightmare
@@ -239,9 +239,9 @@ export default function Home() {
                   </h2>
                 </div>
 
-                <div className="space-y-3 sm:space-y-4 pt-4 border-t border-gray-800">
-                  <div className="flex gap-3 sm:gap-4">
-                    <div className="w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 lg:pt-5 border-t border-gray-800">
+                  <div className="flex gap-3 sm:gap-3 lg:gap-4">
+                    <div className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Image src="/icon/doc.png" alt="info" width={20} height={20} style={{ objectFit: 'contain' }} />
                     </div>
                     <div>
@@ -332,11 +332,11 @@ export default function Home() {
             </div>
 
             {/* Solution Text - Right Side */}
-            <div className="space-y-6 sm:space-y-8 order-2 lg:order-2">
-              <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-5 sm:space-y-7 lg:space-y-8 order-2 lg:order-2">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <div>
                   <span className="text-xs sm:text-sm font-semibold text-cyan-400 uppercase tracking-wider">Why Rho Works</span>
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-2 sm:mt-3 lg:mt-4 leading-tight">
                     Everything you need to{' '}
                     <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                       decide fast
@@ -349,15 +349,15 @@ export default function Home() {
                 </p>
 
                 {/* Feature List with checkmarks */}
-                <div className="space-y-2 sm:space-y-3 pt-4 sm:pt-6">
+                <div className="space-y-2 sm:space-y-3 pt-4 sm:pt-5 lg:pt-6">
                   {[
                     { title: 'Side-by-side visual comparison', color: 'cyan' },
                     { title: 'Real-time performance metrics', color: 'blue' },
                     { title: 'Automated cost calculations', color: 'purple' },
                     { title: 'Data-driven recommendations', color: 'green' },
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3 sm:gap-4 items-center">
-                      <div className="w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center flex-shrink-0">
+                    <div key={idx} className="flex gap-2 sm:gap-3 lg:gap-4 items-center">
+                      <div className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 flex items-center justify-center flex-shrink-0">
                         <Image src="/icon/checkmark-seal.png" alt="check" width={18} height={18} style={{ objectFit: 'contain' }} />
                       </div>
                       <p className="text-gray-300 text-base sm:text-lg">{item.title}</p>
