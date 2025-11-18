@@ -146,8 +146,7 @@ export default function QuestionnairePage() {
   const isLastStep = currentStep === steps.length - 1;
 
   const handleSelectOption = (value: string, categories: string[]) => {
-    const newAnswers = { ...answers, [step.id]: value };
-    setAnswers(newAnswers);
+    setAnswers({ ...answers, [step.id]: value });
 
     // Accumulate recommended categories
     const newCategories = [...recommendedCategories];
@@ -157,15 +156,19 @@ export default function QuestionnairePage() {
       }
     });
     setRecommendedCategories(newCategories);
+  };
 
-    // Move to next step or finish
+  const handleNext = () => {
+    if (!selectedValue) return;
+
     if (isLastStep) {
       // Redirect to stack builder with recommendations
+      const allCategories = [...recommendedCategories];
       const params = new URLSearchParams({
-        categories: newCategories.join(','),
-        useCase: newAnswers['use-case'] || '',
-        budget: newAnswers['budget'] || '',
-        priority: newAnswers['priority'] || '',
+        categories: allCategories.join(','),
+        useCase: answers['use-case'] || '',
+        budget: answers['budget'] || '',
+        priority: answers['priority'] || '',
       });
       window.location.href = `/stacks/builder?${params.toString()}`;
     } else {
@@ -265,9 +268,7 @@ export default function QuestionnairePage() {
           </button>
 
           <button
-            onClick={() =>
-              handleSelectOption(selectedValue, step.options.find(o => o.value === selectedValue)?.recommendedCategories || [])
-            }
+            onClick={handleNext}
             disabled={!selectedValue}
             className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
           >
