@@ -277,7 +277,7 @@ export default function Home() {
                     className="bg-gradient-to-br from-green-600/20 to-green-500/10 border border-green-500/30 rounded-xl p-6 backdrop-blur hover:border-green-400/60 transition duration-300 transform hover:scale-105 text-left cursor-pointer w-full"
                   >
                     <div className="mb-3 w-10 h-10 flex items-center justify-center">
-                      <Image src="/icon/star.png" alt="smart" width={40} height={40} style={{ objectFit: 'contain', filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.6)) brightness(1.25)' }} />
+                      <Image src="/icon/star.png" alt="smart" width={40} height={40} style={{ objectFit: 'contain' }} />
                     </div>
                     <h3 className="text-white font-semibold mb-2">Smart</h3>
                     <p className="text-sm text-gray-400">AI recommendations</p>
