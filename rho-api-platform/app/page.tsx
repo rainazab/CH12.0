@@ -57,13 +57,13 @@ export default function Home() {
             <div className="space-y-8 flex flex-col items-center">
               <div className="space-y-6 text-left">
                 <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
-                  See API Outputs{' '}
+                  Compare API Outputs{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Visually
                   </span>
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
-                  Watch APIs perform side-by-side in real-time. See exact outputs, compare metrics, costs, and performance all in one visual interface.
+                  Stop guessing which API is best. Compare outputs, metrics, speed, and costs side-by-side in real-time. See the differences that matter.
                 </p>
               </div>
 
@@ -299,7 +299,7 @@ export default function Home() {
                     { icon: '✓', title: 'Data-driven recommendations', color: 'green' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4 items-center">
-                      <div className={`text-xl font-bold text-${item.color}-400`}>{item.icon}</div>
+                      <div className="text-xl font-bold text-white">{item.icon}</div>
                       <p className="text-gray-300 text-lg">{item.title}</p>
                     </div>
                   ))}
