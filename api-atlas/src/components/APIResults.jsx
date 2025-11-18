@@ -171,113 +171,66 @@ export default function APIResults({
                     : 'border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10'
                 }`}
               >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    {/* Left: API Info */}
-                    <div className="flex gap-4 flex-1">
-                      <div className="text-4xl">{api.icon || '⚙️'}</div>
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3 mb-2">
-                          <h3 className="text-xl font-bold text-white">{api.name}</h3>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    {/* Left: API Info - Compact */}
+                    <div className="flex gap-3 flex-1 min-w-0">
+                      <div className="text-3xl flex-shrink-0">{api.icon || '⚙️'}</div>
+                      <div className="flex-1 min-w-0">
+                        {/* Name + Status */}
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <h3 className="text-lg font-bold text-white">{api.name}</h3>
                           {api.status === 'operational' && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full border border-green-500/30">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full border border-green-500/30">
                               <Zap className="w-3 h-3" />
                               Live
                             </span>
                           )}
-                          {api.performance?.reliability > 98 && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/30">
-                              <Lock className="w-3 h-3" />
-                              Reliable
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-gray-400 mb-3">{api.description}</p>
-
-                        {/* Quick Stats */}
-                        <div className="flex flex-wrap gap-4 mb-3">
-                          {api.performance && (
-                            <>
-                              <div className="text-sm">
-                                <span className="text-gray-500">Uptime:</span>
-                                <span className="font-bold text-gray-300 ml-1">
-                                  {api.performance.uptime}%
-                                </span>
-                              </div>
-                              <div className="text-sm">
-                                <span className="text-gray-500">Response:</span>
-                                <span className="font-bold text-gray-300 ml-1">
-                                  {api.performance.avgResponseTime}ms
-                                </span>
-                              </div>
-                            </>
-                          )}
-                          <div className="text-sm">
-                            <span className="text-gray-500">Category:</span>
-                            <span className="font-bold text-gray-300 ml-1">
-                              {api.category}
-                            </span>
-                          </div>
                         </div>
 
-                        {/* Features */}
-                        {api.features && (
-                          <div className="flex flex-wrap gap-2 mb-3">
-                            {api.features.slice(0, 3).map((feature) => (
-                              <span
-                                key={feature}
-                                className="px-2.5 py-1 bg-gray-800 text-gray-300 text-xs rounded-full font-medium border border-gray-700"
-                              >
-                                {feature}
-                              </span>
-                            ))}
-                            {api.features.length > 3 && (
-                              <span className="px-2.5 py-1 bg-gray-800 text-gray-300 text-xs rounded-full font-medium border border-gray-700">
-                                +{api.features.length - 3} more
-                              </span>
-                            )}
-                          </div>
-                        )}
+                        {/* One-line description */}
+                        <p className="text-sm text-gray-400 mb-2 line-clamp-1">{api.description}</p>
+
+                        {/* Compact Stats */}
+                        <div className="flex gap-3 text-xs text-gray-400 flex-wrap">
+                          {api.performance?.uptime && (
+                            <span>📊 {api.performance.uptime}% uptime</span>
+                          )}
+                          {api.performance?.avgResponseTime && (
+                            <span>⚡ {api.performance.avgResponseTime}ms</span>
+                          )}
+                          {api.category && (
+                            <span>🏷️ {api.category}</span>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Right: Actions */}
-                    <div className="flex flex-col items-end gap-3">
+                    {/* Right: CTA + Price - Compact */}
+                    <div className="flex flex-col items-end gap-2 flex-shrink-0">
                       <button
                         onClick={() => onAPISelect(api)}
-                        className={`p-2.5 rounded-lg font-semibold transition ${
+                        className={`p-2 rounded-lg font-semibold transition ${
                           isSelected
                             ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/40'
                             : 'bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700'
                         }`}
                       >
                         {isSelected ? (
-                          <Check className="w-5 h-5" />
+                          <Check className="w-4 h-4" />
                         ) : (
-                          <Plus className="w-5 h-5" />
+                          <Plus className="w-4 h-4" />
                         )}
                       </button>
 
-                      {/* Pricing + Dynamic Cost */}
+                      {/* Price - Inline */}
                       {api.pricing && (
-                        <div className="text-right">
-                          <div className="text-xs text-gray-500 mb-1">Estimated Monthly Cost</div>
-                          <div className="text-lg font-bold text-cyan-400 mb-2">
-                            ${calculateMonthlyCost(api, userVolume).toFixed(2)}/mo
+                        <div className="text-right text-xs">
+                          <div className="text-cyan-400 font-bold">
+                            ${calculateMonthlyCost(api, userVolume).toFixed(0)}/mo
                           </div>
-                          <div className="text-xs text-gray-500">
-                            {api.pricing.model === 'pay-per-token' &&
-                              `$${api.pricing.input}/1K tokens`}
-                            {api.pricing.model === 'subscription' &&
-                              `$${api.pricing.individual}/mo`}
-                            {api.pricing.model === 'pay-per-image' &&
-                              `$${api.pricing.standard}/image`}
-                            {api.pricing.model === 'pay-per-character' &&
-                              `$${api.pricing.cost}/1K chars`}
-                            {api.pricing.model === 'pay-per-email' &&
-                              `$${api.pricing.cost * 1000}/1M`}
-                            {api.pricing.model === 'pay-per-minute' &&
-                              `$${api.pricing.cost}/min`}
+                          <div className="text-gray-500 text-xs">
+                            {api.pricing.input ? `$${api.pricing.input}/1K` : api.pricing.cost}
                           </div>
                         </div>
                       )}
