@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Star, Users, TrendingUp, Copy } from 'lucide-react';
+import { Star, Users, Copy } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { cloneStack } from '@/lib/stackService';
@@ -135,7 +135,7 @@ export default function ExplorePage() {
 
     setCloning(stackId);
     try {
-      const newStackId = await cloneStack(user.uid, stackId, `${stackName} (Clone)`);
+      await cloneStack(user.uid, stackId, `${stackName} (Clone)`);
       alert('Stack cloned successfully! Check your stacks.');
     } catch (error) {
       console.error('Error cloning stack:', error);

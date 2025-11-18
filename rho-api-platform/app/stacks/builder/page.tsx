@@ -3,7 +3,7 @@
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { ArrowLeft, X, DollarSign, Zap } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
@@ -207,7 +207,7 @@ const categoryLabels: Record<string, string> = {
   'analytics': 'Analytics',
 };
 
-export default function StackBuilderPage() {
+function StackBuilderPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categories = searchParams.get('categories')?.split(',').filter(Boolean) || [];
@@ -585,5 +585,13 @@ export default function StackBuilderPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function StackBuilderPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StackBuilderPageContent />
+    </Suspense>
   );
 }

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Share2, Trash2, Eye, Edit } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { getUserStacks, deleteStack, toggleStackPublic, SavedStack as SavedStackType } from '@/lib/stackService';
+import { getUserStacks, deleteStack, toggleStackPublic } from '@/lib/stackService';
 
 interface SavedStack {
   id: string;
@@ -203,7 +203,7 @@ export default function MyStacksPage() {
 
               {/* APIs */}
               <div className="flex flex-wrap gap-2 mb-4">
-                {stack.apis.map((api, idx) => (
+                {stack.apis.map((api: { name: string; icon: string }, idx: number) => (
                   <div key={idx} className="flex items-center gap-1 px-3 py-1 bg-black/40 rounded-full">
                     <span>{api.icon}</span>
                     <span className="text-xs text-gray-300">{api.name}</span>

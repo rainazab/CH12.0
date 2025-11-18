@@ -2,9 +2,8 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { ArrowLeft, X, Plus, DollarSign } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { getStack, updateStack } from '@/lib/stackService';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';

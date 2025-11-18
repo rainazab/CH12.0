@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ interface ComparisonResult {
   };
 }
 
-export default function ComparePage() {
+function ComparePageContent() {
   const searchParams = useSearchParams();
   const [selectedApis, setSelectedApis] = useState<string[]>([]);
   const [prompt, setPrompt] = useState('');
@@ -289,6 +289,14 @@ export default function ComparePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ComparePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ComparePageContent />
+    </Suspense>
   );
 }
 

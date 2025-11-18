@@ -195,9 +195,9 @@ export const getPublicStacks = async (limit: number = 20): Promise<SavedStack[]>
       .map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      }))
+      } as SavedStack))
       .sort((a, b) => (b.views || 0) - (a.views || 0))
-      .slice(0, limit) as SavedStack[];
+      .slice(0, limit);
   } catch (error) {
     console.error('Error getting public stacks:', error);
     throw error;

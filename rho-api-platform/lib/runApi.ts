@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 interface ApiConfig {
   id: string;
   endpoint: string;
@@ -79,7 +77,7 @@ export async function runApi(apiId: string, input: string): Promise<{
   }
 }
 
-async function mockDalle3(prompt: string) {
+async function mockDalle3(_prompt: string) {
   // Mock DALL·E response
   return {
     model: 'dall-e-3',
@@ -106,7 +104,7 @@ async function mockGpt4(prompt: string) {
   };
 }
 
-async function mockElevenLabs(text: string) {
+async function mockElevenLabs(_text: string) {
   // Mock ElevenLabs response
   return {
     audio_base64: 'mock_audio_data',
