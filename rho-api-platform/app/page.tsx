@@ -299,7 +299,7 @@ export default function Home() {
                     { icon: '✓', title: 'Data-driven recommendations', color: 'green' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4 items-center">
-                      <div className="text-xl font-bold text-white">{item.icon}</div>
+                      <div className="text-xl font-bold text-green-400">{item.icon}</div>
                       <p className="text-gray-300 text-lg">{item.title}</p>
                     </div>
                   ))}

@@ -63,7 +63,7 @@ export default function About() {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  name: 'Raina Zabasajja',
+                  name: 'Raina Zab',
                   image: '/rz.jpg',
                   website: 'www.rainazab.com',
                   linkedin: 'https://www.linkedin.com/in/rainazab/',

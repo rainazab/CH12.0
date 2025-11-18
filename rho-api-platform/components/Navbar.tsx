@@ -63,9 +63,9 @@ export default function Navbar() {
                 <span className="text-gray-300 text-sm">{user.email}</span>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg transition"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30 text-orange-400 border border-orange-500/30 hover:border-orange-500/50 rounded-lg transition duration-300 transform hover:scale-105 group"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition" />
                   Sign Out
                 </button>
               </div>
@@ -104,8 +104,9 @@ export default function Navbar() {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="w-full px-4 py-2 text-left text-red-400 hover:bg-red-600/20"
+                className="w-full px-4 py-2.5 text-left text-orange-400 hover:bg-gradient-to-r hover:from-orange-500/20 hover:to-red-500/20 rounded-lg transition duration-300 flex items-center gap-2 group"
               >
+                <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition" />
                 Sign Out
               </button>
             ) : (
