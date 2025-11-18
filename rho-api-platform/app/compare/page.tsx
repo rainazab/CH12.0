@@ -275,12 +275,12 @@ export default function ComparePage() {
                     <p className="text-gray-400">Fill out the form on the left and click <span className="text-cyan-400 font-semibold">Compare</span> to see results here</p>
                   </div>
                   <div className="pt-4 border-t border-gray-700/50">
-                    <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+                    <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
                       <div className="w-4 h-4 flex items-center justify-center">
                         <Image src="/icon/bolt.png" alt="bolt" width={16} height={13} style={{ objectFit: 'contain' }} />
                       </div>
-                      Results appear here in real-time as you test
-                    </p>
+                      <span>Results appear here in real-time as you test</span>
+                    </div>
                   </div>
                 </div>
               </div>
