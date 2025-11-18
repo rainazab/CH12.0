@@ -18,25 +18,25 @@ export default function Home() {
     <div className="relative bg-black overflow-hidden">
 
       {/* HERO SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-0">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
+            <div className="space-y-8 flex flex-col items-center">
+              <div className="space-y-6 text-left">
                 <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
                   Compare APIs in{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     seconds
                   </span>
                 </h1>
-                <p className="text-xl text-gray-400 leading-relaxed">
+                <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
                   Stop drowning in documentation. Rho lets you test multiple APIs side-by-side and make data-driven decisions instantly.
                 </p>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 py-8 border-y border-gray-800">
+              <div className="grid grid-cols-3 gap-4 py-8 border-y border-gray-800 w-full text-center">
                 <div>
                   <div className="text-3xl font-bold text-cyan-400">3</div>
                   <p className="text-sm text-gray-500">APIs at once</p>
@@ -54,7 +54,7 @@ export default function Home() {
               {/* Hero CTA */}
               <Link
                 href="/compare"
-                className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-110 w-fit"
+                className="flex items-center justify-center gap-3 px-12 py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-110"
               >
                 Start Comparing
                 <span className="text-2xl">→</span>
