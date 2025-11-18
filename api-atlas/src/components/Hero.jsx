@@ -83,140 +83,98 @@ export default function Hero({ onSearch }) {
           </div>
         </form>
 
-        {/* Example Terms Carousel - Premium AI Experience */}
-        <div className="space-y-6 mt-8">
-          {/* Label with animation */}
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-0.5 w-8 bg-gradient-to-r from-transparent to-cyan-400" />
-            <p className="text-gray-400 text-sm font-medium uppercase tracking-widest">Try Searching For</p>
-            <div className="h-0.5 w-8 bg-gradient-to-l from-transparent to-cyan-400" />
+        {/* Live Typing Demo - Shows Rho in Action */}
+        <div className="mt-20 max-w-3xl relative">
+          {/* Search input simulation with typing effect */}
+          <div className="relative group mb-8">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-40 group-hover:opacity-60 transition" />
+            
+            <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 px-6 py-4">
+              <Search className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+              
+              <div className="flex-1 text-lg text-white font-medium h-6 flex items-center">
+                <span className="inline-block min-w-fit">
+                  best {currentExample % 3 === 0 ? 'image generation' : currentExample % 3 === 1 ? 'text to speech' : 'payment processing'} API
+                </span>
+                <span className="ml-1 inline-block w-0.5 h-6 bg-cyan-400 animate-pulse" />
+              </div>
+            </div>
           </div>
 
-          {/* Animated carousel container */}
-          <div className="relative h-16 flex items-center justify-center">
-            {/* Glow background effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-2xl blur-xl" />
-            
-            {/* Carousel box */}
-            <div className="relative flex items-center justify-center">
-              {/* Left indicator */}
-              <div className="absolute left-0 w-1 h-12 bg-gradient-to-b from-transparent via-cyan-400 to-transparent opacity-60" />
-              
-              {/* Text carousel with smooth animation */}
-              <div className="px-8 py-4 text-center">
-                <div className="relative h-12 flex items-center justify-center overflow-hidden">
-                  <div 
-                    className="absolute transition-all duration-500 ease-in-out"
-                    style={{
-                      opacity: 1,
-                      transform: 'translateY(0)',
-                    }}
-                  >
-                    <p className="text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent animate-pulse">
-                      {examples[currentExample]}
-                    </p>
+          {/* Dynamic results appearing */}
+          <div className="space-y-3 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
+            {/* Result 1 - Main recommendation */}
+            <div className="group relative overflow-hidden rounded-lg border border-cyan-500/40 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-4 hover:border-cyan-400/80 transition cursor-pointer">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl mt-1">
+                  {currentExample % 3 === 0 ? '🎨' : currentExample % 3 === 1 ? '🔊' : '💳'}
+                </span>
+                <div className="flex-1">
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="font-bold text-white text-sm">
+                      {currentExample % 3 === 0 ? 'DALL-E 3' : currentExample % 3 === 1 ? 'ElevenLabs TTS' : 'Stripe API'}
+                    </h3>
+                    <span className="text-xs text-cyan-400 font-semibold animate-pulse">
+                      {currentExample % 3 === 0 ? '99.1% Uptime' : currentExample % 3 === 1 ? '99.7% Uptime' : '99.99% Uptime'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-2">
+                    {currentExample % 3 === 0 
+                      ? 'Professional image generation with stunning quality' 
+                      : currentExample % 3 === 1
+                      ? 'Natural-sounding voice synthesis with premium voices'
+                      : 'Industry-standard payment processor'}
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <span className="text-gray-500">
+                      {currentExample % 3 === 0 
+                        ? 'From $0.08/img' 
+                        : currentExample % 3 === 1
+                        ? 'From $0.18/1K chars'
+                        : 'From 2.9%'}
+                    </span>
+                    <span className="text-cyan-400">★ 4.9/5</span>
                   </div>
                 </div>
               </div>
-
-              {/* Right indicator */}
-              <div className="absolute right-0 w-1 h-12 bg-gradient-to-b from-transparent via-purple-400 to-transparent opacity-60" />
             </div>
 
-            {/* Dots indicator */}
-            <div className="absolute bottom-0 flex gap-2 mt-4">
-              {examples.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    idx === currentExample
-                      ? 'w-6 bg-gradient-to-r from-cyan-400 to-purple-400'
-                      : 'w-1.5 bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Status text */}
-          <p className="text-center text-xs text-gray-500 uppercase tracking-widest">
-            powered by rho intelligence
-          </p>
-        </div>
-
-        {/* Example Results Preview - Dynamic Cards */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
-          {/* Result Card 1 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-cyan-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.1s' }}>
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition" />
-            
-            {/* Floating animation on the icon */}
-            <div className="relative">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl animate-bounce" style={{ animationDelay: '0s' }}>🤖</span>
-                <div>
-                  <h3 className="font-bold text-white text-sm group-hover:text-cyan-300 transition">ChatGPT API</h3>
-                  <p className="text-xs text-gray-400">OpenAI</p>
+            {/* Result 2 */}
+            <div className="group relative overflow-hidden rounded-lg border border-gray-700/30 bg-black/30 p-4 hover:border-purple-400/50 transition cursor-pointer opacity-70">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl mt-1">
+                  {currentExample % 3 === 0 ? '🌐' : currentExample % 3 === 1 ? '🎤' : '📊'}
+                </span>
+                <div className="flex-1">
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="font-bold text-gray-300 text-sm">
+                      {currentExample % 3 === 0 ? 'Midjourney' : currentExample % 3 === 1 ? 'Google TTS' : 'Square Payments'}
+                    </h3>
+                    <span className="text-xs text-gray-500">
+                      {currentExample % 3 === 0 ? '99.8% Uptime' : currentExample % 3 === 1 ? '99.8% Uptime' : '99.95% Uptime'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500 mb-2">Alternative option with unique features</p>
+                  <span className="text-xs text-gray-500">See more details →</span>
                 </div>
-              </div>
-              <p className="text-xs text-gray-400 mb-3 line-clamp-2">Advanced language model for text generation and conversation</p>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-cyan-400 font-semibold animate-pulse">99.9% Uptime</span>
-                <span className="text-xs text-gray-500">$0.03/1K tokens</span>
               </div>
             </div>
           </div>
 
-          {/* Result Card 2 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-purple-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.2s' }}>
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition" />
-            
-            {/* Floating animation on the icon */}
-            <div className="relative">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎨</span>
-                <div>
-                  <h3 className="font-bold text-white text-sm group-hover:text-purple-300 transition">DALL-E 3</h3>
-                  <p className="text-xs text-gray-400">OpenAI</p>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mb-3 line-clamp-2">AI image generation from text descriptions</p>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-purple-400 font-semibold animate-pulse">99.1% Uptime</span>
-                <span className="text-xs text-gray-500">$0.08/image</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Result Card 3 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-blue-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.3s' }}>
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition" />
-            
-            {/* Floating animation on the icon */}
-            <div className="relative">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl animate-bounce" style={{ animationDelay: '0.4s' }}>💳</span>
-                <div>
-                  <h3 className="font-bold text-white text-sm group-hover:text-blue-300 transition">Stripe API</h3>
-                  <p className="text-xs text-gray-400">Stripe</p>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mb-3 line-clamp-2">Complete payment processing platform</p>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-blue-400 font-semibold animate-pulse">99.99% Uptime</span>
-                <span className="text-xs text-gray-500">2.9% + $0.30</span>
-              </div>
-            </div>
+          {/* Cycling indicator */}
+          <div className="flex justify-center gap-2 mt-8">
+            {[0, 1, 2].map((idx) => (
+              <div
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentExample % 3
+                    ? 'w-6 bg-gradient-to-r from-cyan-400 to-blue-400'
+                    : 'w-1.5 bg-gray-600'
+                }`}
+              />
+            ))}
           </div>
         </div>
-
-        {/* Call to action text */}
-        <p className="text-center text-sm text-gray-400 mt-8">
-          See what <span className="text-cyan-300 font-semibold">real results</span> look like with Rho
-        </p>
       </div>
     </div>
   );
