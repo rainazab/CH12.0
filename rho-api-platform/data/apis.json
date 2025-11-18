@@ -1,0 +1,63 @@
+[
+  {
+    "id": "dalle3",
+    "name": "DALL·E 3",
+    "provider": "OpenAI",
+    "uptime": "99.1%",
+    "cost": "$0.08/img",
+    "category": "image-generation",
+    "description": "Professional image generation with stunning quality.",
+    "icon": "🎨"
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "provider": "Midjourney Inc",
+    "uptime": "99.8%",
+    "cost": "$0.04/img",
+    "category": "image-generation",
+    "description": "Alternative option with unique style control.",
+    "icon": "🌐"
+  },
+  {
+    "id": "gpt4o",
+    "name": "GPT-4.1 Omni",
+    "provider": "OpenAI",
+    "uptime": "99.9%",
+    "cost": "$0.005/1k tokens",
+    "category": "llm",
+    "description": "Multi-modal general reasoning model.",
+    "icon": "🧠"
+  },
+  {
+    "id": "claude3",
+    "name": "Claude 3 Opus",
+    "provider": "Anthropic",
+    "uptime": "99.7%",
+    "cost": "$0.015/1k tokens",
+    "category": "llm",
+    "description": "Advanced reasoning with extended thinking.",
+    "icon": "💭"
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs TTS",
+    "provider": "ElevenLabs",
+    "uptime": "99.7%",
+    "cost": "$0.30/1M characters",
+    "category": "text-to-speech",
+    "description": "Natural-sounding voice synthesis with premium voices.",
+    "icon": "🔊"
+  },
+  {
+    "id": "stripe",
+    "name": "Stripe API",
+    "provider": "Stripe",
+    "uptime": "99.99%",
+    "cost": "2.9% + $0.30",
+    "category": "payments",
+    "description": "Industry-standard payment processor.",
+    "icon": "💳"
+  }
+]
+

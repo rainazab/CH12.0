@@ -1,0 +1,36 @@
+app = "rho-api-platform"
+primary_region = "sjc"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 3000
+  processes = ["app"]
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    number = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    number = 443
+    handlers = ["tls", "http"]
+
+[env]
+  NODE_ENV = "production"
+
+[checks]
+  [checks.alive]
+    type = "http"
+    interval = 10000
+    timeout = 5000
+    grace_period = "5s"
+    method = "get"
+    path = "/api/health"
+
