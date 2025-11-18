@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import ApiCard from '@/components/ApiCard';
 import CompareOutputPanel from '@/components/CompareOutputPanel';
 import apis from '@/data/apis.json';
@@ -69,7 +70,16 @@ export default function ComparePage() {
           <h1 className="text-6xl lg:text-7xl font-bold text-white mb-4">
             Compare <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">APIs</span>
           </h1>
-          <p className="text-xl text-gray-400">Select APIs and enter a prompt to see how they respond</p>
+          <p className="text-xl text-gray-400 mb-6">Select APIs and enter a prompt to see how they respond</p>
+          
+          {/* Stack Builder CTA */}
+          <Link 
+            href="/stacks/questionnaire"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105"
+          >
+            🎯 Build a Stack Instead
+            <span>→</span>
+          </Link>
         </div>
 
         {/* Main Content Grid */}
