@@ -57,21 +57,25 @@ export default function Hero({ onSearch }) {
         </p>
 
         {/* Demo Search Box */}
-        <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-16">
+        <form onSubmit={handleSearch} className="max-w-3xl mx-auto mb-16">
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-            <div className="relative flex items-center bg-black rounded-xl shadow-2xl border border-gray-800 overflow-hidden">
-              <Search className="w-6 h-6 text-cyan-400 ml-4" />
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-70 transition duration-500" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
+            
+            <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 group-hover:border-cyan-400/60 overflow-hidden transition duration-300 px-6 py-3">
+              <Search className="w-5 h-5 text-cyan-400 flex-shrink-0 group-hover:text-cyan-300 transition" />
+              
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search APIs… ex: image generation, payments, speech-to-text"
-                className="flex-1 px-4 py-4 text-lg outline-none bg-transparent text-white placeholder-gray-500"
+                placeholder="Search APIs… (ex: image generation, payments, speech-to-text)"
+                className="flex-1 px-2 py-3 text-base md:text-lg outline-none bg-transparent text-white placeholder-gray-400 group-hover:placeholder-gray-300 transition"
               />
+              
               <button
                 type="submit"
-                className="mr-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105"
+                className="px-7 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/60 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap"
               >
                 Search
               </button>
