@@ -67,7 +67,7 @@ export default function Hero({ onSearch }) {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden pt-20 pb-12 flex items-center justify-center">
+    <div className="relative min-h-screen bg-black overflow-hidden pb-12 flex flex-col justify-start">
       {/* Animated Grid Background */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -85,7 +85,7 @@ export default function Hero({ onSearch }) {
 
       {/* Content - Two Column Layout */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-12">
           
           {/* LEFT SIDE - Text Content */}
           <div className="flex flex-col justify-center">
