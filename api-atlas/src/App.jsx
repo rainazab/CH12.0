@@ -10,7 +10,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
-import FirstSecondsTest from './components/FirstSecondsTest';
+import BuilderFlow from './components/BuilderFlow';
 import { searchAPIs } from './lib/api';
 
 // Scroll to top on route change
@@ -149,7 +149,7 @@ function App() {
                 </>
               }
             />
-            <Route path="/test" element={<FirstSecondsTest allAPIs={allAPIs} />} />
+            <Route path="/test" element={<BuilderFlow />} />
             <Route path="/compare" element={<ComparisonView apis={selectedAPIs} />} />
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />

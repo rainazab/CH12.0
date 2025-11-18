@@ -99,6 +99,15 @@ export default function Hero({ onSearch }) {
               Rho finds your perfect API match. Intelligently discover and compare what powers innovation.
             </p>
 
+            {/* CTA Button */}
+            <a 
+              href="/test"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-105 w-fit"
+            >
+              ✨ What are you building?
+              <span className="text-xl">→</span>
+            </a>
+
           </div>
 
           {/* RIGHT SIDE - Live Typing Demo - Shows Rho in Action */}
