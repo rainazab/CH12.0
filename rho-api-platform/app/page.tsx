@@ -1,11 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Zap, TrendingUp, Target } from 'lucide-react';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  
+  const searchExamples = [
+    'Compare GPT-4 vs Claude 3...',
+    'Find image generation APIs...',
+    'Search by budget: $100/month...',
+    'Compare latency & speed...',
+    'Find text-to-speech APIs...',
+  ];
+
+  useEffect(() => {
+    const currentExample = searchExamples[currentExampleIndex];
+    
+    if (charIndex < currentExample.length) {
+      // Still typing this example
+      const timeout = setTimeout(() => {
+        setDisplayedText(currentExample.substring(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, 50); // Speed of typing
+      return () => clearTimeout(timeout);
+    } else {
+      // Finished typing this example, wait then move to next
+      const timeout = setTimeout(() => {
+        setCurrentExampleIndex((currentExampleIndex + 1) % searchExamples.length);
+        setCharIndex(0);
+        setDisplayedText('');
+      }, 2000); // Pause before moving to next example
+      return () => clearTimeout(timeout);
+    }
+  }, [charIndex, currentExampleIndex, searchExamples]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,7 +263,9 @@ export default function Home() {
 
                   {/* Card 4 */}
                   <div className="bg-gradient-to-br from-green-600/20 to-green-500/10 border border-green-500/30 rounded-xl p-6 backdrop-blur hover:border-green-400/60 transition duration-300 transform hover:scale-105">
-                    <div className="text-4xl mb-3">✨</div>
+                    <div className="mb-3">
+                      <img src="/star.png" alt="Star" className="w-10 h-10 drop-shadow-lg filter brightness-125" style={{ filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.6))' }} />
+                    </div>
                     <h3 className="text-white font-semibold mb-2">Smart</h3>
                     <p className="text-sm text-gray-400">AI recommendations</p>
                   </div>
@@ -288,32 +322,31 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Search Form */}
-          <form onSubmit={handleSearch} className="w-full max-w-3xl mx-auto">
-            <div className="relative group">
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-70 transition duration-500" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
+          {/* Demo Search Showcase */}
+          <div className="w-full max-w-3xl mx-auto">
+            <div className="relative">
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50" />
 
-              <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 group-hover:border-cyan-400/60 overflow-hidden transition duration-300 px-6 py-4">
+              <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 px-6 py-4 min-h-16">
                 <Search className="w-5 h-5 text-cyan-400 flex-shrink-0" />
 
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for APIs..."
-                  className="flex-1 px-2 py-3 text-lg outline-none bg-transparent text-white placeholder-gray-500 group-hover:placeholder-gray-400 transition font-medium"
-                />
+                <div className="flex-1 text-lg text-white font-medium">
+                  <span className="text-gray-500 italic">
+                    {displayedText}
+                    <span className="animate-pulse">|</span>
+                  </span>
+                </div>
 
                 <button
-                  type="submit"
+                  onClick={() => window.location.href = '/compare'}
                   className="px-8 py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-sm"
                 >
-                  Search
+                  Explore
                 </button>
               </div>
             </div>
-          </form>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
@@ -331,10 +364,6 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Trust Badge */}
-          <p className="text-gray-500 text-sm pt-8">
-            Trusted by developers at CalHacks 12.0
-          </p>
         </div>
       </section>
     </div>
