@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Plus, X, DollarSign, Zap, TrendingUp } from 'lucide-react';
+import { ArrowLeft, X, DollarSign, Zap, TrendingUp } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { saveStack } from '@/lib/stackService';

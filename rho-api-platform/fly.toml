@@ -1,47 +1,22 @@
-app = "rho-api-platform"
-primary_region = "iad"
+# fly.toml app configuration file generated for rho-api-platform on 2025-11-18T01:28:29-08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-[[services]]
-  protocol = "tcp"
+app = 'rho-api-platform'
+primary_region = 'sjc'
+
+[build]
+
+[http_service]
   internal_port = 3000
-  processes = ["app"]
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-    force_https = true
-
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
-  [services.concurrency]
-    type = "connections"
-    hard_limit = 25
-    soft_limit = 20
-
-  [[services.tcp_checks]]
-    interval = "15s"
-    timeout = "2s"
-    grace_period = "1s"
-    restart_limit = 0
-
-[[statics]]
-  guest_path = "/app/public"
-  url_prefix = "/"
-
-[env]
-  NODE_ENV = "production"
-
-[secrets]
-  NEXT_PUBLIC_FIREBASE_API_KEY = "your-firebase-api-key"
-  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN = "your-firebase-auth-domain"
-  NEXT_PUBLIC_FIREBASE_PROJECT_ID = "your-firebase-project-id"
-  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "your-firebase-storage-bucket"
-  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "your-firebase-messaging-sender-id"
-  NEXT_PUBLIC_FIREBASE_APP_ID = "your-firebase-app-id"
-  FIREBASE_SERVICE_ACCOUNT_KEY = "your-firebase-service-account-json"
-  STRIPE_SECRET_KEY = "your-stripe-secret-key"
-  STRIPE_WEBHOOK_SECRET = "your-stripe-webhook-secret"
-  OPENAI_API_KEY = "your-openai-api-key"
-  ANTHROPIC_API_KEY = "your-anthropic-api-key"
-  GOOGLE_AI_API_KEY = "your-google-ai-api-key"
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
