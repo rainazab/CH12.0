@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8">
+    <footer className="bg-black border-t border-gray-800/50 flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 flex-grow">
         <div className="grid md:grid-cols-4 gap-20 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
@@ -80,12 +80,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-800 py-2 mt-2">
-          <p className="text-center text-xs text-gray-600">
-            © 2025 Rho. All rights reserved.
-          </p>
-        </div>
+      </div>
+
+      {/* Copyright - At Very Bottom */}
+      <div className="border-t border-gray-800 py-4 mt-auto bg-black/50 w-full">
+        <p className="text-center text-xs text-gray-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          © 2025 Rho. All rights reserved.
+        </p>
       </div>
     </footer>
   );
