@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Share2, Trash2, Eye, Edit } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
+import { getUserStacks, deleteStack, toggleStackPublic, SavedStack as SavedStackType } from '@/lib/stackService';
 
 interface SavedStack {
   id: string;
@@ -68,15 +69,52 @@ const mockStacks: SavedStack[] = [
 export default function MyStacksPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [stacks, setStacks] = useState<any[]>([]);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        try {
+          const userStacks = await getUserStacks(currentUser.uid);
+          setStacks(userStacks);
+        } catch (error) {
+          console.error('Error loading stacks:', error);
+        }
+      }
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  const handleDeleteStack = async (stackId: string) => {
+    if (!confirm('Are you sure you want to delete this stack?')) {
+      return;
+    }
+
+    setDeleting(stackId);
+    try {
+      await deleteStack(stackId);
+      setStacks(stacks.filter(s => s.id !== stackId));
+    } catch (error) {
+      console.error('Error deleting stack:', error);
+      alert('Failed to delete stack');
+    } finally {
+      setDeleting(null);
+    }
+  };
+
+  const handleTogglePublic = async (stack: any) => {
+    try {
+      await toggleStackPublic(stack.id, !stack.isPublic);
+      setStacks(stacks.map(s => s.id === stack.id ? { ...s, isPublic: !s.isPublic } : s));
+    } catch (error) {
+      console.error('Error toggling stack public:', error);
+      alert('Failed to update stack');
+    }
+  };
 
   if (loading) {
     return (
@@ -143,7 +181,7 @@ export default function MyStacksPage() {
 
         {/* Stacks Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {mockStacks.map((stack) => (
+          {(stacks.length > 0 ? stacks : mockStacks).map((stack) => (
             <div
               key={stack.id}
               className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-gray-800/50 rounded-2xl p-6 backdrop-blur hover:border-cyan-400/30 transition group"
@@ -202,10 +240,18 @@ export default function MyStacksPage() {
                   <Edit className="w-4 h-4" />
                   Edit
                 </button>
-                <button className="px-3 py-2 bg-purple-400/20 hover:bg-purple-400/30 text-purple-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1">
+                <button
+                  onClick={() => handleTogglePublic(stack)}
+                  className="px-3 py-2 bg-purple-400/20 hover:bg-purple-400/30 text-purple-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1"
+                  title={stack.isPublic ? 'Make private' : 'Make public'}
+                >
                   <Share2 className="w-4 h-4" />
                 </button>
-                <button className="px-3 py-2 bg-red-400/20 hover:bg-red-400/30 text-red-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1">
+                <button
+                  onClick={() => handleDeleteStack(stack.id)}
+                  disabled={deleting === stack.id}
+                  className="px-3 py-2 bg-red-400/20 hover:bg-red-400/30 text-red-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1 disabled:opacity-50"
+                >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>

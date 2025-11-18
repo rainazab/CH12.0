@@ -1,9 +1,12 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Plus, X, DollarSign, Zap, TrendingUp } from 'lucide-react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { saveStack } from '@/lib/stackService';
 
 interface StackAPI {
   id: string;
@@ -204,12 +207,62 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function StackBuilderPage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categories = searchParams.get('categories')?.split(',').filter(Boolean) || [];
   const useCase = searchParams.get('useCase') || '';
   const priority = searchParams.get('priority') || '';
 
   const [selectedApis, setSelectedApis] = useState<StackAPI[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [stackName, setStackName] = useState('');
+  const [stackDescription, setStackDescription] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSaveStack = async () => {
+    if (!user) {
+      router.push('/auth/signin');
+      return;
+    }
+
+    if (!stackName.trim()) {
+      alert('Please enter a stack name');
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const stackId = await saveStack(
+        user.uid,
+        stackName,
+        stackDescription,
+        useCase,
+        selectedApis,
+        false
+      );
+
+      alert('Stack saved successfully!');
+      setShowSaveModal(false);
+      setStackName('');
+      setStackDescription('');
+      // Optionally redirect to my-stacks
+      // router.push('/stacks/my-stacks');
+    } catch (error) {
+      console.error('Error saving stack:', error);
+      alert('Failed to save stack');
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const totalMonthlyCost = selectedApis.reduce((sum, api) => sum + api.monthlyCost, 0);
   const avgUptime = selectedApis.length > 0
@@ -374,7 +427,10 @@ export default function StackBuilderPage() {
                       >
                         🔍 Compare Results
                       </Link>
-                      <button className="w-full px-4 py-2 border border-cyan-400/50 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-400/10 transition">
+                      <button
+                        onClick={() => setShowSaveModal(true)}
+                        className="w-full px-4 py-2 border border-cyan-400/50 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-400/10 transition"
+                      >
                         💾 Save Stack
                       </button>
                       <button className="w-full px-4 py-2 border border-cyan-400/50 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-400/10 transition">
@@ -388,6 +444,62 @@ export default function StackBuilderPage() {
           </div>
         </div>
       </div>
+
+      {/* Save Stack Modal */}
+      {showSaveModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-cyan-500/30 rounded-2xl p-8 max-w-md w-full">
+            <h3 className="text-2xl font-bold text-white mb-6">Save Your Stack</h3>
+
+            <div className="space-y-4 mb-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">Stack Name</label>
+                <input
+                  type="text"
+                  value={stackName}
+                  onChange={(e) => setStackName(e.target.value)}
+                  placeholder="e.g., E-Commerce MVP"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">Description (Optional)</label>
+                <textarea
+                  value={stackDescription}
+                  onChange={(e) => setStackDescription(e.target.value)}
+                  placeholder="Describe your stack..."
+                  rows={3}
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none resize-none"
+                />
+              </div>
+
+              <div className="p-4 bg-cyan-400/10 border border-cyan-400/30 rounded-lg">
+                <p className="text-sm text-cyan-300">
+                  <span className="font-semibold">Stack Summary:</span><br/>
+                  {selectedApis.length} APIs • ${totalMonthlyCost}/mo
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowSaveModal(false)}
+                className="flex-1 px-4 py-2 border border-gray-700 text-gray-300 rounded-lg hover:border-gray-600 hover:text-white transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveStack}
+                disabled={saving}
+                className="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {saving ? 'Saving...' : 'Save Stack'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
