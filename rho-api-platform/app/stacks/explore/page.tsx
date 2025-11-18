@@ -1,7 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Star, Users, TrendingUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Star, Users, TrendingUp, Copy } from 'lucide-react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { cloneStack } from '@/lib/stackService';
 
 interface CommunityStack {
   id: string;
@@ -112,6 +116,35 @@ const communityStacks: CommunityStack[] = [
 ];
 
 export default function ExplorePage() {
+  const [user, setUser] = useState<any>(null);
+  const [cloning, setCloning] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleCloneStack = async (stackId: string, stackName: string) => {
+    if (!user) {
+      alert('Please sign in to clone stacks');
+      return;
+    }
+
+    setCloning(stackId);
+    try {
+      const newStackId = await cloneStack(user.uid, stackId, `${stackName} (Clone)`);
+      alert('Stack cloned successfully! Check your stacks.');
+    } catch (error) {
+      console.error('Error cloning stack:', error);
+      alert('Failed to clone stack');
+    } finally {
+      setCloning(null);
+    }
+  };
+
   const featured = communityStacks.filter(s => s.featured);
   const others = communityStacks.filter(s => !s.featured);
 
@@ -177,8 +210,13 @@ export default function ExplorePage() {
                     </div>
                   </div>
 
-                  <button className="w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-yellow-500/50 transition">
-                    Use This Stack →
+                  <button
+                    onClick={() => handleCloneStack(stack.id, stack.name)}
+                    disabled={cloning === stack.id}
+                    className="w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-yellow-500/50 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    <Copy className="w-4 h-4" />
+                    {cloning === stack.id ? 'Cloning...' : 'Clone Stack'}
                   </button>
                 </div>
               ))}
@@ -229,8 +267,13 @@ export default function ExplorePage() {
                   </div>
                 </div>
 
-                <button className="w-full px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                  Use This Stack
+                <button
+                  onClick={() => handleCloneStack(stack.id, stack.name)}
+                  disabled={cloning === stack.id}
+                  className="w-full px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  <Copy className="w-4 h-4" />
+                  {cloning === stack.id ? 'Cloning...' : 'Clone Stack'}
                 </button>
               </div>
             ))}
