@@ -98,7 +98,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-black">
         <Header />
 
         <main className="pt-16">
