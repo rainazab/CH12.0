@@ -95,22 +95,37 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden border-t border-white/10 py-4 space-y-3">
-            <Link href="/compare" className="block px-4 py-2 text-gray-300 hover:text-cyan-400">
+            <Link 
+              href="/compare" 
+              onClick={() => setIsOpen(false)}
+              className="block px-4 py-2 text-gray-300 hover:text-cyan-400"
+            >
               Compare APIs
             </Link>
-            <Link href="/pricing" className="block px-4 py-2 text-gray-300 hover:text-cyan-400">
+            <Link 
+              href="/pricing" 
+              onClick={() => setIsOpen(false)}
+              className="block px-4 py-2 text-gray-300 hover:text-cyan-400"
+            >
               Pricing
             </Link>
             {user ? (
               <button
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
                 className="w-full px-4 py-2.5 text-left text-red-400 hover:bg-gradient-to-r hover:from-red-500/20 hover:via-orange-500/20 hover:to-red-500/20 rounded-lg transition duration-300 flex items-center gap-2 border border-transparent hover:border-red-400/30"
               >
                 <LogOut className="w-4 h-4 transition duration-300" />
                 <span className="font-medium">Sign Out</span>
               </button>
             ) : (
-              <Link href="/auth/signin" className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300">
+              <Link 
+                href="/auth/signin" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300"
+              >
                 Sign In
               </Link>
             )}
