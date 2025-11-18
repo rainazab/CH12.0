@@ -368,9 +368,12 @@ export default function StackBuilderPage() {
 
                     {/* Action Buttons */}
                     <div className="space-y-3 pt-6">
-                      <button className="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition">
+                      <Link
+                        href="/stacks/results"
+                        className="block w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition text-center"
+                      >
                         🔍 Compare Results
-                      </button>
+                      </Link>
                       <button className="w-full px-4 py-2 border border-cyan-400/50 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-400/10 transition">
                         💾 Save Stack
                       </button>
