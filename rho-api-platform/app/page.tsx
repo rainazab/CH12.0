@@ -102,15 +102,15 @@ export default function Home() {
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6 sm:py-8 lg:py-8 border-y border-gray-700/50 w-full text-center">
-                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-cyan-500/10 to-transparent sm:bg-transparent border sm:border-none border-cyan-500/20 sm:border-transparent">
+                <div className="space-y-2">
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow">10+</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">Leading APIs</p>
                 </div>
-                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-blue-500/10 to-transparent sm:bg-transparent border sm:border-none border-blue-500/20 sm:border-transparent">
+                <div className="space-y-2">
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow">&lt;5s</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">Time to Compare</p>
                 </div>
-                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-purple-500/10 to-transparent sm:bg-transparent border sm:border-none border-purple-500/20 sm:border-transparent">
+                <div className="space-y-2">
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow">$0</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">To Get Started</p>
                 </div>
