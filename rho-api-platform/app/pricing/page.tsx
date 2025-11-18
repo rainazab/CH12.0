@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
+export const dynamic = 'force-dynamic';
 import Image from 'next/image';
 import { Check, ChevronDown } from 'lucide-react';
 

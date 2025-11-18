@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { Star, Users, Copy } from 'lucide-react';
 import { cloneStack } from '@/lib/stackService';

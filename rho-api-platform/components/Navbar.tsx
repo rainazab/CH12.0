@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { useEffect, useState } from 'react';
 import { Menu, X, LogOut } from 'lucide-react';
 

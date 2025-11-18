@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { Share2, Trash2, Eye, Edit } from 'lucide-react';
 import { getUserStacks, deleteStack, toggleStackPublic } from '@/lib/stackService';
