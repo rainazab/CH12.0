@@ -151,7 +151,6 @@ export default function PricingPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 space-y-4">
-          <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">Pricing</span>
           <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
             Simple, <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Transparent</span> Pricing
           </h1>
