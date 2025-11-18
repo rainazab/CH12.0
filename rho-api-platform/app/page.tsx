@@ -387,12 +387,12 @@ export default function Home() {
           </div>
 
           {/* Demo Search Showcase */}
-          <div className="w-full max-w-4xl mx-auto px-4 sm:px-0">
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-0">
             <div className="relative">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40" />
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50" />
 
-              <div className="relative flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-cyan-500/30 px-4 sm:px-6 py-3 sm:py-4 min-h-14 sm:min-h-16">
+              <div className="relative flex items-center gap-2 sm:gap-4 lg:gap-6 bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-cyan-500/30 px-4 sm:px-8 lg:px-10 py-3 sm:py-4 min-h-14 sm:min-h-16">
                 <Search className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-400 flex-shrink-0" />
 
                 <div className="flex-1 min-w-0 text-sm sm:text-lg text-white font-medium">
