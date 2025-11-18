@@ -72,6 +72,12 @@ export default function PricingPage() {
         'Basic output view',
         'Community support',
       ],
+      stackFeatures: [
+        '❌ Save stacks',
+        '❌ Share stacks',
+        '❌ View community stacks',
+        '❌ Edit saved stacks',
+      ],
       cta: 'Get Started',
       highlighted: false,
       priceId: '',
@@ -89,6 +95,12 @@ export default function PricingPage() {
         'API history & saved comparisons',
         'Custom workspaces',
       ],
+      stackFeatures: [
+        '✅ Save unlimited stacks',
+        '✅ Share stacks with unique links',
+        '✅ View & explore community stacks',
+        '✅ Edit & update saved stacks',
+      ],
       cta: 'Subscribe',
       highlighted: true,
       priceId: 'price_pro_monthly',
@@ -105,6 +117,12 @@ export default function PricingPage() {
         'Team collaboration',
         'Advanced analytics',
         'SLA guarantee',
+      ],
+      stackFeatures: [
+        '✅ Unlimited stacks with team storage',
+        '✅ Advanced sharing & collaboration',
+        '✅ Private community stacks',
+        '✅ Full stack management suite',
       ],
       cta: 'Contact Sales',
       highlighted: false,
@@ -139,11 +157,18 @@ export default function PricingPage() {
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Choose the perfect plan for your needs. No hidden fees, cancel anytime.
           </p>
+          
+          {/* Info Banner */}
+          <div className="mt-8 p-4 border border-blue-500/30 rounded-lg bg-blue-500/5 backdrop-blur">
+            <p className="text-sm text-blue-200">
+              💡 <span className="font-semibold">Pro & Enterprise plans unlock</span> stack saving, sharing, editing, and community access.
+            </p>
+          </div>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 mb-24">
-          {plans.map((plan, idx) => (
+          {plans.map((plan) => (
             <div
               key={plan.name}
               className={`relative rounded-2xl border backdrop-blur transition duration-300 transform hover:scale-105 ${
@@ -195,12 +220,29 @@ export default function PricingPage() {
 
                 {/* Features List */}
                 <div className="space-y-4 flex-grow">
-                  {plan.features.map((feature, featureIdx) => (
-                    <div key={featureIdx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-300 text-sm">{feature}</span>
-                    </div>
-                  ))}
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Comparison Features</p>
+                    {plan.features.map((feature, featureIdx) => (
+                      <div key={featureIdx} className="flex items-start gap-3 mb-2">
+                        <Check className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-300 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="border-t border-gray-700/30 pt-4">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Stack Features</p>
+                    {plan.stackFeatures?.map((feature, featureIdx) => (
+                      <div key={featureIdx} className="flex items-start gap-3 mb-2">
+                        <span className="text-lg flex-shrink-0 mt-0.5">
+                          {feature.startsWith('✅') ? '✅' : '❌'}
+                        </span>
+                        <span className={`text-sm ${feature.startsWith('✅') ? 'text-green-300' : 'text-gray-400'}`}>
+                          {feature.substring(2).trim()}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
