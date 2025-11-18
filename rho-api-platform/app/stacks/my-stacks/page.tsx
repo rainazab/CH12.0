@@ -236,10 +236,13 @@ export default function MyStacksPage() {
                   <Eye className="w-4 h-4" />
                   View
                 </Link>
-                <button className="flex-1 px-3 py-2 bg-blue-400/20 hover:bg-blue-400/30 text-blue-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1">
+                <Link
+                  href={`/stacks/edit/${stack.id}`}
+                  className="flex-1 px-3 py-2 bg-blue-400/20 hover:bg-blue-400/30 text-blue-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1"
+                >
                   <Edit className="w-4 h-4" />
                   Edit
-                </button>
+                </Link>
                 <button
                   onClick={() => handleTogglePublic(stack)}
                   className="px-3 py-2 bg-purple-400/20 hover:bg-purple-400/30 text-purple-400 rounded-lg transition text-sm font-medium flex items-center justify-center gap-1"
