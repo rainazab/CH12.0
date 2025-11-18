@@ -98,22 +98,6 @@ export default function Hero({ onSearch }) {
             </div>
           </div>
         </div>
-
-        {/* Stats Row */}
-        <div className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12 border-t border-gray-800">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-cyan-400 mb-2">50+</div>
-            <p className="text-gray-400 text-sm">Premium APIs</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-cyan-400 mb-2">⚡</div>
-            <p className="text-gray-400 text-sm">Instant Search</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-cyan-400 mb-2">99.9%</div>
-            <p className="text-gray-400 text-sm">Uptime</p>
-          </div>
-        </div>
       </div>
     </div>
   );
