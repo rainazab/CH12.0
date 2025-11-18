@@ -86,31 +86,32 @@ export default function Home() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Content */}
-            <div className="space-y-6 sm:space-y-7 lg:space-y-8 w-full">
-              <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+            <div className="space-y-8 sm:space-y-7 lg:space-y-8 w-full">
+              {/* Content Box with Background */}
+              <div className="space-y-4 sm:space-y-5 lg:space-y-6 lg:p-0 p-5 sm:p-6 rounded-2xl sm:rounded-none bg-gradient-to-br from-gray-900/40 via-gray-900/20 to-transparent sm:bg-transparent border sm:border-none border-gray-700/30 backdrop-blur-sm sm:backdrop-blur-none">
                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
                   Find Your Perfect{' '}
-                  <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg filter">
                     API Stack
                   </span>
                 </h1>
-                <p className="text-sm sm:text-base lg:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base lg:text-xl text-gray-300 sm:text-gray-400 leading-relaxed max-w-2xl">
                   Don't waste hours testing APIs. See real responses, compare costs, speed, and reliability side-by-side instantly. Make smarter integration decisions in seconds.
                 </p>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6 sm:py-8 lg:py-8 border-y border-gray-700/50 w-full text-center">
-                <div className="space-y-2">
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">10+</div>
+                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-cyan-500/10 to-transparent sm:bg-transparent border sm:border-none border-cyan-500/20 sm:border-transparent">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow">10+</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">Leading APIs</p>
                 </div>
-                <div className="space-y-2">
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">&lt;5s</div>
+                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-blue-500/10 to-transparent sm:bg-transparent border sm:border-none border-blue-500/20 sm:border-transparent">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow">&lt;5s</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">Time to Compare</p>
                 </div>
-                <div className="space-y-2">
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$0</div>
+                <div className="space-y-2 p-3 sm:p-0 rounded-lg sm:rounded-none bg-gradient-to-b from-purple-500/10 to-transparent sm:bg-transparent border sm:border-none border-purple-500/20 sm:border-transparent">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow">$0</div>
                   <p className="text-xs sm:text-sm text-gray-400 font-medium">To Get Started</p>
                 </div>
               </div>
