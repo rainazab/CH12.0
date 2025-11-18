@@ -99,32 +99,6 @@ export default function Hero({ onSearch }) {
               Rho finds your perfect API match. Intelligently discover and compare what powers innovation.
             </p>
 
-            {/* Demo Search Box */}
-            <form onSubmit={handleSearch} className="w-full">
-              <div className="relative group">
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-70 transition duration-500" />
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
-                
-                <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 group-hover:border-cyan-400/60 overflow-hidden transition duration-300 px-6 py-3">
-                  <Search className="w-5 h-5 text-cyan-400 flex-shrink-0 group-hover:text-cyan-300 transition" />
-                  
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Enter your search here…"
-                    className="flex-1 px-2 py-3 text-base md:text-lg outline-none bg-transparent text-white placeholder-gray-500 group-hover:placeholder-gray-400 transition font-medium"
-                  />
-                  
-                  <button
-                    type="submit"
-                    className="px-8 py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-sm"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
 
           {/* RIGHT SIDE - Live Typing Demo - Shows Rho in Action */}
@@ -222,6 +196,33 @@ export default function Hero({ onSearch }) {
             </div>
           </div>
         </div>
+
+        {/* Full Width Search Below */}
+        <form onSubmit={handleSearch} className="w-full mt-16 max-w-3xl mx-auto">
+          <div className="relative group">
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-70 transition duration-500" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
+            
+            <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 group-hover:border-cyan-400/60 overflow-hidden transition duration-300 px-6 py-3">
+              <Search className="w-5 h-5 text-cyan-400 flex-shrink-0 group-hover:text-cyan-300 transition" />
+              
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Enter your search here…"
+                className="flex-1 px-2 py-3 text-base md:text-lg outline-none bg-transparent text-white placeholder-gray-500 group-hover:placeholder-gray-400 transition font-medium"
+              />
+              
+              <button
+                type="submit"
+                className="px-8 py-2.5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-purple-600/70 transition duration-300 transform hover:scale-110 flex-shrink-0 whitespace-nowrap uppercase tracking-wide text-sm"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );
