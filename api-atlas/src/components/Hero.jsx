@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 
 export default function Hero({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentExample, setCurrentExample] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
 
   const examples = [
     'Payment processing APIs',
     'AI image generation',
     'Email delivery services',
     'Text-to-speech solutions',
+  ];
+
+  const searchExamples = [
+    'best image generation API',
+    'best text to speech API',
+    'best payment processing API',
   ];
 
   const handleSearch = (e) => {
@@ -19,8 +27,39 @@ export default function Hero({ onSearch }) {
     }
   };
 
+  // Typing effect for the demo search
+  useEffect(() => {
+    const currentSearchText = searchExamples[currentExample % 3];
+    
+    if (isTyping) {
+      if (displayedText.length < currentSearchText.length) {
+        const timer = setTimeout(() => {
+          setDisplayedText(currentSearchText.slice(0, displayedText.length + 1));
+        }, 80);
+        return () => clearTimeout(timer);
+      } else {
+        // Finished typing, wait 2 seconds then start deleting
+        const timer = setTimeout(() => {
+          setIsTyping(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    } else {
+      if (displayedText.length > 0) {
+        const timer = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1));
+        }, 40);
+        return () => clearTimeout(timer);
+      } else {
+        // Finished deleting, move to next example
+        setCurrentExample((prev) => (prev + 1) % 3);
+        setIsTyping(true);
+      }
+    }
+  }, [displayedText, isTyping, currentExample]);
+
   // Rotate examples
-  useState(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentExample((prev) => (prev + 1) % examples.length);
     }, 4000);
@@ -92,11 +131,11 @@ export default function Hero({ onSearch }) {
             <div className="relative flex items-center gap-3 bg-black/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/30 px-6 py-4">
               <Search className="w-5 h-5 text-cyan-400 flex-shrink-0" />
               
-              <div className="flex-1 text-lg text-white font-medium h-6 flex items-center">
+              <div className="flex-1 text-lg text-white font-medium h-6 flex items-center min-h-[1.5rem]">
                 <span className="inline-block min-w-fit">
-                  best {currentExample % 3 === 0 ? 'image generation' : currentExample % 3 === 1 ? 'text to speech' : 'payment processing'} API
+                  {displayedText}
                 </span>
-                <span className="ml-1 inline-block w-0.5 h-6 bg-cyan-400 animate-pulse" />
+                <span className="ml-0.5 inline-block w-0.5 h-6 bg-cyan-400 animate-pulse" />
               </div>
             </div>
           </div>
