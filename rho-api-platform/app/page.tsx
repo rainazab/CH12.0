@@ -201,43 +201,74 @@ export default function Home() {
 
       {/* SOLUTION SECTION */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Solution Text */}
-            <div className="space-y-8 order-2 md:order-1">
-              <div>
-                <h2 className="text-5xl font-bold text-white mb-6">
-                  The Solution
-                </h2>
-                <p className="text-xl text-gray-400 leading-relaxed mb-8">
-                  Rho gives you everything you need to choose the perfect API in minutes, not days.
-                </p>
+            {/* Solution Visual - Left Side */}
+            <div className="hidden md:block order-1 md:order-1">
+              <div className="space-y-4">
+                {/* Feature Cards Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Card 1 */}
+                  <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl p-6 backdrop-blur hover:border-cyan-400/60 transition duration-300 transform hover:scale-105">
+                    <div className="text-4xl mb-3">⚡</div>
+                    <h3 className="text-white font-semibold mb-2">Real-Time</h3>
+                    <p className="text-sm text-gray-400">See results instantly</p>
+                  </div>
 
-                {/* Solution Features */}
-                <div className="space-y-6">
-                  {[
-                    { icon: '⚡', title: 'Real-Time Comparison', desc: 'Side-by-side API testing' },
-                    { icon: '💰', title: 'Cost Tracking', desc: 'See exact pricing impact' },
-                    { icon: '📊', title: 'Performance Metrics', desc: 'Track latency & uptime' },
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-4 items-start">
-                      <span className="text-3xl flex-shrink-0">{item.icon}</span>
-                      <div>
-                        <h3 className="text-white font-semibold text-lg">{item.title}</h3>
-                        <p className="text-gray-400 text-sm">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
+                  {/* Card 2 */}
+                  <div className="bg-gradient-to-br from-blue-600/20 to-blue-500/10 border border-blue-500/30 rounded-xl p-6 backdrop-blur hover:border-blue-400/60 transition duration-300 transform hover:scale-105">
+                    <div className="text-4xl mb-3">💰</div>
+                    <h3 className="text-white font-semibold mb-2">Cost Clear</h3>
+                    <p className="text-sm text-gray-400">Exact pricing shown</p>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="bg-gradient-to-br from-purple-600/20 to-purple-500/10 border border-purple-500/30 rounded-xl p-6 backdrop-blur hover:border-purple-400/60 transition duration-300 transform hover:scale-105">
+                    <div className="text-4xl mb-3">📊</div>
+                    <h3 className="text-white font-semibold mb-2">Metrics</h3>
+                    <p className="text-sm text-gray-400">Latency & uptime data</p>
+                  </div>
+
+                  {/* Card 4 */}
+                  <div className="bg-gradient-to-br from-green-600/20 to-green-500/10 border border-green-500/30 rounded-xl p-6 backdrop-blur hover:border-green-400/60 transition duration-300 transform hover:scale-105">
+                    <div className="text-4xl mb-3">✨</div>
+                    <h3 className="text-white font-semibold mb-2">Smart</h3>
+                    <p className="text-sm text-gray-400">AI recommendations</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Solution Visual */}
-            <div className="hidden md:block order-1 md:order-2">
-              <div className="h-80 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl border border-cyan-500/20 flex items-center justify-center backdrop-blur">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">✨</div>
-                  <p className="text-gray-400">Data-driven decisions</p>
+            {/* Solution Text - Right Side */}
+            <div className="space-y-8 order-2 md:order-2">
+              <div className="space-y-6">
+                <div>
+                  <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">Why Rho Works</span>
+                  <h2 className="text-5xl lg:text-6xl font-bold text-white mt-4 leading-tight">
+                    Everything you need to{' '}
+                    <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                      decide fast
+                    </span>
+                  </h2>
+                </div>
+
+                <p className="text-lg text-gray-400 leading-relaxed">
+                  Rho brings all API data together in one place. Compare performance, pricing, and features in seconds—not days.
+                </p>
+
+                {/* Feature List with checkmarks */}
+                <div className="space-y-4 pt-6">
+                  {[
+                    { icon: '✓', title: 'Side-by-side visual comparison', color: 'cyan' },
+                    { icon: '✓', title: 'Real-time performance metrics', color: 'blue' },
+                    { icon: '✓', title: 'Automated cost calculations', color: 'purple' },
+                    { icon: '✓', title: 'Data-driven recommendations', color: 'green' },
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4 items-center">
+                      <div className={`text-xl font-bold text-${item.color}-400`}>{item.icon}</div>
+                      <p className="text-gray-300 text-lg">{item.title}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
