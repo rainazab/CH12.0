@@ -214,8 +214,7 @@ function App() {
             {/* Bottom */}
             <div className="border-t border-gray-800 pt-8">
               <p className="text-center text-sm text-gray-500">
-                © 2024 Rho. All rights reserved. | Powered by{' '}
-                <span className="text-cyan-400 font-semibold">Elastic & Chroma</span>
+                © 2025 Rho. All rights reserved.
               </p>
             </div>
           </div>
