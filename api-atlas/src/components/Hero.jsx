@@ -53,7 +53,7 @@ export default function Hero({ onSearch }) {
 
         {/* Subheadline */}
         <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Rho finds your perfect API match — intelligently discover and compare what powers innovation.
+          Rho finds your perfect API match. Intelligently discover and compare what powers innovation.
         </p>
 
         {/* Demo Search Box */}
