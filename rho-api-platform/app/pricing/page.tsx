@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Check, ChevronDown } from 'lucide-react';
+import Head from 'next/head';
 
 export default function PricingPage() {
   const [user, setUser] = useState<any>(null);
