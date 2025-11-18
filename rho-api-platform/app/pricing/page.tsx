@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { auth } from '@/lib/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
 import { Check, ChevronDown } from 'lucide-react';
 
 export default function PricingPage() {
@@ -12,11 +10,25 @@ export default function PricingPage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const initFirebase = async () => {
+      const { onAuthStateChanged } = await import('firebase/auth');
+      const { auth } = await import('@/lib/firebase');
+
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+
+      return unsubscribe;
+    };
+
+    let unsubscribe: (() => void) | undefined;
+    initFirebase().then((unsub) => {
+      unsubscribe = unsub;
     });
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const handleCheckout = async (priceId: string, planName?: string) => {

@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Share2, Trash2, Eye, Edit } from 'lucide-react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import { getUserStacks, deleteStack, toggleStackPublic } from '@/lib/stackService';
 
 interface SavedStack {
@@ -73,20 +71,34 @@ export default function MyStacksPage() {
   const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        try {
-          const userStacks = await getUserStacks(currentUser.uid);
-          setStacks(userStacks);
-        } catch (error) {
-          console.error('Error loading stacks:', error);
+    const initFirebase = async () => {
+      const { onAuthStateChanged } = await import('firebase/auth');
+      const { auth } = await import('@/lib/firebase');
+
+      const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        setUser(currentUser);
+        if (currentUser) {
+          try {
+            const userStacks = await getUserStacks(currentUser.uid);
+            setStacks(userStacks);
+          } catch (error) {
+            console.error('Error loading stacks:', error);
+          }
         }
-      }
-      setLoading(false);
+        setLoading(false);
+      });
+
+      return unsubscribe;
+    };
+
+    let unsubscribe: (() => void) | undefined;
+    initFirebase().then((unsub) => {
+      unsubscribe = unsub;
     });
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const handleDeleteStack = async (stackId: string) => {

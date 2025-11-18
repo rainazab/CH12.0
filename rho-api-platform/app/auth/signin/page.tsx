@@ -1,9 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
-import { auth, db } from '@/lib/firebase';
-import { doc, setDoc, getDoc, Timestamp } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -21,6 +18,10 @@ export default function SignInPage() {
     setError('');
 
     try {
+      const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = await import('firebase/auth');
+      const { auth, db } = await import('@/lib/firebase');
+      const { doc, setDoc, Timestamp } = await import('firebase/firestore');
+
       if (isSignUp) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         // Create user document in Firestore
@@ -47,13 +48,17 @@ export default function SignInPage() {
     setError('');
 
     try {
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
+      const { auth, db } = await import('@/lib/firebase');
+      const { doc, setDoc, getDoc, Timestamp } = await import('firebase/firestore');
+
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      
+
       // Check if user already exists in Firestore
       const userDoc = await getDoc(doc(db, 'users', user.uid));
-      
+
       // If user doesn't exist, create a new user document
       if (!userDoc.exists()) {
         await setDoc(doc(db, 'users', user.uid), {
@@ -65,7 +70,7 @@ export default function SignInPage() {
           authMethod: 'google',
         });
       }
-      
+
       router.push('/compare');
     } catch (err: any) {
       setError(err.message);

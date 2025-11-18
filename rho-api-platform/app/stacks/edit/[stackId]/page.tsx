@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ArrowLeft, X } from 'lucide-react';
 import { getStack, updateStack } from '@/lib/stackService';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 
 interface StackAPI {
   id: string;
@@ -188,11 +186,25 @@ export default function EditStackPage() {
   const [selectedApis, setSelectedApis] = useState<StackAPI[]>([]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const initFirebase = async () => {
+      const { onAuthStateChanged } = await import('firebase/auth');
+      const { auth } = await import('@/lib/firebase');
+
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+
+      return unsubscribe;
+    };
+
+    let unsubscribe: (() => void) | undefined;
+    initFirebase().then((unsub) => {
+      unsubscribe = unsub;
     });
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   useEffect(() => {

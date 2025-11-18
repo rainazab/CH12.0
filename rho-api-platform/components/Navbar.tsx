@@ -2,8 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import { Menu, X, LogOut } from 'lucide-react';
 
 export default function Navbar() {
@@ -12,11 +10,25 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const initFirebase = async () => {
+      const { onAuthStateChanged } = await import('firebase/auth');
+      const { auth } = await import('@/lib/firebase');
+
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+
+      return unsubscribe;
+    };
+
+    let unsubscribe: (() => void) | undefined;
+    initFirebase().then((unsub) => {
+      unsubscribe = unsub;
     });
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -29,6 +41,8 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
+    const { signOut } = await import('firebase/auth');
+    const { auth } = await import('@/lib/firebase');
     await signOut(auth);
     setUser(null);
   };
