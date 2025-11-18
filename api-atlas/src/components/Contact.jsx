@@ -112,8 +112,8 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-semibold text-cyan-400 mb-4">Email</h3>
               <p className="text-gray-300">
-                <a href="mailto:hello@rho.dev" className="hover:text-cyan-400 transition">
-                  hello@rho.dev
+                <a href="mailto:support@rhoapi.com" className="hover:text-cyan-400 transition">
+                  support@rhoapi.com
                 </a>
               </p>
             </div>
@@ -125,21 +125,6 @@ export default function Contact() {
               </p>
             </div>
 
-            <div>
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">Social</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-cyan-400 transition">Twitter</a>
-                <a href="#" className="text-gray-400 hover:text-cyan-400 transition">LinkedIn</a>
-                <a href="#" className="text-gray-400 hover:text-cyan-400 transition">GitHub</a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">Response Time</h3>
-              <p className="text-gray-300">
-                We typically respond within 24 hours during business days.
-              </p>
-            </div>
           </div>
         </div>
       </div>
