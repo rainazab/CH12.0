@@ -144,60 +144,69 @@ export default function Hero({ onSearch }) {
           </p>
         </div>
 
-        {/* Example Results Preview */}
+        {/* Example Results Preview - Dynamic Cards */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
           {/* Result Card 1 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-cyan-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer">
+          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-cyan-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.1s' }}>
+            {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition" />
+            
+            {/* Floating animation on the icon */}
             <div className="relative">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl">🤖</span>
+                <span className="text-2xl animate-bounce" style={{ animationDelay: '0s' }}>🤖</span>
                 <div>
-                  <h3 className="font-bold text-white text-sm">ChatGPT API</h3>
+                  <h3 className="font-bold text-white text-sm group-hover:text-cyan-300 transition">ChatGPT API</h3>
                   <p className="text-xs text-gray-400">OpenAI</p>
                 </div>
               </div>
               <p className="text-xs text-gray-400 mb-3 line-clamp-2">Advanced language model for text generation and conversation</p>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-cyan-400 font-semibold">99.9% Uptime</span>
+                <span className="text-xs text-cyan-400 font-semibold animate-pulse">99.9% Uptime</span>
                 <span className="text-xs text-gray-500">$0.03/1K tokens</span>
               </div>
             </div>
           </div>
 
           {/* Result Card 2 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-purple-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer">
+          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-purple-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.2s' }}>
+            {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition" />
+            
+            {/* Floating animation on the icon */}
             <div className="relative">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl">🎨</span>
+                <span className="text-2xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎨</span>
                 <div>
-                  <h3 className="font-bold text-white text-sm">DALL-E 3</h3>
+                  <h3 className="font-bold text-white text-sm group-hover:text-purple-300 transition">DALL-E 3</h3>
                   <p className="text-xs text-gray-400">OpenAI</p>
                 </div>
               </div>
               <p className="text-xs text-gray-400 mb-3 line-clamp-2">AI image generation from text descriptions</p>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-purple-400 font-semibold">99.1% Uptime</span>
+                <span className="text-xs text-purple-400 font-semibold animate-pulse">99.1% Uptime</span>
                 <span className="text-xs text-gray-500">$0.08/image</span>
               </div>
             </div>
           </div>
 
           {/* Result Card 3 */}
-          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-blue-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer">
+          <div className="group relative overflow-hidden rounded-xl border border-gray-700/50 hover:border-blue-400/50 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition p-5 cursor-pointer animate-fadeInUp hover:scale-110 hover:-translate-y-2 duration-300" style={{ animationDelay: '0.3s' }}>
+            {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition" />
+            
+            {/* Floating animation on the icon */}
             <div className="relative">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl">💳</span>
+                <span className="text-2xl animate-bounce" style={{ animationDelay: '0.4s' }}>💳</span>
                 <div>
-                  <h3 className="font-bold text-white text-sm">Stripe API</h3>
+                  <h3 className="font-bold text-white text-sm group-hover:text-blue-300 transition">Stripe API</h3>
                   <p className="text-xs text-gray-400">Stripe</p>
                 </div>
               </div>
               <p className="text-xs text-gray-400 mb-3 line-clamp-2">Complete payment processing platform</p>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-blue-400 font-semibold">99.99% Uptime</span>
+                <span className="text-xs text-blue-400 font-semibold animate-pulse">99.99% Uptime</span>
                 <span className="text-xs text-gray-500">2.9% + $0.30</span>
               </div>
             </div>
