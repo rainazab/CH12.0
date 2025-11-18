@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { db } from '@/lib/firebase';
-import { doc, setDoc } from 'firebase/firestore';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
@@ -28,6 +26,10 @@ export async function POST(request: NextRequest) {
         const userId = subscription.metadata?.userId;
 
         if (userId) {
+          // Import Firebase dynamically to avoid build-time initialization
+          const { db } = await import('@/lib/firebase');
+          const { doc, setDoc } = await import('firebase/firestore');
+
           await setDoc(
             doc(db, 'users', userId, 'subscription', 'current'),
             {
@@ -48,6 +50,10 @@ export async function POST(request: NextRequest) {
         const userId = subscription.metadata?.userId;
 
         if (userId) {
+          // Import Firebase dynamically to avoid build-time initialization
+          const { db } = await import('@/lib/firebase');
+          const { doc, setDoc } = await import('firebase/firestore');
+
           await setDoc(
             doc(db, 'users', userId, 'subscription', 'current'),
             {
