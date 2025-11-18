@@ -387,7 +387,7 @@ export default function Home() {
           </div>
 
           {/* Demo Search Showcase */}
-          <div className="w-full max-w-3xl mx-auto px-4 sm:px-0">
+          <div className="w-full max-w-4xl mx-auto px-4 sm:px-0">
             <div className="relative">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40" />
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-50" />
@@ -396,7 +396,7 @@ export default function Home() {
                 <Search className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-400 flex-shrink-0" />
 
                 <div className="flex-1 min-w-0 text-sm sm:text-lg text-white font-medium">
-                  <span className="text-gray-500 italic truncate inline-block max-w-xs sm:max-w-md">
+                  <span className="text-gray-500 italic truncate inline-block max-w-xs sm:max-w-lg lg:max-w-xl">
                     {displayedText}
                     <span className="animate-pulse">|</span>
                   </span>
