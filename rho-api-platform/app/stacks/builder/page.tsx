@@ -343,7 +343,7 @@ export default function StackBuilderPage() {
                           <p className="text-xs text-gray-500 mb-3">{api.provider}</p>
                           <div className="space-y-1 text-xs text-gray-400">
                             <p className="flex items-center gap-1"><Image src="/icon/dollarsign.png" alt="cost" width={14} height={14} className="w-3.5 h-3.5" /> {api.cost}</p>
-                            <p className="flex items-center gap-1"><Image src="/icon/bolt.png" alt="speed" width={14} height={14} className="w-3.5 h-3.5" /> Uptime: {api.uptime}</p>
+                            <p className="flex items-center gap-1"><Image src="/icon/bolt.png" alt="speed" width={14} height={11} className="w-3.5 h-3.5" /> Uptime: {api.uptime}</p>
                             <p className="flex items-center gap-1"><Image src="/icon/clock.png" alt="latency" width={14} height={14} className="w-3.5 h-3.5" /> Latency: {api.latency}</p>
                           </div>
                         </button>

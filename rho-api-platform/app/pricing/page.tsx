@@ -162,7 +162,7 @@ export default function PricingPage() {
           {/* Info Banner */}
           <div className="mt-8 p-4 border border-blue-500/30 rounded-lg bg-blue-500/5 backdrop-blur flex items-center gap-3">
             <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-              <Image src="/icon/bolt.png" alt="bolt" width={20} height={20} style={{ objectFit: 'contain' }} />
+              <Image src="/icon/bolt.png" alt="bolt" width={20} height={16} style={{ objectFit: 'contain' }} />
             </div>
             <p className="text-sm text-blue-200">
               <span className="font-semibold">Pro & Enterprise plans unlock</span> stack saving, sharing, editing, and community access.

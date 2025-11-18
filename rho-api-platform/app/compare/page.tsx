@@ -79,7 +79,7 @@ export default function ComparePage() {
             <div className="p-4 border border-cyan-500/30 rounded-lg bg-cyan-500/5 backdrop-blur">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 flex items-center justify-center">
-                  <Image src="/icon/bolt.png" alt="bolt" width={24} height={24} style={{ objectFit: 'contain' }} />
+                  <Image src="/icon/bolt.png" alt="bolt" width={24} height={19} style={{ objectFit: 'contain' }} />
                 </div>
                 <div>
                   <h3 className="font-bold text-white mb-1">Quick Compare</h3>
@@ -150,7 +150,7 @@ export default function ComparePage() {
             <div className="bg-gradient-to-r from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-xl p-4">
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <div className="w-7 h-7 flex items-center justify-center">
-                  <Image src="/icon/bolt.png" alt="bolt" width={28} height={28} style={{ objectFit: 'contain' }} />
+                  <Image src="/icon/bolt.png" alt="bolt" width={28} height={22} style={{ objectFit: 'contain' }} />
                 </div>
                 Quick Compare
               </h2>
@@ -277,7 +277,7 @@ export default function ComparePage() {
                   <div className="pt-4 border-t border-gray-700/50">
                     <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
                       <div className="w-4 h-4 flex items-center justify-center">
-                        <Image src="/icon/bolt.png" alt="bolt" width={16} height={16} style={{ objectFit: 'contain' }} />
+                        <Image src="/icon/bolt.png" alt="bolt" width={16} height={13} style={{ objectFit: 'contain' }} />
                       </div>
                       Results appear here in real-time as you test
                     </p>
