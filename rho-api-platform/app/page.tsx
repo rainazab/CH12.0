@@ -81,82 +81,82 @@ export default function Home() {
       <section 
         id="hero"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-0 ${visibleSections['hero'] ? 'visible' : ''}`}
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['hero'] ? 'visible' : ''}`}
       >
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Content */}
-            <div className="space-y-8 flex flex-col items-center">
-              <div className="space-y-6 text-left">
-                <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <div className="space-y-6 sm:space-y-8 w-full">
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
                   Compare API Outputs{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Visually
                   </span>
                 </h1>
-                <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed">
                   Stop guessing which API is best. Compare outputs, metrics, speed, and costs side-by-side in real-time. See the differences that matter.
                 </p>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 py-8 border-y border-gray-800 w-full text-center">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-6 sm:py-8 border-y border-gray-800 w-full text-center">
                 <div>
-                  <div className="text-3xl font-bold text-cyan-400">3</div>
-                  <p className="text-sm text-gray-500">APIs at once</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">3</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">APIs at once</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-cyan-400">0s</div>
-                  <p className="text-sm text-gray-500">Setup time</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">0s</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Setup time</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-cyan-400">100%</div>
-                  <p className="text-sm text-gray-500">Data-driven</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">100%</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Data-driven</p>
                 </div>
               </div>
 
               {/* Hero CTA */}
               <Link
                 href="/compare"
-                className="flex items-center justify-center gap-3 px-12 py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-110"
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-5 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transition transform hover:scale-105 sm:hover:scale-110 w-full sm:w-auto"
               >
                 Start Comparing
-                <span className="text-2xl">→</span>
+                <span className="text-lg sm:text-2xl">→</span>
               </Link>
             </div>
 
             {/* Right: Demo Visual */}
-            <div className="hidden lg:block">
-              <div className="relative">
+            <div className="hidden lg:block w-full">
+              <div className="relative group">
                 {/* Demo Card */}
-                <div className="bg-gradient-to-b from-gray-900/80 to-black/80 border border-gray-800/50 rounded-2xl p-6 backdrop-blur">
+                <div className="bg-gradient-to-b from-gray-900/80 to-black/80 border border-gray-800/50 rounded-2xl p-4 sm:p-6 backdrop-blur group-hover:border-cyan-500/40 transition duration-300">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-800/30">
-                    <h3 className="font-semibold text-white">Comparison Results</h3>
+                  <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-800/30">
+                    <h3 className="font-semibold text-white text-sm sm:text-base">Comparison Results</h3>
                     <span className="text-xs text-gray-500">Real-time</span>
                   </div>
 
                   {/* API Columns */}
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4">
                     {[
                       { name: 'GPT-4', speed: '245ms', cost: '$0.03', uptime: '99.9%', color: 'cyan' },
                       { name: 'Claude 3', speed: '312ms', cost: '$0.02', uptime: '99.8%', color: 'blue' },
                       { name: 'Gemini', speed: '198ms', cost: '$0.01', uptime: '99.5%', color: 'purple' },
                     ].map((api, idx) => (
-                      <div key={idx} className={`space-y-3 p-4 rounded-lg bg-${api.color}-500/5 border border-${api.color}-500/20`}>
-                        <div className={`font-semibold text-${api.color}-400 text-sm`}>{api.name}</div>
-                        <div className="space-y-2">
+                      <div key={idx} className={`space-y-2 sm:space-y-3 p-3 sm:p-4 rounded-lg bg-${api.color}-500/5 border border-${api.color}-500/20 hover:border-${api.color}-400/40 transition`}>
+                        <div className={`font-semibold text-${api.color}-400 text-xs sm:text-sm`}>{api.name}</div>
+                        <div className="space-y-1 sm:space-y-2">
                           <div className="flex justify-between items-center text-xs">
                             <span className="text-gray-400">Speed</span>
-                            <span className="text-gray-300 font-mono">{api.speed}</span>
+                            <span className="text-gray-300 font-mono text-xs">{api.speed}</span>
                           </div>
                           <div className="flex justify-between items-center text-xs">
                             <span className="text-gray-400">Cost</span>
-                            <span className="text-gray-300 font-mono">{api.cost}</span>
+                            <span className="text-gray-300 font-mono text-xs">{api.cost}</span>
                           </div>
                           <div className="flex justify-between items-center text-xs">
                             <span className="text-gray-400">Uptime</span>
-                            <span className="text-gray-300 font-mono">{api.uptime}</span>
+                            <span className="text-gray-300 font-mono text-xs">{api.uptime}</span>
                           </div>
                         </div>
                       </div>
@@ -164,13 +164,13 @@ export default function Home() {
                   </div>
 
                   {/* Footer */}
-                  <div className="mt-6 pt-4 border-t border-gray-800/30">
+                  <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-800/30">
                     <p className="text-xs text-gray-500 text-center">Winner: Gemini (Best price & speed)</p>
                   </div>
                 </div>
 
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl -z-10" />
+                {/* Glow effect - enhanced on hover */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl -z-10 group-hover:from-cyan-500/40 group-hover:to-blue-500/40 group-hover:blur-2xl transition duration-300" />
               </div>
             </div>
           </div>
@@ -181,45 +181,45 @@ export default function Home() {
       <section 
         id="problem"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['problem'] ? 'visible' : ''}`}
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['problem'] ? 'visible' : ''}`}
       >
         <div className="max-w-6xl mx-auto w-full">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Problem Visual */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block order-2 lg:order-1">
               <div className="space-y-4">
                 {/* Stack of cards animation */}
-                <div className="relative h-80 perspective">
+                <div className="relative h-64 sm:h-72 lg:h-80 perspective">
                   {/* Card 1 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 p-4 transform -rotate-3 shadow-lg">
-                    <div className="text-xs text-gray-500 mb-3">API Performance</div>
-                    <div className="space-y-2">
-                      <div className="h-2 bg-gray-700 rounded w-3/4"></div>
-                      <div className="h-2 bg-gray-700 rounded w-1/2"></div>
-                      <div className="h-2 bg-gray-700 rounded w-2/3"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg sm:rounded-xl border border-gray-700 p-3 sm:p-4 transform -rotate-3 shadow-lg text-xs sm:text-sm">
+                    <div className="text-xs text-gray-500 mb-2 sm:mb-3">API Performance</div>
+                    <div className="space-y-1 sm:space-y-2">
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-3/4"></div>
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-1/2"></div>
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-2/3"></div>
                     </div>
                   </div>
 
                   {/* Card 2 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 p-4 transform rotate-2 translate-y-4 translate-x-4 shadow-lg">
-                    <div className="text-xs text-gray-500 mb-3">Pricing Guide</div>
-                    <div className="space-y-2">
-                      <div className="h-2 bg-gray-700 rounded w-full"></div>
-                      <div className="h-2 bg-gray-700 rounded w-5/6"></div>
-                      <div className="h-2 bg-gray-700 rounded w-3/4"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg sm:rounded-xl border border-gray-700 p-3 sm:p-4 transform rotate-2 translate-y-3 sm:translate-y-4 translate-x-2 sm:translate-x-4 shadow-lg text-xs sm:text-sm">
+                    <div className="text-xs text-gray-500 mb-2 sm:mb-3">Pricing Guide</div>
+                    <div className="space-y-1 sm:space-y-2">
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-full"></div>
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-5/6"></div>
+                      <div className="h-1.5 sm:h-2 bg-gray-700 rounded w-3/4"></div>
                     </div>
                   </div>
 
                   {/* Card 3 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-red-500/30 p-4 transform rotate-1 translate-y-8 translate-x-2 shadow-lg">
-                    <div className="text-xs text-red-400 mb-3 flex items-center gap-2">
-                      <Image src="/icon/doc.png" alt="docs" width={16} height={16} style={{ objectFit: 'contain' }} />
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg sm:rounded-xl border border-red-500/30 p-3 sm:p-4 transform rotate-1 translate-y-6 sm:translate-y-8 translate-x-1 sm:translate-x-2 shadow-lg text-xs sm:text-sm">
+                    <div className="text-xs text-red-400 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+                      <Image src="/icon/doc.png" alt="docs" width={12} height={12} style={{ objectFit: 'contain' }} />
                       API Documentation
                     </div>
-                    <div className="space-y-2">
-                      <div className="h-2 bg-red-500/20 rounded w-4/5"></div>
-                      <div className="h-2 bg-red-500/20 rounded w-3/5"></div>
-                      <div className="h-2 bg-red-500/20 rounded w-full"></div>
+                    <div className="space-y-1 sm:space-y-2">
+                      <div className="h-1.5 sm:h-2 bg-red-500/20 rounded w-4/5"></div>
+                      <div className="h-1.5 sm:h-2 bg-red-500/20 rounded w-3/5"></div>
+                      <div className="h-1.5 sm:h-2 bg-red-500/20 rounded w-full"></div>
                     </div>
                   </div>
                 </div>
@@ -227,11 +227,11 @@ export default function Home() {
             </div>
 
             {/* Problem Text */}
-            <div className="space-y-8">
-              <div className="space-y-6">
+            <div className="space-y-6 sm:space-y-8 order-1 lg:order-2">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <span className="text-sm font-semibold text-red-400 uppercase tracking-wider">The Challenge</span>
-                  <h2 className="text-5xl lg:text-6xl font-bold text-white mt-4 leading-tight">
+                  <span className="text-xs sm:text-sm font-semibold text-red-400 uppercase tracking-wider">The Challenge</span>
+                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
                     Choosing the right API is a{' '}
                     <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
                       nightmare
@@ -239,34 +239,34 @@ export default function Home() {
                   </h2>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-gray-800">
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <Image src="/icon/doc.png" alt="info" width={32} height={32} style={{ objectFit: 'contain' }} />
+                <div className="space-y-3 sm:space-y-4 pt-4 border-t border-gray-800">
+                  <div className="flex gap-3 sm:gap-4">
+                    <div className="w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Image src="/icon/doc.png" alt="info" width={20} height={20} style={{ objectFit: 'contain' }} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Fragmented Information</h3>
-                      <p className="text-gray-400">Pricing, docs, benchmarks scattered across 10+ websites. No single source of truth.</p>
+                      <h3 className="text-base sm:text-lg font-semibold text-white mb-1">Fragmented Information</h3>
+                      <p className="text-sm sm:text-base text-gray-400">Pricing, docs, benchmarks scattered across 10+ websites. No single source of truth.</p>
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <Image src="/icon/clock.png" alt="time" width={32} height={32} style={{ objectFit: 'contain' }} />
+                  <div className="flex gap-3 sm:gap-4">
+                    <div className="w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Image src="/icon/clock.png" alt="time" width={20} height={20} style={{ objectFit: 'contain' }} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Endless Evaluation</h3>
-                      <p className="text-gray-400">Hours spent testing, comparing spreadsheets, and reading conflicting reviews.</p>
+                      <h3 className="text-base sm:text-lg font-semibold text-white mb-1">Endless Evaluation</h3>
+                      <p className="text-sm sm:text-base text-gray-400">Hours spent testing, comparing spreadsheets, and reading conflicting reviews.</p>
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <Image src="/icon/x.png" alt="wrong" width={32} height={32} style={{ objectFit: 'contain' }} />
+                  <div className="flex gap-3 sm:gap-4">
+                    <div className="w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Image src="/icon/x.png" alt="wrong" width={20} height={20} style={{ objectFit: 'contain' }} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Wrong Decisions</h3>
-                      <p className="text-gray-400">Pick the wrong API and waste thousands on costs or suffer from poor performance.</p>
+                      <h3 className="text-base sm:text-lg font-semibold text-white mb-1">Wrong Decisions</h3>
+                      <p className="text-sm sm:text-base text-gray-400">Pick the wrong API and waste thousands on costs or suffer from poor performance.</p>
                     </div>
                   </div>
                 </div>
@@ -280,15 +280,15 @@ export default function Home() {
       <section 
         id="solution"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['solution'] ? 'visible' : ''}`}
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['solution'] ? 'visible' : ''}`}
       >
         <div className="max-w-6xl mx-auto w-full">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Solution Visual - Left Side */}
-            <div className="hidden md:block order-1 md:order-1">
-              <div className="space-y-4">
+            <div className="hidden lg:block order-1 lg:order-1">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Feature Cards Grid */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   {/* Card 1 */}
                   <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl p-6 backdrop-blur hover:border-cyan-400/60 transition duration-300 transform hover:scale-105">
                     <div className="mb-3 w-10 h-10 flex items-center justify-center">
@@ -332,11 +332,11 @@ export default function Home() {
             </div>
 
             {/* Solution Text - Right Side */}
-            <div className="space-y-8 order-2 md:order-2">
-              <div className="space-y-6">
+            <div className="space-y-6 sm:space-y-8 order-2 lg:order-2">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">Why Rho Works</span>
-                  <h2 className="text-5xl lg:text-6xl font-bold text-white mt-4 leading-tight">
+                  <span className="text-xs sm:text-sm font-semibold text-cyan-400 uppercase tracking-wider">Why Rho Works</span>
+                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mt-2 sm:mt-4 leading-tight">
                     Everything you need to{' '}
                     <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                       decide fast
@@ -344,23 +344,23 @@ export default function Home() {
                   </h2>
                 </div>
 
-                <p className="text-lg text-gray-400 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
                   Rho brings all API data together in one place. Compare performance, pricing, and features in seconds—not days.
                 </p>
 
                 {/* Feature List with checkmarks */}
-                <div className="space-y-4 pt-6">
+                <div className="space-y-2 sm:space-y-3 pt-4 sm:pt-6">
                   {[
                     { title: 'Side-by-side visual comparison', color: 'cyan' },
                     { title: 'Real-time performance metrics', color: 'blue' },
                     { title: 'Automated cost calculations', color: 'purple' },
                     { title: 'Data-driven recommendations', color: 'green' },
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-4 items-center">
-                      <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-                        <Image src="/icon/checkmark-seal.png" alt="check" width={24} height={24} style={{ objectFit: 'contain' }} />
+                    <div key={idx} className="flex gap-3 sm:gap-4 items-center">
+                      <div className="w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center flex-shrink-0">
+                        <Image src="/icon/checkmark-seal.png" alt="check" width={18} height={18} style={{ objectFit: 'contain' }} />
                       </div>
-                      <p className="text-gray-300 text-lg">{item.title}</p>
+                      <p className="text-gray-300 text-base sm:text-lg">{item.title}</p>
                     </div>
                   ))}
                 </div>
@@ -374,14 +374,14 @@ export default function Home() {
       <section 
         id="cta"
         data-scroll-section
-        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['cta'] ? 'visible' : ''}`}
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ${visibleSections['cta'] ? 'visible' : ''}`}
       >
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <div className="space-y-6">
-            <h2 className="text-6xl font-bold text-white">
+        <div className="max-w-4xl mx-auto text-center space-y-8 sm:space-y-12">
+          <div className="space-y-3 sm:space-y-6">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
               Ready to find your API?
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-400">
               Try Rho free. No credit card required.
             </p>
           </div>
