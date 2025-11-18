@@ -89,29 +89,29 @@ export default function Home() {
             <div className="space-y-5 sm:space-y-7 lg:space-y-8 w-full">
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                  Compare API Outputs{' '}
+                  Find Your Perfect{' '}
                   <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Visually
+                    API Stack
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed">
-                  Stop guessing which API is best. Compare outputs, metrics, speed, and costs side-by-side in real-time. See the differences that matter.
+                  Don't waste hours testing APIs. See real responses, compare costs, speed, and reliability side-by-side instantly. Make smarter integration decisions in seconds.
                 </p>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-2 sm:gap-4 py-5 sm:py-7 lg:py-8 border-y border-gray-800 w-full text-center">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">3</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">APIs at once</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">10+</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Leading APIs</p>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">0s</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Setup time</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">&lt;5s</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Time to Compare</p>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">100%</div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">Data-driven</p>
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">$0</div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">To Get Started</p>
                 </div>
               </div>
 
