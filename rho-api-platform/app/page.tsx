@@ -44,6 +44,12 @@ export default function Home() {
 
   // Scroll fade-in effect
   useEffect(() => {
+    // Initialize hero as visible since it's already on screen
+    setVisibleSections((prev) => ({
+      ...prev,
+      hero: true,
+    }));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
