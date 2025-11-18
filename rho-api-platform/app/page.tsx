@@ -11,6 +11,7 @@ export default function Home() {
   const [displayedText, setDisplayedText] = useState('');
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   
   const searchExamples = [
     'Compare GPT-4 vs Claude 3...',
@@ -41,11 +42,41 @@ export default function Home() {
     }
   }, [charIndex, currentExampleIndex, searchExamples]);
 
+  // Scroll fade-in effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }));
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px',
+      }
+    );
+
+    // Observe all sections
+    const sections = document.querySelectorAll('[data-scroll-section]');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
+
   return (
     <div className="relative bg-black overflow-hidden">
 
       {/* HERO SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-0">
+      <section 
+        id="hero"
+        data-scroll-section
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-0 ${visibleSections['hero'] ? 'visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Content */}
@@ -141,7 +172,11 @@ export default function Home() {
       </section>
 
       {/* PROBLEM SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <section 
+        id="problem"
+        data-scroll-section
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['problem'] ? 'visible' : ''}`}
+      >
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Problem Visual */}
@@ -236,7 +271,11 @@ export default function Home() {
       </section>
 
       {/* SOLUTION SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <section 
+        id="solution"
+        data-scroll-section
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['solution'] ? 'visible' : ''}`}
+      >
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Solution Visual - Left Side */}
@@ -326,7 +365,11 @@ export default function Home() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <section 
+        id="cta"
+        data-scroll-section
+        className={`relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 ${visibleSections['cta'] ? 'visible' : ''}`}
+      >
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <div className="space-y-6">
             <h2 className="text-6xl font-bold text-white">
