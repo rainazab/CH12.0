@@ -1,11 +1,14 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ArrowLeft, Check, Save, LogIn } from 'lucide-react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
 
 interface APIResult {
   api: {
@@ -23,7 +26,7 @@ interface APIResult {
   error?: string;
 }
 
-export default function ResultsPage() {
+function ResultsPageContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<APIResult[]>([]);
   const [loading, setLoading] = useState(true);
@@ -482,6 +485,21 @@ export default function ResultsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading results...</p>
+        </div>
+      </div>
+    }>
+      <ResultsPageContent />
+    </Suspense>
   );
 }
 
