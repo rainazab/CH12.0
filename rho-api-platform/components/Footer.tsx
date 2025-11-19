@@ -33,9 +33,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-gray-400 hover:text-cyan-400 transition duration-300 text-xs sm:text-sm flex items-center gap-2 group">
+                <Link href="/use-cases" className="text-gray-400 hover:text-cyan-400 transition duration-300 text-xs sm:text-sm flex items-center gap-2 group">
                   <span className="group-hover:translate-x-1 transition">→</span>
-                  Pricing
+                  Use Cases
                 </Link>
               </li>
             </ul>

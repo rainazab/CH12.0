@@ -67,15 +67,11 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/compare" className="text-gray-300 hover:text-cyan-400 transition">
-              Compare APIs
-            </Link>
-            <Link href="/pricing" className="text-gray-300 hover:text-cyan-400 transition">
-              Pricing
-            </Link>
-
             {user ? (
               <div className="flex items-center gap-4">
+                <Link href="/compare" className="text-gray-300 hover:text-cyan-400 transition text-sm">
+                  Compare APIs
+                </Link>
                 <span className="text-gray-300 text-sm">{user.email}</span>
                 <button
                   onClick={handleLogout}
@@ -86,16 +82,21 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link
-                href="/auth/signin"
-                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition duration-300 transform hover:scale-105 relative overflow-hidden group"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Sign In
-                  <span className="group-hover:translate-x-1 transition duration-300">→</span>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition duration-300 -z-10"></div>
-              </Link>
+              <div className="flex items-center gap-6">
+                <Link href="/compare" className="text-gray-300 hover:text-cyan-400 transition text-sm">
+                  Compare APIs
+                </Link>
+                <Link
+                  href="/auth/signin"
+                  className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition duration-300 transform hover:scale-105 relative overflow-hidden group"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Get Started
+                    <span className="group-hover:translate-x-1 transition duration-300">→</span>
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition duration-300 -z-10"></div>
+                </Link>
+              </div>
             )}
           </div>
 
@@ -118,13 +119,6 @@ export default function Navbar() {
             >
               Compare APIs
             </Link>
-            <Link 
-              href="/pricing" 
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400"
-            >
-              Pricing
-            </Link>
             {user ? (
               <button
                 onClick={() => {
@@ -137,12 +131,12 @@ export default function Navbar() {
                 <span className="font-medium">Sign Out</span>
               </button>
             ) : (
-              <Link 
-                href="/auth/signin" 
+              <Link
+                href="/auth/signin"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300"
               >
-                Sign In
+                Get Started
               </Link>
             )}
           </div>

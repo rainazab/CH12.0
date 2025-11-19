@@ -11,11 +11,34 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// Check if all required config values are present
+const isFirebaseConfigured = !!(
+  firebaseConfig.apiKey &&
+  firebaseConfig.authDomain &&
+  firebaseConfig.projectId &&
+  firebaseConfig.storageBucket &&
+  firebaseConfig.messagingSenderId &&
+  firebaseConfig.appId
+);
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+let app: any = null;
+let auth: any = null;
+let db: any = null;
 
+if (isFirebaseConfigured) {
+  try {
+    // Initialize Firebase
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    auth = getAuth(app);
+    db = getFirestore(app);
+  } catch (error) {
+    console.error('Failed to initialize Firebase:', error);
+    // Don't crash the app if Firebase fails
+  }
+} else {
+  console.warn('Firebase configuration is incomplete. Some features may not work.');
+}
+
+export { auth, db };
 export default app;
 

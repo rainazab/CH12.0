@@ -1,16 +1,5 @@
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-  Timestamp,
-} from 'firebase/firestore';
-import { db } from './firebase';
+// Dynamic imports to avoid build-time Firebase initialization
+import type { Timestamp } from 'firebase/firestore';
 
 export interface StackAPI {
   id: string;
@@ -54,6 +43,12 @@ export const saveStack = async (
   isPublic: boolean = false
 ): Promise<string> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ collection, addDoc, Timestamp }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const totalMonthlyCost = apis.reduce((sum, api) => sum + api.monthlyCost, 0);
     const shareCode = generateShareCode();
 
@@ -82,6 +77,12 @@ export const saveStack = async (
 // Get a stack by ID
 export const getStack = async (stackId: string): Promise<SavedStack | null> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ doc, getDoc }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const docRef = doc(db, 'stacks', stackId);
     const docSnap = await getDoc(docRef);
 
@@ -98,6 +99,12 @@ export const getStack = async (stackId: string): Promise<SavedStack | null> => {
 // Get a stack by share code
 export const getStackByShareCode = async (shareCode: string): Promise<SavedStack | null> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ query, collection, where, getDocs }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const q = query(collection(db, 'stacks'), where('shareCode', '==', shareCode));
     const querySnapshot = await getDocs(q);
 
@@ -116,6 +123,12 @@ export const getStackByShareCode = async (shareCode: string): Promise<SavedStack
 // Get all stacks for a user
 export const getUserStacks = async (userId: string): Promise<SavedStack[]> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ query, collection, where, getDocs }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const q = query(collection(db, 'stacks'), where('userId', '==', userId));
     const querySnapshot = await getDocs(q);
 
@@ -135,6 +148,12 @@ export const updateStack = async (
   updates: Partial<SavedStack>
 ): Promise<void> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ doc, updateDoc, Timestamp }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const docRef = doc(db, 'stacks', stackId);
     await updateDoc(docRef, {
       ...updates,
@@ -149,6 +168,12 @@ export const updateStack = async (
 // Delete a stack
 export const deleteStack = async (stackId: string): Promise<void> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ doc, deleteDoc }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const docRef = doc(db, 'stacks', stackId);
     await deleteDoc(docRef);
   } catch (error) {
@@ -185,6 +210,12 @@ export const toggleStackPublic = async (stackId: string, isPublic: boolean): Pro
 // Get public stacks (community stacks)
 export const getPublicStacks = async (limit: number = 20): Promise<SavedStack[]> => {
   try {
+    // Dynamic imports to avoid build-time Firebase initialization
+    const [{ query, collection, where, getDocs }, { db }] = await Promise.all([
+      import('firebase/firestore'),
+      import('./firebase')
+    ]);
+
     const q = query(
       collection(db, 'stacks'),
       where('isPublic', '==', true)
