@@ -95,20 +95,6 @@ export default function ComparePage() {
             </div>
           </div>
 
-          {/* Call to Action */}
-          <div className="mt-12 text-center">
-            <p className="text-lg text-gray-300 mb-6">
-              Ready to find your perfect API stack?
-            </p>
-            <Link
-              href="/stacks/questionnaire"
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-bold text-lg rounded-xl hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-105"
-            >
-              <Image src="/icon/bolt.png" alt="bolt" width={24} height={19} style={{ objectFit: 'contain' }} />
-              Get Started Now
-              <span className="text-xl">→</span>
-            </Link>
-          </div>
         </div>
       </div>
     </div>

@@ -170,14 +170,19 @@ export default function QuestionnairePage() {
 
     setAnswers({ ...answers, description: projectDescription });
 
+    // Ensure we have at least some categories, default to LLM if none
+    const finalCategories = recommendedCategories.length > 0 ? recommendedCategories : ['llm'];
+
     // Redirect to results with all the data
     const params = new URLSearchParams({
-      categories: recommendedCategories.join(','),
+      categories: finalCategories.join(','),
       useCase: answers['use-case'] || '',
       budget: answers['budget'] || '',
       priority: answers['priority'] || '',
       description: projectDescription,
     });
+
+    console.log('Redirecting to results with params:', params.toString());
     window.location.href = `/stacks/results?${params.toString()}`;
   };
 

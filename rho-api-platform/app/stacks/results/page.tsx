@@ -36,25 +36,37 @@ export default function ResultsPage() {
   const description = searchParams.get('description') || '';
 
   useEffect(() => {
+    console.log('Results page loaded with params:', { categories, useCase, budget, priority, description });
     loadResults();
   }, [categories, useCase, budget, priority, description]);
 
   const loadResults = async () => {
-    if (categories.length === 0) return;
-
+    // Allow loading even if categories is empty (we'll use defaults)
     setLoading(true);
 
     try {
+      console.log('Getting recommended APIs for categories:', categories);
       // Get recommended APIs based on categories
       const recommendedAPIs = getRecommendedAPIs(categories);
+      console.log('Recommended APIs:', recommendedAPIs);
+
+      if (recommendedAPIs.length === 0) {
+        console.log('No recommended APIs found');
+        setLoading(false);
+        return;
+      }
 
       // Make API calls for comparison
       const comparisonResults = await runComparison(description, recommendedAPIs.slice(0, 3));
+      console.log('Comparison results:', comparisonResults);
 
       // Format results
       const formattedResults: APIResult[] = Object.entries(comparisonResults).map(([apiId, result]) => {
         const api = recommendedAPIs.find(a => a.id === apiId);
-        if (!api) return null;
+        if (!api) {
+          console.log('API not found for id:', apiId);
+          return null;
+        }
 
         return {
           api,
@@ -65,6 +77,7 @@ export default function ResultsPage() {
         };
       }).filter(Boolean) as APIResult[];
 
+      console.log('Formatted results:', formattedResults);
       setResults(formattedResults);
     } catch (error) {
       console.error('Error loading results:', error);
@@ -74,6 +87,27 @@ export default function ResultsPage() {
   };
 
   const getRecommendedAPIs = (categories: string[]) => {
+    // Category mapping from questionnaire to API categories
+    const categoryMapping: Record<string, string[]> = {
+      'llm': ['llm'],
+      'image-gen': ['image-generation'],
+      'voice': ['text-to-speech', 'voice'],
+      'voice-tts': ['text-to-speech'],
+      'voice-stt': ['text-to-speech'],
+      'embeddings': ['llm'],
+      'payments': ['payments'],
+      'inventory': ['e-commerce'],
+      'email': ['email'],
+      'analytics': ['analytics'],
+      'auth': ['auth'],
+      'database': ['database'],
+      'audio-processing': ['text-to-speech'],
+      'image-processing': ['image-generation'],
+      'storage': ['storage'],
+      'data-processing': ['analytics'],
+      'visualization': ['analytics']
+    };
+
     // Import APIs data
     const apis = [
       {
@@ -114,8 +148,25 @@ export default function ResultsPage() {
       }
     ];
 
-    // Filter APIs based on categories
-    return apis.filter(api => categories.some(cat => api.category.includes(cat) || cat.includes(api.category)));
+    // Convert questionnaire categories to API categories
+    const mappedCategories = categories.flatMap(cat => categoryMapping[cat] || [cat]);
+
+    // If no categories match, return all APIs (fallback)
+    if (mappedCategories.length === 0) {
+      return apis;
+    }
+
+    // Filter APIs based on mapped categories
+    const filteredAPIs = apis.filter(api =>
+      mappedCategories.some(mappedCat =>
+        api.category === mappedCat ||
+        api.category.includes(mappedCat) ||
+        mappedCat.includes(api.category)
+      )
+    );
+
+    // If no APIs match, return all available APIs as fallback
+    return filteredAPIs.length > 0 ? filteredAPIs : apis;
   };
 
   const runComparison = async (prompt: string, apis: any[]) => {
