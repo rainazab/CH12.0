@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Copy, Check, Heart } from 'lucide-react';
 import { getStack, incrementStackViews } from '@/lib/stackService';
@@ -115,7 +116,13 @@ export default function ViewStackPage() {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">{api.icon}</span>
+                      <Image
+                        src={api.icon}
+                        alt={api.name}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8 object-contain rounded"
+                      />
                       <div>
                         <h3 className="font-bold text-white">{api.name}</h3>
                         <p className="text-xs text-gray-400">{api.provider}</p>

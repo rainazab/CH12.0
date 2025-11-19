@@ -344,7 +344,7 @@ function StackBuilderPageContent() {
                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
-                            <Image src={`/icon/${api.icon}.png`} alt={api.name} width={32} height={32} className="w-8 h-8" />
+                            <Image src={api.icon} alt={api.name} width={32} height={32} className="w-8 h-8 object-contain rounded" />
                             {isSelected && (
                               <div className="w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center">
                                 <Image src="/icon/checkmark-seal.png" alt="check" width={16} height={16} className="w-4 h-4" />

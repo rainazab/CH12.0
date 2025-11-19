@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface ApiCardProps {
   id: string;
   name: string;
@@ -32,7 +34,13 @@ export default function ApiCard({
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="text-4xl">{icon}</span>
+          <Image
+            src={icon}
+            alt={name}
+            width={48}
+            height={48}
+            className="w-12 h-12 object-contain rounded-lg"
+          />
           <div>
             <h3 className="font-bold text-white text-lg">{name}</h3>
             <p className="text-sm text-gray-400">{provider}</p>

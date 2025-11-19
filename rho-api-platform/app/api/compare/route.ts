@@ -4,7 +4,7 @@ import { runComparison } from '@/lib/runApi';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, apis } = body;
+    const { prompt, apis, userId } = body;
 
     if (!prompt || !apis || !Array.isArray(apis)) {
       return NextResponse.json(
@@ -13,7 +13,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const results = await runComparison(prompt, apis);
+    // Limit to maximum 3 APIs per comparison to control costs
+    const limitedApis = apis.slice(0, 3);
+
+    const results = await runComparison(prompt, limitedApis, userId);
 
     return NextResponse.json(results);
   } catch (error: any) {

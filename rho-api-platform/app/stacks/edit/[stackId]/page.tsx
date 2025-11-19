@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { ArrowLeft, X } from 'lucide-react';
 import { getStack, updateStack } from '@/lib/stackService';
@@ -358,7 +359,13 @@ export default function EditStackPage() {
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xl">{api.icon}</span>
+                                <Image
+                                  src={api.icon}
+                                  alt={api.name}
+                                  width={24}
+                                  height={24}
+                                  className="w-6 h-6 object-contain rounded"
+                                />
                                 <h4 className="font-semibold text-white">{api.name}</h4>
                               </div>
                               <p className="text-xs text-gray-400">{api.cost}</p>

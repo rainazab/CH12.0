@@ -69,9 +69,6 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {user ? (
               <div className="flex items-center gap-4">
-                <Link href="/compare" className="text-gray-300 hover:text-cyan-400 transition text-sm">
-                  Compare APIs
-                </Link>
                 <span className="text-gray-300 text-sm">{user.email}</span>
                 <button
                   onClick={handleLogout}
@@ -82,12 +79,15 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-6">
-                <Link href="/compare" className="text-gray-300 hover:text-cyan-400 transition text-sm">
-                  Compare APIs
-                </Link>
+              <div className="flex items-center gap-4">
                 <Link
                   href="/auth/signin"
+                  className="px-4 py-2 text-gray-300 hover:text-cyan-400 transition text-sm border border-transparent hover:border-cyan-400/40 rounded-lg"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/stacks/questionnaire"
                   className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition duration-300 transform hover:scale-105 relative overflow-hidden group"
                 >
                   <span className="relative z-10 flex items-center gap-2">
@@ -112,13 +112,6 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden border-t border-white/10 py-4 space-y-3">
-            <Link 
-              href="/compare" 
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-gray-300 hover:text-cyan-400"
-            >
-              Compare APIs
-            </Link>
             {user ? (
               <button
                 onClick={() => {
@@ -131,13 +124,22 @@ export default function Navbar() {
                 <span className="font-medium">Sign Out</span>
               </button>
             ) : (
-              <Link
-                href="/auth/signin"
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 mx-2 mt-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300"
-              >
-                Get Started
-              </Link>
+              <div className="space-y-2 px-4">
+                <Link
+                  href="/auth/signin"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full py-2 text-gray-300 hover:text-cyan-400 transition text-center border border-transparent hover:border-cyan-400/40 rounded-lg"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/stacks/questionnaire"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg text-center hover:shadow-lg hover:shadow-cyan-500/50 transition duration-300"
+                >
+                  Get Started
+                </Link>
+              </div>
             )}
           </div>
         )}

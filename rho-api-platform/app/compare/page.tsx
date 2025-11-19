@@ -50,6 +50,7 @@ function ComparePageContent() {
         body: JSON.stringify({
           prompt,
           apis: selectedApis,
+          userId: 'anonymous', // TODO: Integrate with Firebase auth
         }),
       });
 

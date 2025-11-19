@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
@@ -206,7 +207,13 @@ export default function ExplorePage() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     {stack.apis.map((api, idx) => (
                       <div key={idx} className="flex items-center gap-1 px-2 py-1 bg-black/40 rounded-full">
-                        <span className="text-sm">{api.icon}</span>
+                        <Image
+                          src={api.icon}
+                          alt={api.name}
+                          width={16}
+                          height={16}
+                          className="w-4 h-4 object-contain rounded"
+                        />
                         <span className="text-xs text-gray-300">{api.name}</span>
                       </div>
                     ))}

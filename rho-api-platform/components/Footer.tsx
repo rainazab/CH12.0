@@ -86,7 +86,7 @@ export default function Footer() {
       <div className="border-t border-gray-800 py-4 mt-auto bg-black/50 w-full">
         <p className="text-center text-xs text-gray-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           © 2025 Rho. All rights reserved.
-        </p>
+          </p>
       </div>
     </footer>
   );

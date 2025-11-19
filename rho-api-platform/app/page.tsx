@@ -299,7 +299,7 @@ export default function Home() {
               Ready to find your API?
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400">
-              Try Rho free. No credit card required.
+              Discover your perfect API stack.
             </p>
           </div>
 
@@ -308,13 +308,13 @@ export default function Home() {
               href="/stacks/questionnaire"
               className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition transform hover:scale-105"
             >
-              Compare APIs
+              Find Your APIs
             </Link>
             <Link
-              href="/pricing"
+              href="/use-cases"
               className="inline-flex items-center justify-center px-10 py-4 bg-gray-800 text-white font-bold rounded-full hover:bg-gray-700 transition"
             >
-              View Pricing
+              Explore Use Cases
             </Link>
           </div>
         </div>

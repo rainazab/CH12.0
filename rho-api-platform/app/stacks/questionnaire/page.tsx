@@ -135,12 +135,19 @@ const steps: QuestionnaireStep[] = [
       },
     ],
   },
+  {
+    id: 'description',
+    question: 'Describe your project',
+    description: 'Tell us more about what you\'re building so we can provide better recommendations.',
+    options: [], // This will be a text input step
+  },
 ];
 
 export default function QuestionnairePage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [recommendedCategories, setRecommendedCategories] = useState<string[]>([]);
+  const [projectDescription, setProjectDescription] = useState('');
 
   const step = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
@@ -158,22 +165,31 @@ export default function QuestionnairePage() {
     setRecommendedCategories(newCategories);
   };
 
+  const handleDescriptionSubmit = () => {
+    if (!projectDescription.trim()) return;
+
+    setAnswers({ ...answers, description: projectDescription });
+
+    // Redirect to results with all the data
+    const params = new URLSearchParams({
+      categories: recommendedCategories.join(','),
+      useCase: answers['use-case'] || '',
+      budget: answers['budget'] || '',
+      priority: answers['priority'] || '',
+      description: projectDescription,
+    });
+    window.location.href = `/stacks/results?${params.toString()}`;
+  };
+
   const handleNext = () => {
+    if (step.id === 'description') {
+      handleDescriptionSubmit();
+      return;
+    }
+
     if (!selectedValue) return;
 
-    if (isLastStep) {
-      // Redirect to stack builder with recommendations
-      const allCategories = [...recommendedCategories];
-      const params = new URLSearchParams({
-        categories: allCategories.join(','),
-        useCase: answers['use-case'] || '',
-        budget: answers['budget'] || '',
-        priority: answers['priority'] || '',
-      });
-      window.location.href = `/stacks/builder?${params.toString()}`;
-    } else {
-      setCurrentStep(currentStep + 1);
-    }
+    setCurrentStep(currentStep + 1);
   };
 
   const handleBack = () => {
@@ -230,32 +246,47 @@ export default function QuestionnairePage() {
           <p className="text-gray-400">{step.description}</p>
         </div>
 
-        {/* Options Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {step.options.map((option) => (
-            <button
-              key={option.value}
-              onClick={() => handleSelectOption(option.value, option.recommendedCategories)}
-              className={`p-6 rounded-xl border-2 transition duration-300 transform hover:scale-105 text-left group ${
-                selectedValue === option.value
-                  ? 'bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border-cyan-400/60'
-                  : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'
-              }`}
-            >
-              <div className="flex items-start justify-between mb-3">
-                <Image src={`/icon/${option.icon}.png`} alt={option.label} width={32} height={32} className="w-8 h-8" />
-                {selectedValue === option.value && (
-                  <div className="w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center">
-                    <span className="text-xs text-black font-bold">✓</span>
-                  </div>
-                )}
-              </div>
-              <h3 className="font-semibold text-white group-hover:text-cyan-300 transition">
-                {option.label}
-              </h3>
-            </button>
-          ))}
-        </div>
+        {/* Options Grid or Description Input */}
+        {step.id === 'description' ? (
+          <div className="mb-12">
+            <textarea
+              value={projectDescription}
+              onChange={(e) => setProjectDescription(e.target.value)}
+              placeholder="Describe your project, what you're building, and any specific requirements..."
+              className="w-full h-32 p-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none resize-none"
+              maxLength={500}
+            />
+            <p className="text-xs text-gray-500 mt-2">
+              {projectDescription.length}/500 characters
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+            {step.options.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => handleSelectOption(option.value, option.recommendedCategories)}
+                className={`p-6 rounded-xl border-2 transition duration-300 transform hover:scale-105 text-left group ${
+                  selectedValue === option.value
+                    ? 'bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border-cyan-400/60'
+                    : 'bg-gray-900/50 border-gray-800 hover:border-gray-700'
+                }`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <Image src={`/icon/${option.icon}.png`} alt={option.label} width={32} height={32} className="w-8 h-8" />
+                  {selectedValue === option.value && (
+                    <div className="w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center">
+                      <span className="text-xs text-black font-bold">✓</span>
+                    </div>
+                  )}
+                </div>
+                <h3 className="font-semibold text-white group-hover:text-cyan-300 transition">
+                  {option.label}
+                </h3>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Navigation */}
         <div className="flex gap-4">
@@ -269,7 +300,7 @@ export default function QuestionnairePage() {
 
           <button
             onClick={handleNext}
-            disabled={!selectedValue}
+            disabled={step.id === 'description' ? !projectDescription.trim() : !selectedValue}
             className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
           >
             {isLastStep ? (

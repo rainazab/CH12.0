@@ -7,7 +7,7 @@
     "cost": "$0.08/img",
     "category": "image-generation",
     "description": "Professional image generation with stunning quality.",
-    "icon": "🎨"
+    "icon": "/logo/openai.svg.png"
   },
   {
     "id": "midjourney",
@@ -17,7 +17,7 @@
     "cost": "$0.04/img",
     "category": "image-generation",
     "description": "Alternative option with unique style control.",
-    "icon": "🌐"
+    "icon": "/logo/midjourney.svg.png"
   },
   {
     "id": "gpt4o",
@@ -27,7 +27,7 @@
     "cost": "$0.005/1k tokens",
     "category": "llm",
     "description": "Multi-modal general reasoning model.",
-    "icon": "🧠"
+    "icon": "/logo/openai.svg.png"
   },
   {
     "id": "claude3",
@@ -37,7 +37,17 @@
     "cost": "$0.015/1k tokens",
     "category": "llm",
     "description": "Advanced reasoning with extended thinking.",
-    "icon": "💭"
+    "icon": "/logo/claude.svg.png"
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini Pro",
+    "provider": "Google",
+    "uptime": "99.5%",
+    "cost": "$0.0005/1k tokens",
+    "category": "llm",
+    "description": "Innovative AI with multimodal capabilities.",
+    "icon": "/logo/gemini.svg.png"
   },
   {
     "id": "elevenlabs",
@@ -47,7 +57,7 @@
     "cost": "$0.30/1M characters",
     "category": "text-to-speech",
     "description": "Natural-sounding voice synthesis with premium voices.",
-    "icon": "🔊"
+    "icon": "/logo/ElevenLabs.png"
   },
   {
     "id": "stripe",
@@ -57,7 +67,7 @@
     "cost": "2.9% + $0.30",
     "category": "payments",
     "description": "Industry-standard payment processor.",
-    "icon": "💳"
+    "icon": "/logo/stripe.svg.png"
   }
 ]
 
