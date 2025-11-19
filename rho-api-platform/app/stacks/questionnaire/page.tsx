@@ -182,7 +182,6 @@ export default function QuestionnairePage() {
       description: projectDescription,
     });
 
-    console.log('Redirecting to results with params:', params.toString());
     window.location.href = `/stacks/results?${params.toString()}`;
   };
 

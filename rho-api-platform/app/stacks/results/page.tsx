@@ -36,7 +36,6 @@ export default function ResultsPage() {
   const description = searchParams.get('description') || '';
 
   useEffect(() => {
-    console.log('Results page loaded with params:', { categories, useCase, budget, priority, description });
     loadResults();
   }, [categories, useCase, budget, priority, description]);
 
@@ -45,39 +44,60 @@ export default function ResultsPage() {
     setLoading(true);
 
     try {
-      console.log('Getting recommended APIs for categories:', categories);
       // Get recommended APIs based on categories
       const recommendedAPIs = getRecommendedAPIs(categories);
-      console.log('Recommended APIs:', recommendedAPIs);
 
       if (recommendedAPIs.length === 0) {
-        console.log('No recommended APIs found');
         setLoading(false);
         return;
       }
 
       // Make API calls for comparison
       const comparisonResults = await runComparison(description, recommendedAPIs.slice(0, 3));
-      console.log('Comparison results:', comparisonResults);
 
       // Format results
       const formattedResults: APIResult[] = Object.entries(comparisonResults).map(([apiId, result]) => {
         const api = recommendedAPIs.find(a => a.id === apiId);
-        if (!api) {
-          console.log('API not found for id:', apiId);
-          return null;
+        if (!api) return null;
+
+        // Extract text content from API response objects
+        let outputText = 'No response generated';
+        if (result.output) {
+          try {
+            const parsed = typeof result.output === 'string' ? JSON.parse(result.output) : result.output;
+
+            // Extract text based on API response format
+            if (parsed.choices && parsed.choices[0]?.message?.content) {
+              // OpenAI format
+              outputText = parsed.choices[0].message.content;
+            } else if (parsed.content && parsed.content[0]?.text) {
+              // Claude format
+              outputText = parsed.content[0].text;
+            } else if (parsed.candidates && parsed.candidates[0]?.content?.parts?.[0]?.text) {
+              // Gemini format
+              outputText = parsed.candidates[0].content.parts[0].text;
+            } else if (parsed.response) {
+              // Generic format
+              outputText = parsed.response;
+            } else if (typeof parsed === 'string') {
+              outputText = parsed;
+            } else {
+              outputText = JSON.stringify(parsed, null, 2);
+            }
+          } catch (e) {
+            outputText = typeof result.output === 'string' ? result.output : JSON.stringify(result.output, null, 2);
+          }
         }
 
         return {
           api,
-          output: result.output ? JSON.parse(result.output) : 'No response generated',
+          output: outputText,
           latency: result.latency,
           cost: result.error ? 0 : 0.01, // Fixed cost for demo
           error: result.error,
         };
       }).filter(Boolean) as APIResult[];
 
-      console.log('Formatted results:', formattedResults);
       setResults(formattedResults);
     } catch (error) {
       console.error('Error loading results:', error);
