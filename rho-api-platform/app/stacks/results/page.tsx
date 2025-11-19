@@ -27,6 +27,7 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   // Get parameters from URL
   const categories = searchParams.get('categories')?.split(',') || [];
@@ -36,29 +37,45 @@ export default function ResultsPage() {
   const description = searchParams.get('description') || '';
 
   useEffect(() => {
-    loadResults();
-  }, [categories, useCase, budget, priority, description]);
+    // Only load once and only if we have a description (indicating questionnaire completion)
+    if (!hasLoaded && description.trim()) {
+      loadResults();
+    }
+  }, [categories, useCase, budget, priority, description, hasLoaded]);
 
   const loadResults = async () => {
-    // Allow loading even if categories is empty (we'll use defaults)
+    // Prevent multiple simultaneous calls
+    if (hasLoaded) return;
+
     setLoading(true);
+    setHasLoaded(true); // Mark as loaded immediately to prevent re-runs
 
     try {
       // Get recommended APIs based on categories
       const recommendedAPIs = getRecommendedAPIs(categories);
 
+      console.log('Loading results for description:', description.substring(0, 50) + '...');
+      console.log('Recommended APIs:', recommendedAPIs.map(api => api.name));
+
       if (recommendedAPIs.length === 0) {
+        console.log('No recommended APIs found');
+        setResults([]);
         setLoading(false);
         return;
       }
 
       // Make API calls for comparison
+      console.log('Making API comparison calls...');
       const comparisonResults = await runComparison(description, recommendedAPIs.slice(0, 3));
+      console.log('Comparison results received:', Object.keys(comparisonResults));
 
       // Format results
       const formattedResults: APIResult[] = Object.entries(comparisonResults).map(([apiId, result]) => {
         const api = recommendedAPIs.find(a => a.id === apiId);
-        if (!api) return null;
+        if (!api) {
+          console.log('API not found for id:', apiId);
+          return null;
+        }
 
         // Extract text content from API response objects
         let outputText = 'No response generated';
@@ -85,6 +102,7 @@ export default function ResultsPage() {
               outputText = JSON.stringify(parsed, null, 2);
             }
           } catch (e) {
+            console.error('Error parsing API response for', apiId, ':', e);
             outputText = typeof result.output === 'string' ? result.output : JSON.stringify(result.output, null, 2);
           }
         }
@@ -98,9 +116,11 @@ export default function ResultsPage() {
         };
       }).filter(Boolean) as APIResult[];
 
+      console.log('Setting formatted results:', formattedResults.length, 'results');
       setResults(formattedResults);
     } catch (error) {
       console.error('Error loading results:', error);
+      setResults([]);
     } finally {
       setLoading(false);
     }
@@ -194,7 +214,14 @@ export default function ResultsPage() {
 
     for (const api of apis) {
       try {
-        const response = await fetch('/api/compare', {
+        console.log(`Calling API for ${api.name}...`);
+
+        // Create a timeout promise
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 second timeout
+        });
+
+        const fetchPromise = fetch('/api/compare', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -204,10 +231,22 @@ export default function ResultsPage() {
           }),
         });
 
+        const response = await Promise.race([fetchPromise, timeoutPromise]) as Response;
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
         const data = await response.json();
         results[api.id] = data[api.id] || { output: '', latency: 0, error: 'No response' };
-      } catch (error) {
-        results[api.id] = { output: '', latency: 0, error: 'API call failed' };
+        console.log(`✓ ${api.name} completed`);
+      } catch (error: any) {
+        console.error(`✗ ${api.name} failed:`, error.message);
+        results[api.id] = {
+          output: '',
+          latency: 0,
+          error: error.message || 'API call failed'
+        };
       }
     }
 
