@@ -3,7 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ArrowLeft, Check, Save } from 'lucide-react';
+import { ArrowLeft, Check, Save, LogIn } from 'lucide-react';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 
 interface APIResult {
   api: {
@@ -28,6 +30,8 @@ export default function ResultsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   // Get parameters from URL
   const categories = searchParams.get('categories')?.split(',') || [];
@@ -35,6 +39,16 @@ export default function ResultsPage() {
   const budget = searchParams.get('budget') || '';
   const priority = searchParams.get('priority') || '';
   const description = searchParams.get('description') || '';
+
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setAuthLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     // Only load once and only if we have a description (indicating questionnaire completion)
@@ -254,18 +268,45 @@ export default function ResultsPage() {
   };
 
   const handleSaveStack = async () => {
-    if (results.length === 0) return;
+    if (results.length === 0 || !user) return;
 
     setSaving(true);
     try {
-      // This would save to user's profile in a real implementation
-      // For now, just show success
-      setTimeout(() => {
-        setSaved(true);
-        setSaving(false);
-      }, 1000);
+      // Dynamic import to avoid SSR issues
+      const { collection, addDoc, Timestamp } = await import('firebase/firestore');
+      const { db } = await import('@/lib/firebase');
+
+      // Save questionnaire data and stack to Firebase
+      await addDoc(collection(db, 'savedStacks'), {
+        userId: user.uid,
+        userEmail: user.email,
+        questionnaireData: {
+          useCase,
+          budget,
+          priority,
+          description,
+          categories,
+        },
+        stackData: {
+          apis: results.map(r => ({
+            id: r.api.id,
+            name: r.api.name,
+            provider: r.api.provider,
+            cost: r.api.cost,
+            category: r.api.category,
+            uptime: r.api.uptime,
+          })),
+          totalCost: results.reduce((sum, r) => sum + r.cost, 0),
+          averageLatency: results.reduce((sum, r) => sum + r.latency, 0) / results.length,
+        },
+        savedAt: Timestamp.now(),
+      });
+
+      setSaved(true);
     } catch (error) {
       console.error('Error saving stack:', error);
+      alert('Failed to save stack. Please try again.');
+    } finally {
       setSaving(false);
     }
   };
@@ -296,20 +337,35 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          <button
-            onClick={handleSaveStack}
-            disabled={saving || saved}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {saving ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-            ) : saved ? (
-              <Check className="w-4 h-4" />
-            ) : (
-              <Save className="w-4 h-4" />
-            )}
-            {saved ? 'Saved!' : 'Save Stack'}
-          </button>
+          {authLoading ? (
+            <div className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-gray-400 rounded-lg">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+              Loading...
+            </div>
+          ) : user ? (
+            <button
+              onClick={handleSaveStack}
+              disabled={saving || saved || results.length === 0}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              ) : saved ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Save className="w-4 h-4" />
+              )}
+              {saved ? 'Saved!' : 'Save Stack'}
+            </button>
+          ) : (
+            <Link
+              href="/auth/signin"
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg hover:shadow-lg hover:shadow-orange-500/50 transition"
+            >
+              <LogIn className="w-4 h-4" />
+              Sign In to Save
+            </Link>
+          )}
         </div>
       </div>
 

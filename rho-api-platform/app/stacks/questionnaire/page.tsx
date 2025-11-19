@@ -165,10 +165,34 @@ export default function QuestionnairePage() {
     setRecommendedCategories(newCategories);
   };
 
-  const handleDescriptionSubmit = () => {
+  const handleDescriptionSubmit = async () => {
     if (!projectDescription.trim()) return;
 
     setAnswers({ ...answers, description: projectDescription });
+
+    try {
+      // Save questionnaire data to Firebase (whether user is logged in or not)
+      const { collection, addDoc, Timestamp } = await import('firebase/firestore');
+      const { db } = await import('@/lib/firebase');
+
+      await addDoc(collection(db, 'questionnaireResponses'), {
+        responses: {
+          useCase: answers['use-case'] || '',
+          budget: answers['budget'] || '',
+          priority: answers['priority'] || '',
+          description: projectDescription,
+          recommendedCategories,
+        },
+        completedAt: Timestamp.now(),
+        // Will be null for anonymous users, but still useful for analytics
+        userId: null, // We could add auth later if needed
+      });
+
+      console.log('Questionnaire responses saved to Firebase');
+    } catch (error) {
+      console.error('Error saving questionnaire data:', error);
+      // Don't block the flow if saving fails
+    }
 
     // Ensure we have at least some categories, default to LLM if none
     const finalCategories = recommendedCategories.length > 0 ? recommendedCategories : ['llm'];
